@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "admin",
+      "email": "admin@mail.com",
+      "password": "admin",
+      "firstname": "admin",
+      "lastname": "admin",
+      "phone": "xxxxxxxx-xxxx",
+      "role": "ADMIN",
+      "currentRole": "NONE",
+      "shopName": "ADMIN STORE",
+      "shopImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHCuAbOeVVLN1hzcPOYpxv08cTwyEWz_K0Of6Ul_9JXufZro4vMAoxRAaCDa6rPKa4XMw&usqp=CAU",
+      "isShopActive": false
+    },
+    {
+      "id": "son123",
+      "email": "son1@mail.com",
+      "password": "123",
+      "firstname": "Sơn",
+      "lastname": "Hải",
+      "phone": "1230982135",
+      "role": "USER",
+      "currentRole": "BUYER",
+      "shopName": "Big Mom Store",
+      "shopImg": "https://scontent.fhan14-2.fna.fbcdn.net/v/t1.6435-9/117405701_427487784851893_4112296076941812958_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=be3454&_nc_eui2=AeElrl-3riPqfSppCAx8yTFHU-u0gmHdsiFT67SCYd2yIfLjW0mS_-Fzc30dEy8kxXqx55Or30uNm0kMiyX1olac&_nc_ohc=rJRTr1MuTDwAX_HtM54&_nc_ht=scontent.fhan14-2.fna&oh=00_AfDZbOx1Bmm03uSgEqVH597sX_6WDoSvoXnuB2xWP8cHPw&oe=65D23777",
+      "isShopActive": true
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "test",
+      "description": "for test only",
+      "price": "100000",
+      "quantity": 100,
+      "sale": 0,
+      "img": "none"
+    }
+  ]
+}
