@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ProductService from '../../../service/ProductService';
 
 export default function ProductList() {
@@ -16,13 +16,27 @@ export default function ProductList() {
     return (
         <div>
             {category || 'All'}
-            {productList.map(product => (
-                <div>
-                    <h1> {product.name} </h1>
-                    <h1>{product.description}</h1>
-                    <h1>{product.price}</h1>
-                </div>
-            ))}
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {productList.map((product, index) => (
+                        <tr key={product.id}>
+                            <th scope="row">{index + 1}</th>
+                            <td><Link to={`/products/detail/${product.id}`}>{product.name}</Link></td>
+                            <td>{product.description}</td>
+                            <td>{product.price}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

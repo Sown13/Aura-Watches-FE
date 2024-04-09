@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Footer from "../components/navigate/Footer";
+import HeaderBot from "../components/navigate/HeaderBot";
+import HeaderTop from "../components/navigate/HeaderTop";
 
 export default function Layout() {
     return (
         <div>
-            <Header></Header>
-            <Outlet></Outlet>
+            <HeaderTop></HeaderTop>
+            <HeaderBot></HeaderBot>
+            <div className="outlet" style={{ minHeight: '70vh' }}>
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     )
