@@ -1,7 +1,7 @@
 import http from "./httpCommon";
 
 const getAllProduct = () => {
-    return http.get("/products");
+    return http.get("/api/products");
 }
 
 const getProductById = (id) => {
