@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../css/components/navigate/HeaderTop.css";
 
-
 export default function HeaderTop() {
     return (
         <nav className="navbar navbar-expand header-top d-flex flex-row ">

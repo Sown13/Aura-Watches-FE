@@ -1,0 +1,93 @@
+/* Basic styling for the login container */
+.login,
+.Register {
+  float: right;
+  width: 40%; /* Adjust width as needed */
+  margin: 40px auto;
+  padding: 20px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+}
+
+.Register h2 {
+  color: rgb(255, 255, 255);
+  margin-bottom: 15px;
+}
+
+/* General form styling */
+form {
+  margin-bottom: 5px;
+}
+
+.Register .form-group label {
+  color: white;
+  float: inline-start;
+  margin-bottom: 3px;
+}
+
+.Register .form-control {
+  border-radius: 15px 15px 15px 15px;
+}
+
+
+label {
+  display: inline;
+  /* font-weight: bold; */
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Button styling */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.btn-primary {
+  background-color: #E8C284; 
+  color: white;
+  width: 50%;
+}
+
+.btn-primary:hover {
+  background-color: #3e8e41; 
+
+}
+
+.btn-success {
+  background-color: #E8C284; 
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #207b3c; 
+}
+
+.background-image {
+  float: left;
+  width: 630px; /* Adjust width as needed */
+  height: 760px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+  background-image: url('../../../../../images/register.png');
+  background-size: contain;
+}

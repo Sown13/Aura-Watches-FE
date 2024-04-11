@@ -14,13 +14,23 @@ import PolWarranty from './layout/pages/policies/PolWarranty';
 import ProductDetail from './layout/pages/products/ProductDetail';
 import ProductList from './layout/pages/products/ProductList';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 function App() {
+  const [cookies, setCookie] = useCookies(['user'])
+  function handleLogin(user) {
+    setCookie('user', user, { path: '/' })
+  }
+  function handleLogout() {
+    setCookie('user', null, { path: '/' })
+  }
   return (
+    <CookiesProvider>
     <div className="App" >
       <Routes>
-        <Route path="/" element={<Layout></Layout>}>
-          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/" element={<Layout></Layout>}>
+          <Route path="/" element={<Home user={cookies.user} />}></Route>
           <Route path="/products" element={<ProductList></ProductList>}></Route>
           <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
           <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}></Route>
@@ -33,10 +43,12 @@ function App() {
           <Route path="/contact-us" element={<Contact></Contact>}></Route>
           <Route path="/news" element={<News></News>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
-          <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/login" element={<Login onLogin={handleLogin} />}></Route>
         </Route>
       </Routes>
+      <ToastContainer/>
     </div >
+    </CookiesProvider>
   );
 }
 

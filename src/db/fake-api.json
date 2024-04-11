@@ -7,11 +7,33 @@
       "firstname": "admin",
       "lastname": "admin",
       "phone": "xxxxxxxx-xxxx"
+    },
+    {
+      "id": "dfde",
+      "Fname": "Nguyễn",
+      "Lname": "Hiếu",
+      "phone": "0836473122",
+      "email": "hieunguyen2005q@gmail.com",
+      "username": "son7atp2",
+      "password": "123456a@",
+      "rePassword": "123456a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "5843",
+      "Fname": "Nguyễn",
+      "Lname": "Hiếu",
+      "phone": "0836643122",
+      "email": "hieunguyen20r05q@gmail.com",
+      "username": "testtool001",
+      "password": "123456a@",
+      "rePassword": "123456a@",
+      "address": "Thanh Ba"
     }
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "test",
       "description": "for test only",
       "price": 100000,
@@ -20,7 +42,7 @@
       "img": "https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "test",
       "description": "for test only",
       "price": 100000,
@@ -29,7 +51,7 @@
       "img": "https://static.wikia.nocookie.net/the-snack-encyclopedia/images/7/7d/Apple.png/revision/latest?cb=20200706145821"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "test",
       "description": "for test only",
       "price": 100000,
@@ -38,7 +60,7 @@
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/1200px-Red_Apple.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "test",
       "description": "for test only",
       "price": 100000,
@@ -47,7 +69,7 @@
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/1200px-Red_Apple.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "test",
       "description": "for test only",
       "price": 100000,
@@ -56,7 +78,7 @@
       "img": "none"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "test",
       "description": "for test only",
       "price": 100000,
