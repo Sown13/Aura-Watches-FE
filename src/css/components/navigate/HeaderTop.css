@@ -5,3 +5,7 @@
 .logo-aura-watch {
     transform: scale(0.9);
 }
+
+.header-top a {
+    margin-right: 10px;
+}
