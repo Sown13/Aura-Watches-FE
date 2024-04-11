@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Footer() {
+export default function FooterBot() {
     return (
         <div className="d-flex justify-content-evenly">
             <Link className="p2" to={"/policy-customers"}>Customer Policy</Link>

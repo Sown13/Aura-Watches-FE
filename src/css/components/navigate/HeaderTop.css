@@ -1,0 +1,7 @@
+.header-top {
+    padding-top: calc(4.35vh - 8px);
+}
+
+.logo-aura-watch {
+    transform: scale(0.9);
+}
