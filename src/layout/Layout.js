@@ -4,19 +4,23 @@ import HeaderTop from "../components/navigate/HeaderTop";
 import "../css/layout/Layout.css";
 import FooterTop from "../components/navigate/FooterTop";
 import FooterBot from "../components/navigate/FooterBot";
+import { UserContext } from "../context/UserContext";
 
 export default function Layout() {
+    const testContext = "This one displays mean the context ok";
     return (
-        <div className="layout d-flex justify-content-center flex-column vh-100">
-            <div className="header d-flex flex-column">
-                <HeaderTop></HeaderTop>
-                <HeaderBot></HeaderBot>
-            </div>
-            <div className="outlet" style={{ minHeight: '70vh' }}>
-                <Outlet></Outlet>
-            </div>
-            <FooterTop></FooterTop>
-            <FooterBot></FooterBot>
+        <div className="layout d-flex justify-content-center flex-column">
+            <UserContext.Provider value={{testContext}}>
+                <div className="header d-flex flex-column">
+                    <HeaderTop></HeaderTop>
+                    <HeaderBot></HeaderBot>
+                </div>
+                <div className="outlet" style={{ minHeight: '70vh' }}>
+                    <Outlet></Outlet>
+                </div>
+                <FooterTop></FooterTop>
+                <FooterBot></FooterBot>
+            </UserContext.Provider>
         </div>
     )
 }

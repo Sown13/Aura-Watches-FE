@@ -1,0 +1,22 @@
+.product-card {
+   aspect-ratio: 1/1;
+   border-radius: 0% !important
+}
+
+
+.product-card a{
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.product-card-img-container {
+    overflow: hidden;
+}
+
+.product-card-img-container img {
+    transition: transform 0.3s ease;
+}
+
+.product-card-img-container:hover img {
+    transform: scale(1.2);
+}
