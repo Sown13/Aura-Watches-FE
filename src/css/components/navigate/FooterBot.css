@@ -1,0 +1,26 @@
+.footer-bot {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-bot-logo {
+    text-align: left !important;
+}
+
+
+.footer-bot-logo span>a {
+    margin-right: 10px;
+}
+
+.footer-bot a {
+    text-decoration: none !important;
+    color: inherit;
+    padding-top: 5px;
+    font-weight: 300;
+}
+
+.footer-bot-nav {
+    margin-top: 15px;
+    margin-left: 15%;
+    text-align: left;
+}
