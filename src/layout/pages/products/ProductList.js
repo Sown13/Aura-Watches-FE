@@ -23,6 +23,10 @@ export default function ProductList() {
         category ? setBanner(`/img/banner_${category}.svg`) : setBanner('/img/banner_men.svg');
     }, [category]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [category]);
+
 
     return (
         <div className='product-list text-light'>

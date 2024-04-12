@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import "../../css/components/navigate/HeaderBot.css";
+import "../../css/components/navigate/HeaderBotSticky.css";
 
 
 export default function HeaderBotSticky() {
     return (
-        <nav className="navbar navbar-expand header-bot d-flex flex-row">
-            <div class="container-fluid">
+        <nav className="navbar navbar-expand header-bot-sticky d-flex flex-row">
+            <div class="container-fluid row">
+                <a className="col navbar-brand" href={"/"}>
+                    <img className="logo-aura-watch" src="/img/logo.svg" alt="logo"></img>
+                </a>
                 <div className="col d-flex flex-row navbar-nav justify-content-center">
-                    {/* <Link className="nav-link active text-light" aria-current="page" to={"/"}>Home</Link> */}
                     <Link className="nav-link text-light p-3" to={"/products"}>WATCHES</Link>
                     <Link className="nav-link text-light p-3" to={"/products/men"}>MEN</Link>
                     <Link className="nav-link text-light p-3" to={"/products/women"}>WOMEN</Link>
@@ -23,6 +25,11 @@ export default function HeaderBotSticky() {
                     <Link className="nav-link text-light p-3" to={"/products/premier"}>PREMIER</Link>
                     <Link className="nav-link text-light p-3" to={"/products/sport"}>SPORT</Link>
                     <Link className="nav-link text-light p-3" to={"/products/sales"}>SALES</Link>
+                </div>
+                <div className="col d-flex flex-row navbar-nav flex-row-reverse">
+                    <Link className="nav-link text-light" to={"/#"}><i class="fa-solid fa-bag-shopping"></i></Link>
+                    <Link className="nav-link active text-light" aria-current="page" to={"/register"}><i class="fa-solid fa-magnifying-glass"></i></Link>
+                    <Link className="nav-link text-light" to={"/login"}><i class="fa-solid fa-user"></i></Link>
                 </div>
             </div>
         </nav>

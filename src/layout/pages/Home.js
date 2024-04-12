@@ -3,7 +3,7 @@ import "../../css/layout/pages/Home.css";
 export default function Home() {
     return (
         <div className="home">
-            <div id="home-carousel" className="carousel slide carousel slide">
+            <div id="home-carousel" className="carousel slide carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner text-light">
                     <div className="container carousel-item active">
                         <div className="row">

@@ -1,4 +1,4 @@
-.header-bot a {
+.header-bot-sticky a {
     font-weight: bold;
     padding-top: 0 !important;
     margin-left: 15px;
@@ -6,4 +6,12 @@
     padding-top: 10px !important;
 }
 
+.header-bot-sticky img {
+    height: 60px;
+    object-fit: contain;
+}
 
+
+.logo-aura-watch {
+    transform: scale(0.9);
+}

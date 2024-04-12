@@ -10,7 +10,7 @@ export default function HeaderTop() {
 
                 </div>
                 <div className="col">
-                    <Link className="navbar-brand" to={"/"}>
+                    <Link className="logo-aura-watch navbar-brand" to={"/"}>
                         <img src="/img/logo.svg" alt="logo"></img>
                     </Link>
                 </div>

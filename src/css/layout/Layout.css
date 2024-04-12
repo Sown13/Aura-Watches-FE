@@ -2,12 +2,14 @@
     background-color: black;
     padding-left: 10.4vw;
     padding-right: 10.4vw;
+    min-height: 70vh;
 }
 
 
 .sticky {
+    background-color: black !important;
     position: sticky;
-    top: 0;
+    top: 0px;
     z-index: 100;
 }
 

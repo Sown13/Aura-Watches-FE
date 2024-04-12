@@ -21,9 +21,9 @@
     padding: 16px 0 0 0 !important;
 }
 
-.product-card-body h5, div, p {
+/* .product-card-body h5, div, p {
     overflow: hidden;
-}
+} */
 
 .product-card-img-container img {
     object-fit: cover !important;
