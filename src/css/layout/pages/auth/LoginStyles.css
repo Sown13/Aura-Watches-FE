@@ -85,7 +85,6 @@ input[type="password"] {
 
 .btn-primary:hover {
   background-color: #3e8e41; 
-
 }
 
 .btn-success {
@@ -107,7 +106,7 @@ input[type="password"] {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding-right: 15px;
-  background-image: url('../../../../../images/register.png');
+  background-image: url('../../../images/register.png');
   background-size: contain;
 }
 

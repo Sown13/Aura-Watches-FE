@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import facebookLogo from '../../../images/facebook.png';
 import googleLogo from '../../../images/google.png';
 
+
 const Register = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
