@@ -1,50 +1,153 @@
-/* Basic styling for the login container */
-.login {
-    width: 500px; /* Adjust width as needed */
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* General form styling */
-  form {
-    margin-bottom: 0;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  /* Input fields styling */
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-    font-size: 16px;
-  }
-  
-  /* Button styling */
-  .btn {
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #3e8e41; /* Darker green on hover */
-  }
-  
+
+
+.Login {
+  float: right;
+  width: 40%; 
+  margin: 40px auto;
+  padding: 20px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+  margin-top: 13%;
+}
+
+.Login h2 {
+  color: rgb(255, 255, 255);
+  margin-bottom: 15px;
+}
+
+
+form {
+  margin-bottom: 5px;
+}
+
+
+
+.Login .form-group label {
+  color: white;
+  float: inline-start;
+  margin-bottom: 3px;
+}
+
+.Login .form-control {
+  border-radius: 15px 15px 15px 15px;
+}
+
+
+label {
+  display: inline;
+
+}
+
+.Login h6 a{
+  text-decoration: none;
+  color: #E8C284;
+}
+
+.Login h6{
+  color: aliceblue;
+  margin-left: -50%;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.Login h6 a:hover{
+  color: #207b3c;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.btn-primary {
+  background-color: #E8C284; 
+  color: white;
+  width: 50%;
+  margin-top: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #3e8e41; 
+
+}
+
+.btn-success {
+  background-color: #E8C284; 
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #207b3c; 
+}
+
+.background-image {
+  float: left;
+  width: 630px; 
+  height: 760px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+  background-image: url('../../../../../images/register.png');
+  background-size: contain;
+}
+
+.log-facebook img, .log-google img {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.log-facebook {
+  margin-top: 30px;
+  border-radius: 15px;
+  width: 220px;
+  height: 45px;
+  background-color: black;
+  color: aliceblue;
+  border: 1px solid;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  float: left;
+}
+
+.log-google {
+  margin-top: 30px;
+  border-radius: 15px;
+  width: 200px;
+  height: 45px;
+  background-color: black;
+  color: aliceblue;
+  border: 1px solid;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  float: right;
+}
+
+.log-facebook:hover, .log-google:hover {
+  color: #207b3c;
+}

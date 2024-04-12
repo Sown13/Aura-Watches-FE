@@ -9,11 +9,28 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding-right: 15px;
+  text-align: center;
 }
 
 .Register h2 {
   color: rgb(255, 255, 255);
   margin-bottom: 15px;
+}
+
+.Register h6 a{
+  text-decoration: none;
+  color: #E8C284;
+}
+
+.Register h6{
+  color: aliceblue;
+  margin-left: -50%;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.Register h6 a:hover{
+  color: #207b3c;
 }
 
 /* General form styling */
@@ -91,3 +108,45 @@ input[type="password"] {
   background-image: url('../../../../../images/register.png');
   background-size: contain;
 }
+
+.reg-facebook img, .reg-google img {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.reg-facebook {
+  margin-top: 30px;
+  border-radius: 15px;
+  width: 225px;
+  height: 45px;
+  background-color: black;
+  color: aliceblue;
+  border: 1px solid;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  float: left;
+}
+
+.reg-google {
+  margin-top: 30px;
+  border-radius: 15px;
+  width: 205px;
+  height: 45px;
+  background-color: black;
+  color: aliceblue;
+  border: 1px solid;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  float: right;
+}
+
+.reg-facebook:hover, .reg-google:hover {
+  color: #207b3c;
+}
+

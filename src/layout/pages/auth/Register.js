@@ -5,8 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import RegisterStyles from "../../../css/layout/pages/auth/RegisterStyles.css";
 import Error from '../../../css/layout/pages/auth/Error.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link  } from 'react-router-dom';
 import { useFormik } from "formik";
+import facebookLogo from '../../../images/facebook.png';
+import googleLogo from '../../../images/google.png';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -267,6 +269,15 @@ const Register = () => {
                     Create Account
                 </button>
             </form>
+            <h6>Already have an account? <Link to="/login">Login</Link></h6>
+            <button className="reg-facebook">
+            <img src={facebookLogo}  />
+                Sign up with Facebook
+                </button>
+            <button className="reg-google">
+            <img src={googleLogo}  />
+                Sign up with Google
+                </button>
         </div>
         <div className="background-image">
         </div>

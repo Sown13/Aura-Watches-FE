@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoginStyles from "../../../css/layout/pages/auth/LoginStyles.css";
+import facebookLogo from '../../../images/facebook.png';
+import googleLogo from '../../../images/google.png';
 
 const Login = ({ onLogin }) => {
   const [credentials, setCredentials] = useState({
@@ -43,10 +45,12 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="login">
+    <>
+    <div className="Login">
+    <h2>Login</h2>
       <form onSubmit={loginUser}>
         <div className="form-group">
-          <label htmlFor="username">User Name</label>
+          <label htmlFor="username">UserName</label>
           <input
             type="text"
             className="form-control"
@@ -73,7 +77,19 @@ const Login = ({ onLogin }) => {
           Login
         </button>
       </form>
+      <h6>Already have a account? <Link to="/register">Register</Link></h6>
+            <button className="log-facebook">
+            <img src={facebookLogo}  />
+                Sign in with Facebook
+                </button>
+            <button className="log-google">
+            <img src={googleLogo}  />
+                Sign in with Google
+                </button>
     </div>
+    <div className="background-image">
+    </div>
+    </>
   );
 };
 

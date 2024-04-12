@@ -7,29 +7,8 @@
       "firstname": "admin",
       "lastname": "admin",
       "phone": "xxxxxxxx-xxxx"
-    },
-    {
-      "id": "dfde",
-      "Fname": "Nguyễn",
-      "Lname": "Hiếu",
-      "phone": "0836473122",
-      "email": "hieunguyen2005q@gmail.com",
-      "username": "son7atp2",
-      "password": "123456a@",
-      "rePassword": "123456a@",
-      "address": "Thanh Ba"
-    },
-    {
-      "id": "5843",
-      "Fname": "Nguyễn",
-      "Lname": "Hiếu",
-      "phone": "0836643122",
-      "email": "hieunguyen20r05q@gmail.com",
-      "username": "testtool001",
-      "password": "123456a@",
-      "rePassword": "123456a@",
-      "address": "Thanh Ba"
     }
+    
   ],
   "products": [
     {
