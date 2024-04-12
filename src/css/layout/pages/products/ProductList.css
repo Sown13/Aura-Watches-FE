@@ -8,3 +8,14 @@
     
 }
 
+.product-list-banner {
+    width: 100%;
+}
+
+.product-list-banner img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
