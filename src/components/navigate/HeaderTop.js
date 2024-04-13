@@ -16,7 +16,7 @@ export default function HeaderTop() {
                 </div>
                 <div className="col d-flex flex-row navbar-nav flex-row-reverse">
                     <Link className="nav-link text-light" to={"/#"}><i className="fa-solid fa-bag-shopping"></i></Link>
-                    <Link className="nav-link active text-light" aria-current="page" to={"/register"}><i className="fa-solid fa-magnifying-glass"></i></Link>
+                    <Link className="nav-link text-light" aria-current="page" to={"/register"}><i className="fa-solid fa-magnifying-glass"></i></Link>
                     <Link className="nav-link text-light" to={"/login"}><i className="fa-solid fa-user"></i></Link>
                 </div>
             </div>
