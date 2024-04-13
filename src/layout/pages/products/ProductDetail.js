@@ -136,7 +136,7 @@ export default function ProductDetail() {
             <div>
                 <ul className="product-detail-tab nav">
                     <li className="nav-item">
-                        <Link className={"nav-link" + (tabActive === 1 ? " active" : "")} aria-current="page" onClick={() => selectTab(1)} to={"other-products"}>Products You May Like</Link>
+                        <Link className={"nav-link" + (tabActive === 1 ? " active" : "")} aria-current="page" onClick={() => selectTab(1)} to={""}>Products You May Like</Link>
                     </li>
                     <li className="nav-item">
                         <Link className={"nav-link" + (tabActive === 2 ? " active" : "")} onClick={() => selectTab(2)} to={"store"}>Store</Link>
