@@ -17,6 +17,7 @@ import { Route, Routes } from 'react-router-dom';
 import ProductOther from './layout/pages/products/tabs/ProductOther';
 import Store from './layout/pages/products/tabs/Store';
 import CommentList from './layout/pages/products/tabs/CommentList';
+import PageNotFound from './layout/pages/PageNotFound';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/news" element={<News></News>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
+          <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
         </Route>
       </Routes>
     </div >
