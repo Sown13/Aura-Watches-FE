@@ -1,4 +1,4 @@
-import { useState } from "react";
+import  React, { useState } from "react";
 import UserService from "../../../service/UserService";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +25,18 @@ const Register = () => {
 
     const [errors, setErrors] = useState({});
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(showPassword => !showPassword);
+    };
+
+    const [showRePassword, setShowRePassword] = useState(false);
+
+    const toggleRePasswordVisibility = () => {
+        setShowRePassword(showRePassword => !showRePassword);
+    };
+    
     const formik = useFormik({
         initialValues: {
             Fullname: '',
@@ -92,7 +104,7 @@ const Register = () => {
                 address: values.address
             };
             delete data.rePassword;
-            UserService.createNewUser(values, navigate, setUser, formik);
+            UserService.createNewUser(data, navigate, setUser, formik);
 
         },
     });
@@ -119,48 +131,12 @@ const Register = () => {
             setErrors(validationErrors);
             return;
         }
-
-        delete data.rePassword;
-
-        // Kiểm tra xem username hoặc email đã tồn tại chưa
-        axios.get('http://localhost:8080/users')
-            .then(response => {
-                const users = response.data;
-                const exists = users.some(u => u.username === data.username || u.email === data.email || u.phone === data.phone);
-                if (exists) {
-                    toast.error('Username or email or phone already exists');
-                    return;
-                }
-
-                // Nếu không, tạo người dùng mới
-                axios.post('http://localhost:8080/users', data)
-                    .then(response => {
-                        setUser({
-                            id: response.data.id,
-                            Fullname: response.data.Fullname,
-                            phone: response.data.phone,
-                            email: response.data.email,
-                            username: response.data.username,
-                            password: response.data.password,
-                            address: response.data.address
-                        });
-                        setUser(formik);
-                        toast.success("Register Success!");
-                        navigate('/login');
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    };
+    }
 
     return (
         <>
         <div className="Register">
-            <h2>Create Account</h2>
+            <h2>Create Your Account</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="Fullname">Your Name</label>
@@ -224,31 +200,37 @@ const Register = () => {
 
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        required
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        name="password"
-                        placeholder="Enter your password"
-                    />
+                    <div className="password-input">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className="form-control"
+                            id="password"
+                            required
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            name="password"
+                            placeholder="Enter your password"
+                        />
+                        <i onClick={togglePasswordVisibility} className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                    </div>
                     {formik.touched.password && formik.errors.password && <div className="error">{formik.errors.password}</div>}
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="rePassword">Re Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="rePassword"
-                        required
-                        value={formik.values.rePassword}
-                        onChange={formik.handleChange}
-                        name="rePassword"
-                        placeholder="Re-enter your password"
-                    />
+                    <label htmlFor="rePassword">Re-enter Password</label>
+                    <div className="password-input">
+                        <input
+                            type={showRePassword ? "text" : "password"}
+                            className="form-control"
+                            id="rePassword"
+                            required
+                            value={formik.values.rePassword}
+                            onChange={formik.handleChange}
+                            name="rePassword"
+                            placeholder="Re-enter your password"
+                        />
+                        <i onClick={toggleRePasswordVisibility} className={`fa ${showRePassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                    </div>
                     {formik.touched.rePassword && formik.errors.rePassword && <div className="error">{formik.errors.rePassword}</div>}
                 </div>
 

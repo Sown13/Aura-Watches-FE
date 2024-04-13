@@ -150,3 +150,28 @@ input[type="password"] {
 .log-facebook:hover, .log-google:hover {
   color: #207b3c;
 }
+
+.password-input {
+  position: relative;
+  width: 100%;
+}
+
+.password-input input {
+  padding-right: 40px;
+}
+
+.password-input i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px; 
+  color: #E8C284;
+  transition: color 0.3s ease; 
+}
+
+.password-input i:hover {
+  color: #207b3c;
+}
+

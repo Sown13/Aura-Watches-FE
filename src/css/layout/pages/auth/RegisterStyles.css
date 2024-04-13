@@ -1,8 +1,6 @@
-/* Basic styling for the login container */
-.login,
 .Register {
   float: right;
-  width: 40%; /* Adjust width as needed */
+  width: 40%; 
   margin: 40px auto;
   padding: 20px;
   border: 0px solid #ccc;
@@ -10,11 +8,13 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding-right: 15px;
   text-align: center;
+  margin-top: -20px;
 }
 
 .Register h2 {
   color: rgb(255, 255, 255);
   margin-bottom: 15px;
+  font-weight: bold;
 }
 
 .Register h6 a{
@@ -33,11 +33,6 @@
   color: #207b3c;
 }
 
-/* General form styling */
-form {
-  margin-bottom: 5px;
-}
-
 .Register .form-group label {
   color: white;
   float: inline-start;
@@ -48,15 +43,11 @@ form {
   border-radius: 15px 15px 15px 15px;
 }
 
-
 label {
   display: inline;
-  /* font-weight: bold; */
 }
 
-/* Input fields styling */
-input[type="text"],
-input[type="password"] {
+input[type="text"], input[type="password"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -65,7 +56,6 @@ input[type="password"] {
   font-size: 16px;
 }
 
-/* Button styling */
 .btn {
   padding: 10px 20px;
   border: none;
@@ -77,13 +67,12 @@ input[type="password"] {
 
 .btn-primary {
   background-color: #E8C284; 
-  color: white;
+  color: rgb(0, 0, 0);
   width: 50%;
 }
 
 .btn-primary:hover {
   background-color: #3e8e41; 
-
 }
 
 .btn-success {
@@ -97,7 +86,7 @@ input[type="password"] {
 
 .background-image {
   float: left;
-  width: 630px; /* Adjust width as needed */
+  width: 630px; 
   height: 760px;
   margin: 40px auto;
   padding: 20px;
@@ -107,6 +96,7 @@ input[type="password"] {
   padding-right: 15px;
   background-image: url('../../../../images/register.png');
   background-size: contain;
+  margin-top: -20px;
 }
 
 .reg-facebook img, .reg-google img {
@@ -149,4 +139,32 @@ input[type="password"] {
 .reg-facebook:hover, .reg-google:hover {
   color: #207b3c;
 }
+
+.password-input {
+  position: relative;
+  width: 100%;
+}
+
+.password-input input {
+  padding-right: 40px;
+}
+
+.password-input i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px; 
+  color: #E8C284;
+  transition: color 0.3s ease; 
+}
+
+.password-input i:hover {
+  color: #207b3c;
+}
+
+
+
+
 

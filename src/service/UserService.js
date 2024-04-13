@@ -25,6 +25,7 @@ const createNewUser = (data, navigate, setUser, formik) => {
                     password: response.data.password,
                     address: response.data.address
                 });
+
                 setUser(formik);
                 toast.success("Signup Success!");
                 navigate('/login');
@@ -32,7 +33,9 @@ const createNewUser = (data, navigate, setUser, formik) => {
             .catch(e => {
                 console.log(e);
             });
+ 
     })
+  
 };
 
 const UserDataService = {

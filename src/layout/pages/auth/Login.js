@@ -18,6 +18,12 @@ const Login = ({ onLogin }) => {
     setCredentials({ ...credentials, [name]: value });
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+      setShowPassword(showPassword => !showPassword);
+  };
+
   const loginUser = async (event) => {
     event.preventDefault();
 
@@ -63,16 +69,19 @@ const Login = ({ onLogin }) => {
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            required
-            value={credentials.password}
-            onChange={handleInputChange}
-            name="password"
-          />
-        </div>
+          <div className="password-input">
+              <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-control"
+                  id="password"
+                  required
+                  value={credentials.password}
+                  onChange={handleInputChange}
+                  name="password"
+              />
+              <i onClick={togglePasswordVisibility} className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+          </div>
+      </div>
         <button type="submit" className="btn btn-primary">
           Login
         </button>

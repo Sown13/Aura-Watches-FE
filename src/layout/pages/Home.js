@@ -8,7 +8,7 @@ function Home({ user }) {
     return <h1 style={{color: 'white'}}>Please log in to view this page.</h1>;
   }
 
-  return <h1 style={{color: 'white'}}>Welcome, {user.Fname + ' ' + user.Lname}!</h1>;
+  return <h1 style={{color: 'white'}}>Welcome, {user.Fullname}!</h1>;
 }
 
 export default Home

@@ -7,8 +7,75 @@
       "firstname": "admin",
       "lastname": "admin",
       "phone": "xxxxxxxx-xxxx"
+    },
+    {
+      "id": "b0ff",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836473122",
+      "email": "hieunguyen2005q@gmail.com",
+      "username": "hieu01",
+      "password": "12345678a@",
+      "rePassword": "12345678a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "9dfe",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836473134",
+      "email": "hieunguyen200q@gmail.com",
+      "username": "hieu02",
+      "password": "123456a@",
+      "rePassword": "123456a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "da78",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836473162",
+      "email": "hieunguy2005q@gmail.com",
+      "username": "hieu011",
+      "password": "123456a@",
+      "rePassword": "123456a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "ea0b",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836473155",
+      "email": "hieunguye005q@gmail.com",
+      "username": "son7atp2",
+      "password": "123456a@",
+      "rePassword": "123456a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "b5c0",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836475522",
+      "email": "rankhang65@gmail.com",
+      "username": "son7atp22",
+      "password": "123123a@",
+      "rePassword": "123123a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "b16b",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836474567",
+      "email": "rankha65@gmail.com",
+      "username": "hieu0011",
+      "password": "123123a@",
+      "address": "Thanh Ba"
+    },
+    {
+      "id": "7692",
+      "Fullname": "Nguyễn Quốc Hiếu",
+      "phone": "0836412322",
+      "email": "hieunguyen2q@gmail.com",
+      "username": "son7atp255",
+      "password": "123123a@",
+      "address": "Thanh Ba"
     }
-    
   ],
   "products": [
     {
