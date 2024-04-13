@@ -5,7 +5,8 @@ import "../../css/components/navigate/HeaderBot.css";
 export default function HeaderBot() {
     return (
         <nav className="navbar navbar-expand header-bot d-flex flex-row">
-            <div class="container-fluid">
+            <div className="container-fluid">
+                <div className="col"></div>
                 <div className="col d-flex flex-row navbar-nav justify-content-center">
                     {/* <Link className="nav-link active text-light" aria-current="page" to={"/"}>Home</Link> */}
                     <Link className="nav-link text-light p-3" to={"/products"}>WATCHES</Link>
@@ -24,6 +25,7 @@ export default function HeaderBot() {
                     <Link className="nav-link text-light p-3" to={"/products/sport"}>SPORT</Link>
                     <Link className="nav-link text-light p-3" to={"/products/sales"}>SALES</Link>
                 </div>
+                <div className="col"></div>
             </div>
         </nav>
 

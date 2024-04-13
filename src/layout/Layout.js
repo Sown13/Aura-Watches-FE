@@ -17,10 +17,8 @@ export default function Layout() {
             const headerTopHeight = document.querySelector('.layout-header-top ').offsetHeight;
             if (window.scrollY >= headerTopHeight) {
                 setHeaderBot(1);
-                console.log(headerBot);
             } else {
                 setHeaderBot(0);
-                console.log(headerBot);
             }
         }
         window.addEventListener("scroll", handleScroll);
@@ -29,20 +27,6 @@ export default function Layout() {
         };
     }, [headerBot]);
 
-    function handleScroll() {
-        const headerTopHeight = document.querySelector('.layout-header-top ').offsetHeight;
-        if (window.scrollY >= headerTopHeight) {
-            setHeaderBot(1);
-            console.log(headerBot);
-        } else {
-            setHeaderBot(0);
-            console.log(headerBot);
-        }
-    }
-    window.addEventListener("scroll", handleScroll);
-
-    window.removeEventListener("scroll", handleScroll);
-
 
     return (
         <div className="layout d-flex justify-content-center flex-column">
@@ -50,7 +34,7 @@ export default function Layout() {
                 <div className="layout-header-top d-flex flex-column">
                     <HeaderTop></HeaderTop>
                 </div>
-                <div className="sticky">
+                <div className={headerBot == 1 ? "sticky" : ""}>
                     {headerBot == 1 ? <HeaderBotSticky></HeaderBotSticky> : <HeaderBot></HeaderBot>}
                 </div>
                 <div className="outlet">

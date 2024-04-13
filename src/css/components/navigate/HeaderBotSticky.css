@@ -14,4 +14,9 @@
 
 .logo-aura-watch {
     transform: scale(0.9);
+    padding: 0 !important;
+}
+
+.header-bot-sticky {
+    padding: 0;
 }

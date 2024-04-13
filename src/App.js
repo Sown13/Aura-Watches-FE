@@ -14,6 +14,9 @@ import PolWarranty from './layout/pages/policies/PolWarranty';
 import ProductDetail from './layout/pages/products/ProductDetail';
 import ProductList from './layout/pages/products/ProductList';
 import { Route, Routes } from 'react-router-dom';
+import ProductOther from './layout/pages/products/tabs/ProductOther';
+import Store from './layout/pages/products/tabs/Store';
+import CommentList from './layout/pages/products/tabs/CommentList';
 
 function App() {
   return (
@@ -23,7 +26,11 @@ function App() {
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/products" element={<ProductList></ProductList>}></Route>
           <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
-          <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}></Route>
+          <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}>
+            <Route path='other-products' element={<ProductOther></ProductOther>} />
+            <Route path='store' element={<Store></Store>} />
+            <Route path='comment' element={<CommentList></CommentList>} />
+          </Route>
           <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
           <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
           <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>

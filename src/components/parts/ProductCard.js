@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../../css/components/parts/ProductCard.css";
 export default function ProductCard({ product }) {
     return (
-        <Link className="product-card card" to={"/products/detail/" + (product ? product.id : 0)} style={{ textDecoration: "none" }}>
+        <a className="product-card card" href={"/products/detail/" + (product ? product.id : 0)} style={{ textDecoration: "none" }}>
             <div className="product-card-img-container position-relative">
                 <img src={product ? product.img : "..."} className="img-fluid card-img-top" alt="Aura-Watch" />
                 <div className="product-card-img-badge text-light position-absolute">New</div>
@@ -21,6 +21,6 @@ export default function ProductCard({ product }) {
                     <p className="card-text">{product.price.toLocaleString()}$</p>
                 )}
             </div>
-        </Link>
+        </a>
     )
 }

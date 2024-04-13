@@ -3,6 +3,7 @@
     padding-left: 10.4vw;
     padding-right: 10.4vw;
     min-height: 70vh;
+    transition: transform 0.3s ease-in-out;
 }
 
 
@@ -12,4 +13,5 @@
     top: 0px;
     z-index: 100;
 }
+
 
