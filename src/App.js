@@ -22,19 +22,12 @@ import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
 
 function App() {
-  const [cookies, setCookie] = useCookies(['user'])
-  function handleLogin(user) {
-    setCookie('user', user, { path: '/' })
-  }
-  function handleLogout() {
-    setCookie('user', null, { path: '/' })
-  }
   return (
     <CookiesProvider>
     <div className="App" >
       <Routes>
           <Route path="/" element={<Layout></Layout>}>
-          <Route path="/" element={<Home user={cookies.user} />}></Route>
+          <Route path="/" element={<Home/>}></Route>
           <Route path="/products" element={<ProductList></ProductList>}></Route>
           <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
           <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}>
@@ -51,7 +44,7 @@ function App() {
           <Route path="/contact-us" element={<Contact></Contact>}></Route>
           <Route path="/news" element={<News></News>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
-          <Route path="/login" element={<Login onLogin={handleLogin} />}></Route>
+          <Route path="/login" element={<Login/>}></Route>
           <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
         </Route>
       </Routes>

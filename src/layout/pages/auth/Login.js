@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoginStyles from "../../../css/layout/pages/auth/LoginStyles.css";
 import facebookLogo from '../../../images/facebook.png';
 import googleLogo from '../../../images/google.png';
+import { useCookies } from 'react-cookie';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const [cookies, setCookie] = useCookies(['user']);
+  
+  function handleLogin(user) {
+    setCookie('user', user, { path: '/' })
+  }
+  function handleLogout() {
+    setCookie('user', null, { path: '/' })
+  }
+
+  useEffect(() => {
+    if (cookies.user) {
+      navigate('/');
+    };
+  }, [])
+
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,24 +37,24 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
-      setShowPassword(showPassword => !showPassword);
+    setShowPassword(showPassword => !showPassword);
   };
 
   const loginUser = async (event) => {
     event.preventDefault();
 
     try {
-  
+
       const response = await axios.get('http://localhost:8080/users');
       const users = response.data;
 
- 
+
       const foundUser = users.find(
         (user) => user.username === credentials.username && user.password === credentials.password
       );
 
       if (foundUser) {
-        onLogin(foundUser);
+        handleLogin(foundUser);
         toast.success('Login Successful!');
         navigate('/');
       } else {
@@ -52,52 +68,52 @@ const Login = ({ onLogin }) => {
 
   return (
     <>
-    <div className="Login">
-    <h2>Login</h2>
-      <form onSubmit={loginUser}>
-        <div className="form-group">
-          <label htmlFor="username">UserName</label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            required
-            value={credentials.username}
-            onChange={handleInputChange}
-            name="username"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <div className="password-input">
+      <div className="Login">
+        <h2>Login</h2>
+        <form onSubmit={loginUser}>
+          <div className="form-group">
+            <label htmlFor="username">UserName</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              required
+              value={credentials.username}
+              onChange={handleInputChange}
+              name="username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <div className="password-input">
               <input
-                  type={showPassword ? "text" : "password"}
-                  className="form-control"
-                  id="password"
-                  required
-                  value={credentials.password}
-                  onChange={handleInputChange}
-                  name="password"
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                id="password"
+                required
+                value={credentials.password}
+                onChange={handleInputChange}
+                name="password"
               />
               <i onClick={togglePasswordVisibility} className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+            </div>
           </div>
-      </div>
-        <button type="submit" className="btn btn-primary">
-          Login
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+        </form>
+        <h6>Already have a account? <Link to="/register">Register</Link></h6>
+        <button className="log-facebook">
+          <img src={facebookLogo} />
+          Sign in with Facebook
         </button>
-      </form>
-      <h6>Already have a account? <Link to="/register">Register</Link></h6>
-            <button className="log-facebook">
-            <img src={facebookLogo}  />
-                Sign in with Facebook
-                </button>
-            <button className="log-google">
-            <img src={googleLogo}  />
-                Sign in with Google
-                </button>
-    </div>
-    <div className="background-image">
-    </div>
+        <button className="log-google">
+          <img src={googleLogo} />
+          Sign in with Google
+        </button>
+      </div>
+      <div className="background-image">
+      </div>
     </>
   );
 };
