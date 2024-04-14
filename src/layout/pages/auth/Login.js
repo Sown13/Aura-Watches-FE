@@ -28,11 +28,11 @@ const Login = ({ onLogin }) => {
     event.preventDefault();
 
     try {
-      // Fetch user data from JSON server (replace URL with yours)
+  
       const response = await axios.get('http://localhost:8080/users');
       const users = response.data;
 
-      // Find matching user based on credentials
+ 
       const foundUser = users.find(
         (user) => user.username === credentials.username && user.password === credentials.password
       );
@@ -40,7 +40,7 @@ const Login = ({ onLogin }) => {
       if (foundUser) {
         onLogin(foundUser);
         toast.success('Login Successful!');
-        navigate('/'); // Chuyển hướng đến trang home sau khi đăng nhập
+        navigate('/');
       } else {
         toast.error('Login Failed. Please check your username and password.');
       }
