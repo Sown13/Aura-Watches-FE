@@ -5,17 +5,39 @@ import "../css/layout/Layout.css";
 import FooterTop from "../components/navigate/FooterTop";
 import FooterBot from "../components/navigate/FooterBot";
 import { UserContext } from "../context/UserContext";
+import { useEffect, useState } from "react";
+import HeaderBotSticky from "../components/navigate/HeaderBotSticky";
 
 export default function Layout() {
     const testContext = "This one displays mean the context ok";
+    const [headerBot, setHeaderBot] = useState(0);
+
+    useEffect(() => {
+        function handleScroll() {
+            const headerTopHeight = document.querySelector('.layout-header-top ').offsetHeight;
+            if (window.scrollY >= headerTopHeight) {
+                setHeaderBot(1);
+            } else {
+                setHeaderBot(0);
+            }
+        }
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [headerBot]);
+
+
     return (
         <div className="layout d-flex justify-content-center flex-column">
-            <UserContext.Provider value={{testContext}}>
-                <div className="header d-flex flex-column">
+            <UserContext.Provider value={{ testContext }}>
+                <div className="layout-header-top d-flex flex-column">
                     <HeaderTop></HeaderTop>
-                    <HeaderBot></HeaderBot>
                 </div>
-                <div className="outlet" style={{ minHeight: '70vh' }}>
+                <div className={headerBot == 1 ? "sticky" : ""}>
+                    {headerBot == 1 ? <HeaderBotSticky></HeaderBotSticky> : <HeaderBot></HeaderBot>}
+                </div>
+                <div className="outlet">
                     <Outlet></Outlet>
                 </div>
                 <FooterTop></FooterTop>

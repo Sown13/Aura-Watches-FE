@@ -21,9 +21,9 @@
     padding: 16px 0 0 0 !important;
 }
 
-.product-card-body h5, div, p {
+/* .product-card-body h5, div, p {
     overflow: hidden;
-}
+} */
 
 .product-card-img-container img {
     object-fit: cover !important;
@@ -34,3 +34,21 @@
     transform: scale(1.2);
 }
 
+/* product-card-img-badge {
+    background-color: #e8c284 !important;
+    border-radius: 0 !important;
+    width: 10px;
+    height: 10px;
+} */
+
+.product-card-img-container {
+    position: relative;
+}
+
+.product-card-img-badge {
+    padding: 8px 16px;
+    background-color: #e8c284;
+    font-size: 12px;
+    top: 8px;
+    right: 8px;
+}

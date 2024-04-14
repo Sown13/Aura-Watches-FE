@@ -14,6 +14,10 @@ import PolWarranty from './layout/pages/policies/PolWarranty';
 import ProductDetail from './layout/pages/products/ProductDetail';
 import ProductList from './layout/pages/products/ProductList';
 import { Route, Routes } from 'react-router-dom';
+import ProductOther from './layout/pages/products/tabs/ProductOther';
+import Store from './layout/pages/products/tabs/Store';
+import CommentList from './layout/pages/products/tabs/CommentList';
+import PageNotFound from './layout/pages/PageNotFound';
 import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
 
@@ -33,7 +37,11 @@ function App() {
           <Route path="/" element={<Home user={cookies.user} />}></Route>
           <Route path="/products" element={<ProductList></ProductList>}></Route>
           <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
-          <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}></Route>
+          <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}>
+            <Route path='' element={<ProductOther></ProductOther>} />
+            <Route path='store' element={<Store></Store>} />
+            <Route path='comment' element={<CommentList></CommentList>} />
+          </Route>
           <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
           <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
           <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
@@ -44,6 +52,7 @@ function App() {
           <Route path="/news" element={<News></News>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/login" element={<Login onLogin={handleLogin} />}></Route>
+          <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
         </Route>
       </Routes>
       <ToastContainer/>

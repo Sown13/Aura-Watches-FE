@@ -1,5 +1,14 @@
 .header-bot a {
     font-weight: bold;
     padding-top: 0 !important;
-    margin-left: 15px
+    margin-left: 15px;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
 }
+
+.header-bot  .nav-link.active {
+    border: 0px ;
+    background-color: black;
+    color: #e8c284 !important; 
+  }
+
