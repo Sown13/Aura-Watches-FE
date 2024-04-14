@@ -1,0 +1,38 @@
+.home-carousel-content {
+    text-align: left !important;
+}
+
+.home-carousel-content h6 {
+    font-size: 22px;
+}
+
+.home-carousel-content h1 {
+    font-size: 50px;
+    font-weight: 500;
+    padding-bottom: 4vh;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button-container .btn {
+    margin: 10px 10px 10px 20px;
+}
+
+.home-carousel-button-1 {
+    background-color: black;
+    border: 1px solid white !important;
+    border-radius: 1px !important;
+    font-weight: 400;
+    color: white;
+}
+
+.home-carousel-button-2 {
+    background-color: #e8c284;
+    border: 1px solid white !important;
+    border-radius: 1px !important;
+    font-weight: 400;
+    color: white;
+}

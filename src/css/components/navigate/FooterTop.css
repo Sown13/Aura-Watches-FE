@@ -1,0 +1,27 @@
+.footer-top {
+    text-align: left !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+.footer-top h2{
+    margin: 0;
+}
+
+.footer-top input, button {
+    border-radius: 0!important;
+}
+
+.footer-top button {
+    background-color: #2b2b2b;
+    border: 0;
+}
+
+.footer-top img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
