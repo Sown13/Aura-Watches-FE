@@ -7,17 +7,63 @@ import "../../../css/layout/pages/products/ProductList.css";
 
 export default function ProductList() {
     const { category } = useParams();
-    const categoryList = ["all", "men", "women", "premier", "sport", "sales", "brand"];
+    const categoryList = ["all", "men", "women", "premier", "sport", "sales", "aura-watch"];
     const [selectedCategory, setSelectedCategory] = useState(category);
     const { testContext } = useContext(UserContext);
 
+    // for display
     const [productList, setProductList] = useState([]);
     const [banner, setBanner] = useState('/img/banner_men.svg');
 
 
-    useEffect(() => {
-        ProductService.getAllProduct().then((res) => {
+    // for filtering
+    const [isActive, setIsActive] = useState(1);
+    const [isMen, setIsMen] = useState(0);
+    const [isWomen, setIsWomen] = useState(0);
+    const [isPremier, setIsPremier] = useState(0);
+    const [isSport, setIsSport] = useState(0);
+    const [isSale, setIsSale] = useState(0);
+    const [brand, setBrand] = useState("");
+
+    const setFilter = (filter) => {
+        switch (filter) {
+            case "men":
+                setIsMen(isMen === 1 ? 0 : 1);
+                break;
+            case "women":
+                setIsWomen(isWomen === 1 ? 0 : 1);
+                break;
+            case "premier":
+                setIsPremier(isPremier === 1 ? 0 : 1);
+                break;
+            case "sport":
+                setIsSport(isSport === 1 ? 0 : 1);
+                break;
+            default:
+                break;
+        }
+    }
+
+    const resetFilter = (category) => {
+        setIsMen(0);
+        setIsWomen(0);
+        setIsPremier(0);
+        setIsSport(0);
+        setBrand("");
+        setFilter(category);
+    }
+
+    const getFilterResult = () => {
+        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand).then((res) => {
             setProductList(res.data);
+        }).catch((err) => { console.error("Failed to fetch ", err) });
+    }
+
+    // get products after change the category
+    useEffect(() => {
+        ProductService.getAllProduct(category).then((res) => {
+            setProductList(res.data);
+            resetFilter(category);
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }, [category])
 
@@ -76,31 +122,31 @@ export default function ProductList() {
 
                 <div className="product-list-filter-check-catagory  bg-black text-white d-flex gap-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="men" defaultChecked={category === "men"} />
+                        <input class="form-check-input" type="checkbox" value="" id="men" checked={isMen === 1} onChange={() => setFilter("men")} />
                         <label class="form-check-label" for="men">
                             Men
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="women" defaultChecked={category === "women"} />
+                        <input class="form-check-input" type="checkbox" value="" id="women" checked={isWomen === 1} onChange={() => setFilter("women")} />
                         <label class="form-check-label" for="women">
                             Women
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="premier" defaultChecked={category === "premier"} />
+                        <input class="form-check-input" type="checkbox" value="" id="premier" checked={isPremier === 1} onChange={() => setFilter("premier")} />
                         <label class="form-check-label" for="premier">
                             Premier
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="sales" defaultChecked={category === "sport"} />
+                        <input class="form-check-input" type="checkbox" value="" id="sport" checked={isSport === 1} onChange={() => setFilter("sport")} />
                         <label class="form-check-label" htmlFor="sales">
                             Sport
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="sales" defaultChecked={category === "sales"} />
+                        <input class="form-check-input" type="checkbox" value="" id="sales" />
                         <label class="form-check-label" htmlFor="sales">
                             On Sale
                         </label>
@@ -146,7 +192,7 @@ export default function ProductList() {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black" }}>View</button>
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black" }} onClick={() => getFilterResult()}>FILTER</button>
             </div>
             <div className='row'>
                 {productList.map((product, index) => (
