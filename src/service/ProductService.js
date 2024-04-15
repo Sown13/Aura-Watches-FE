@@ -1,30 +1,34 @@
 import http from "./httpCommon";
 
-const getAllProduct = (category) => {
+const getAllProduct = (category, page) => {
     switch (category) {
         case "all":
-            return http.get("/products");
+            return http.get("/products?_page=" + page + "&_per_page=12");
         case "men":
-            return http.get("/products?isMen=1");
+            return http.get("/products?isMen=1&_page=" + page + "&_per_page=12");
         case "women":
-            return http.get("/products?isWomen=1");
+            return http.get("/products?isWomen=1&_page=" + page + "&_per_page=12");
         case "premier":
-            return http.get("/products?isPremier=1");
+            return http.get("/products?isPremier=1&_page=" + page + "&_per_page=12");
         case "sport":
-            return http.get("/products?isSport=1");
+            return http.get("/products?isSport=1&_page=" + page + "&_per_page=12");
         default:
-            return http.get("/products");
+            return http.get("/products?_page=" + page + "&_per_page=12");
     }
 }
 
-const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand) => {
+const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, page) => {
     console.log("/products?isActive=" + isActive + "&isMen=" + isMen + "&isWomen=" + isWomen
-        + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20"));
+        + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20") + "&_page=" + page);
     if (brand) {
         brand = brand.replace(/ /g, "%20");
     }
-    return http.get(`/products?isActive=${isActive}${isMen === 1 ? `&isMen=${isMen}` : ''}${isWomen === 1 ? `&isWomen=${isWomen}` : ''}
-    ${isPremier === 1 ? `&isPremier=${isPremier}` : ''}${isSport === 1 ? `&isSport=${isSport}` : ''}&brand=${brand}`);
+    return http.get(`/products?isActive=${isActive}
+    ${isMen === 1 ? `&isMen=${isMen}` : ''}
+    ${isWomen === 1 ? `&isWomen=${isWomen}` : ''}
+    ${isPremier === 1 ? `&isPremier=${isPremier}` : ''}
+    ${isSport === 1 ? `&isSport=${isSport}` : ''}
+    &brand=${brand}&_page=${page}&_per_page=1`);
 }
 
 const getProductById = (id) => {
