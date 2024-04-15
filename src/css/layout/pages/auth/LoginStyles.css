@@ -1,8 +1,6 @@
-
-
 .Login {
   float: right;
-  width: 40%; 
+  width: 40%;
   margin: 40px auto;
   padding: 20px;
   border: 0px solid #ccc;
@@ -39,19 +37,19 @@ label {
 
 }
 
-.Login h6 a{
+.Login h6 a {
   text-decoration: none;
   color: #E8C284;
 }
 
-.Login h6{
+.Login h6 {
   color: aliceblue;
   margin-left: -50%;
   margin-top: 15px;
   font-size: 14px;
 }
 
-.Login h6 a:hover{
+.Login h6 a:hover {
   color: #207b3c;
 }
 
@@ -66,7 +64,7 @@ input[type="password"] {
 }
 
 
-.btn {
+.Login .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 3px;
@@ -75,29 +73,29 @@ input[type="password"] {
   border-radius: 15px;
 }
 
-.btn-primary {
-  background-color: #E8C284; 
+.Login .btn-primary {
+  background-color: #E8C284;
   color: white;
   width: 50%;
   margin-top: 15px;
 }
 
-.btn-primary:hover {
-  background-color: #3e8e41; 
+.Login .btn-primary:hover {
+  background-color: #3e8e41;
 }
 
-.btn-success {
-  background-color: #E8C284; 
+.Login .btn-success {
+  background-color: #E8C284;
   color: white;
 }
 
-.btn-success:hover {
-  background-color: #207b3c; 
+.Login .btn-success:hover {
+  background-color: #207b3c;
 }
 
-.background-image {
+.Login .background-image {
   float: left;
-  width: 630px; 
+  width: 630px;
   height: 760px;
   margin: 40px auto;
   padding: 20px;
@@ -109,7 +107,8 @@ input[type="password"] {
   background-size: contain;
 }
 
-.log-facebook img, .log-google img {
+.log-facebook img,
+.log-google img {
   width: 20px;
   height: 20px;
   margin-left: 10px;
@@ -146,7 +145,8 @@ input[type="password"] {
   float: right;
 }
 
-.log-facebook:hover, .log-google:hover {
+.log-facebook:hover,
+.log-google:hover {
   color: #207b3c;
 }
 
@@ -165,12 +165,11 @@ input[type="password"] {
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px; 
+  font-size: 20px;
   color: #E8C284;
-  transition: color 0.3s ease; 
+  transition: color 0.3s ease;
 }
 
 .password-input i:hover {
   color: #207b3c;
 }
-

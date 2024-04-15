@@ -5,7 +5,7 @@
 
 .product-list-card {
     margin-top: 20px;
-    
+
 }
 
 .product-list-banner {
@@ -18,4 +18,23 @@
     height: auto;
     margin-bottom: 20px;
     margin-top: 40px;
+}
+
+.change-page-btn {
+    border: 2px solid white;
+    color: white;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-right: 5px;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.change-page-btn.current {
+    background-color: #E8C284;
 }

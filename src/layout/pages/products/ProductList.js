@@ -36,11 +36,10 @@ export default function ProductList() {
     const containerRef = useRef(null);
 
     const scrollToFirstResultLine = () => {
-        const container = containerRef.current;
-        if (container) {
-            container.scrollIntoView();
-        }
-        console.log("scroll to the top");
+        let div = document.getElementById("view-point");
+        div.scrollIntoView();
+        // console.log("out sidebutton work but button in the .map is not?")
+        // fixed, using <a href="#id">, so wield!!
     };
 
     // for pagenation
@@ -99,7 +98,6 @@ export default function ProductList() {
             setTotalPagesFilter(res.data.last);
             handlePageFilterChange(1);
             setIsFiltering(1);
-            scrollToFirstResultLine();
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }
 
@@ -108,7 +106,6 @@ export default function ProductList() {
         ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, page).then((res) => {
             setProductList(res.data.data);
             handlePageFilterChange(page);
-            scrollToFirstResultLine();
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }
 
@@ -119,7 +116,6 @@ export default function ProductList() {
         ProductService.getAllProduct(category, page).then((res) => {
             setProductList(res.data.data);
             handlePageChange(page);
-            scrollToFirstResultLine();
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }
     // get products after change the category
@@ -142,8 +138,20 @@ export default function ProductList() {
     }, [category, selectedCategory]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }, [category]);
+
+    // useEffect(() => {
+    //     const container = containerRef.current;
+    //     if (container) {
+    //         container.scrollTop = 0;
+    //         console.log("scroll to the top, did not work, need fix");
+    //     }
+    // }, [currentPage, currentPageFilter]);
+
 
 
     return (
@@ -188,7 +196,7 @@ export default function ProductList() {
                     </select>
                 </div>
 
-                <div className="product-list-filter-check-catagory  bg-black text-white d-flex gap-3">
+                <div id='view-point' className="product-list-filter-check-catagory  bg-black text-white d-flex gap-3">
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="men" checked={isMen === 1} onChange={() => setFilter("men")} />
                         <label className="form-check-label" htmlFor="men">
@@ -262,7 +270,7 @@ export default function ProductList() {
 
                 <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>
             </div>
-            <div className='row' id='result' ref={containerRef}>
+            <div className='row' ref={containerRef}>
                 {productList.map((product, index) => (
                     <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
                         <ProductCard product={product}></ProductCard>
@@ -273,33 +281,41 @@ export default function ProductList() {
             <div className='d-flex justify-content-end'>
                 {!isFiltering &&
                     (<div>
-                        {currentPage > 1 && <button onClick={() => getPage(currentPage - 1)}>&lt;</button>}
+                        {currentPage > 1 && <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>}
                         {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                            <button
+                            <a
+                                className={'change-page-btn ' + (currentPage === pageNumber ? 'current' : '')}
                                 key={pageNumber}
-                                onClick={() => getPage(pageNumber)}
+                                onClick={() => {
+                                    getPage(pageNumber);
+                                }}
                                 disabled={currentPage === pageNumber}
+                                href='#view-point'
                             >
                                 {pageNumber}
-                            </button>
+                            </a>
                         ))}
-                        {currentPage < totalPages && <button onClick={() => getPage(currentPage + 1)}> &gt;</button>}
+                        {currentPage < totalPages && <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>}
                     </div>)
                 }
 
                 {isFiltering ? (
                     <div>
-                        {currentPageFilter > 1 && <button onClick={() => getPageFilterResult(currentPageFilter - 1)}>&lt;</button>}
+                        {currentPageFilter > 1 && <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>}
                         {Array.from({ length: totalPagesFilter }, (_, index) => index + 1).map((pageNumber) => (
-                            <button
+                            <a
+                                className={'change-page-btn ' + (currentPageFilter === pageNumber ? 'current' : '')}
+                                href='#view-point'
                                 key={pageNumber}
-                                onClick={() => getPageFilterResult(pageNumber)}
+                                onClick={() => {
+                                    getPageFilterResult(pageNumber);
+                                }}
                                 disabled={currentPageFilter === pageNumber}
                             >
                                 {pageNumber}
-                            </button>
+                            </a>
                         ))}
-                        {currentPageFilter < totalPagesFilter && <button onClick={() => getPageFilterResult(currentPageFilter + 1)}> &gt;</button>}
+                        {currentPageFilter < totalPagesFilter && <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>}
                     </div>
                 ) : null}
             </div>

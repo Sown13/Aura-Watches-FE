@@ -6,7 +6,6 @@ import "../../../css/layout/pages/products/ProductDetail.css";
 export default function ProductDetail() {
     const { productId } = useParams();
     const [product, setProduct] = useState([]);
-    const [tag, setTag] = useState(["men", "rolex", "premier"]);
     const [tabActive, setTabActive] = useState(1);
 
     const selectTab = (number) => {
@@ -123,12 +122,11 @@ export default function ProductDetail() {
                         <button type="button" className="btn btn-warning product-detail-button-2">Add To Cart</button>
                     </div>
                     <div className="product-detail-tag">
-                        {tag.map((tag, index) => (
-                            <Link className="badge text-bg-secondary" to={"/products/" + tag} key={index}>{tag}</Link>
-                        ))}
-                        {/* <span className="badge text-bg-secondary">Men</span>
-                        <span className="badge text-bg-secondary">Rolex</span>
-                        <span className="badge text-bg-secondary">Premier</span> */}
+                        {product.isMen ? <Link className="badge text-bg-secondary" to={"/products/men"} >men</Link> : null}
+                        {product.isWomen ? <Link className="badge text-bg-secondary" to={"/products/women"} >women</Link> : null}
+                        {product.isPremier ? <Link className="badge text-bg-secondary" to={"/products/premier"} >premier</Link> : null}
+                        {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
+                        {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand} >{product.brand}</Link> : null}
                     </div>
                 </div>
             </div>
