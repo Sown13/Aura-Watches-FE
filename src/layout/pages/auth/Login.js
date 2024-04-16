@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,22 +6,27 @@ import LoginStyles from "../../../css/layout/pages/auth/LoginStyles.css";
 import facebookLogo from '../../../images/facebook.png';
 import googleLogo from '../../../images/google.png';
 import { useCookies } from 'react-cookie';
+import { UserContext } from '../../../context/UserContext';
 
 const Login = () => {
-  const [cookies, setCookie] = useCookies(['user']);
-  
-  function handleLogin(user) {
-    setCookie('user', user, { path: '/' })
-  }
-  function handleLogout() {
-    setCookie('user', null, { path: '/' })
-  }
 
-  useEffect(() => {
-    if (cookies.user) {
-      navigate('/');
-    };
-  }, [])
+  const { handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn, handleLogin } = useContext(UserContext);
+  // const [cookies, setCookie] = useCookies(['user']);
+
+  // function handleLogin(user) {
+  //   setCookie('user', user, { path: '/' })
+  //   setIsLoggedIn(1);
+  //   console.log("login?:" + isLoggedIn);
+  // }
+  // function handleLogout() {
+  //   setCookie('user', null, { path: '/' })
+  // }
+
+  // useEffect(() => {
+  //   if (cookies.user) {
+  //     navigate('/');
+  //   };
+  // }, [])
 
   const [credentials, setCredentials] = useState({
     username: '',
@@ -67,7 +72,10 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className='login-container'>
+      <a className="logo-aura-watch col navbar-brand" href={"/"}>
+        <img src="/img/logo.svg" alt="logo"></img>
+      </a>
       <div className="Login">
         <h2>Login</h2>
         <form onSubmit={loginUser}>
@@ -114,7 +122,7 @@ const Login = () => {
       </div>
       <div className="background-image">
       </div>
-    </>
+    </div>
   );
 };
 

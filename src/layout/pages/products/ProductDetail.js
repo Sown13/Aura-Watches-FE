@@ -59,7 +59,10 @@ export default function ProductDetail() {
 
 
                 <div className="product-detail-content-padding"></div>
+
+
                 <div className="product-detail-option d-flex flex-column">
+                    <h3>{product.name_code}</h3>
                     <h1>{product.name}</h1>
                     <h1>${Number(product.price).toLocaleString()}</h1>
                     <h6>{product.summary ? product.summary : product.description}</h6>
@@ -71,51 +74,12 @@ export default function ProductDetail() {
                     <div>
                         <h5>Detail:</h5>
                         <p>{product.description}</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
-                        <p>Test content</p>
+                        <h4>Example Section 1</h4>
+                        <p>{product.description}</p>
+                        <h4>Example Section 2</h4>
+                        <p>{product.description}</p>
+                        <h4>Example Section 3</h4>
+                        <p>{product.description}</p>
                     </div>
                     <div className="button-container ">
                         <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>

@@ -20,37 +20,68 @@ import CommentList from './layout/pages/products/tabs/CommentList';
 import PageNotFound from './layout/pages/PageNotFound';
 import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
+import { UserContext } from './context/UserContext';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(1);
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
+  const handleLogout = () => {
+    removeCookie('user');
+    setIsLoggedIn(0);
+  }
+
+  const handleLogin = (user) => {
+    setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
+    setIsLoggedIn(1);
+    console.log("login?:" + isLoggedIn);
+  }
+
+  useEffect(() => {
+    console.log(isLoggedIn ? "Logged in" : "Not logged in");
+    console.log(cookies);
+    if (cookies.user) {
+      setIsLoggedIn(1);
+      console.log("yes"+isLoggedIn);
+    } else {
+      setIsLoggedIn(0);
+      console.log("no" + isLoggedIn);
+    }
+  }, [cookies]);
+
   return (
     <CookiesProvider>
-    <div className="App" >
-      <Routes>
-          <Route path="/" element={<Layout></Layout>}>
-          <Route path="/" element={<Home/>}></Route>
-          <Route path="/products" element={<ProductList></ProductList>}></Route>
-          <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
-          <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}>
-            <Route path='' element={<ProductOther></ProductOther>} />
-            <Route path='store' element={<Store></Store>} />
-            <Route path='comment' element={<CommentList></CommentList>} />
-          </Route>
-          <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
-          <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
-          <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
-          <Route path="/policy-warranty" element={<PolWarranty></PolWarranty>}></Route>
-          <Route path="/policy-security" element={<PolSecurity></PolSecurity>}></Route>
-          <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
-          <Route path="/contact-us" element={<Contact></Contact>}></Route>
-          <Route path="/news" element={<News></News>}></Route>
-          <Route path="/register" element={<Register></Register>}></Route>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
-        </Route>
-      </Routes>
-      <ToastContainer/>
-    </div >
-    </CookiesProvider>
+      <div className="App" >
+        <UserContext.Provider value={{ handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn, handleLogin }}>
+          <Routes>
+            <Route path="/" element={<Layout></Layout>}>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/products" element={<ProductList></ProductList>}></Route>
+              <Route path="/products/:category" element={<ProductList></ProductList>}></Route>
+              <Route path="/products/detail/:productId" element={<ProductDetail></ProductDetail>}>
+                <Route path='' element={<ProductOther></ProductOther>} />
+                <Route path='store' element={<Store></Store>} />
+                <Route path='comment' element={<CommentList></CommentList>} />
+              </Route>
+              <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
+              <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
+              <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
+              <Route path="/policy-warranty" element={<PolWarranty></PolWarranty>}></Route>
+              <Route path="/policy-security" element={<PolSecurity></PolSecurity>}></Route>
+              <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
+              <Route path="/contact-us" element={<Contact></Contact>}></Route>
+              <Route path="/news" element={<News></News>}></Route>
+              <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+            </Route>
+            <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+          </Routes>
+          <ToastContainer />
+        </UserContext.Provider>
+      </div >
+    </CookiesProvider >
   );
 }
 

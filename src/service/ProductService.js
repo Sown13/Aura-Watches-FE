@@ -3,17 +3,17 @@ import http from "./httpCommon";
 const getAllProduct = (category, page) => {
     switch (category) {
         case "all":
-            return http.get("/products?_page=" + page + "&_per_page=12");
+            return http.get("/products?_page=" + page + "&_per_page=20");
         case "men":
-            return http.get("/products?isMen=1&_page=" + page + "&_per_page=12");
+            return http.get("/products?isMen=1&_page=" + page + "&_per_page=20");
         case "women":
-            return http.get("/products?isWomen=1&_page=" + page + "&_per_page=12");
+            return http.get("/products?isWomen=1&_page=" + page + "&_per_page=20");
         case "premier":
-            return http.get("/products?isPremier=1&_page=" + page + "&_per_page=12");
+            return http.get("/products?isPremier=1&_page=" + page + "&_per_page=20");
         case "sport":
-            return http.get("/products?isSport=1&_page=" + page + "&_per_page=12");
+            return http.get("/products?isSport=1&_page=" + page + "&_per_page=20");
         default:
-            return http.get("/products?_page=" + page + "&_per_page=12");
+            return http.get("/products?_page=" + page + "&_per_page=20");
     }
 }
 
@@ -28,7 +28,7 @@ const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, br
     ${isWomen === 1 ? `&isWomen=${isWomen}` : ''}
     ${isPremier === 1 ? `&isPremier=${isPremier}` : ''}
     ${isSport === 1 ? `&isSport=${isSport}` : ''}
-    &brand=${brand}&_page=${page}&_per_page=4`);
+    &brand=${brand}&_page=${page}&_per_page=8`);
 }
 
 const getProductById = (id) => {

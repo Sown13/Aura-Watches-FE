@@ -1,5 +1,6 @@
 .product-detail {
     text-align: left !important;
+    width: 100%;
 }
 
 .product-detail h6 {
@@ -48,6 +49,10 @@
 
 .product-detail-content-padding {
     width: 10%;
+}
+
+.product-detail-option {
+    width: 50%;
 }
 
 .product-detail-img-frame img {

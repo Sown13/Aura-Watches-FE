@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../css/layout/pages/Home.css";
 import { useNavigate } from 'react-router-dom';
 import { Cookies, useCookies } from "react-cookie";
+import { UserContext } from "../../context/UserContext";
 
 export default function Home() {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(0);
-    const [cookies] = useCookies(['user']);
+    const { handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
-    useEffect(()=>{
-        if (!cookies.user) {
-            setIsLoggedIn(0);
-        } else setIsLoggedIn(1);
-    },[])
+    // useEffect(() => {
+    //     if (!cookies.user) {
+    //         setIsLoggedIn(0);
+    //     } else setIsLoggedIn(1);
+    // }, [])
 
     return (
         <div className="home">
-            {isLoggedIn &&  <h1 style={{color: 'white'}}>Welcome, {cookies.user.Fullname}!</h1>}
+            {isLoggedIn ? <h1 style={{ color: 'white' }}> Welcome, {cookies.user.Fullname}!</h1> : null}
             <div id="home-carousel" className="carousel slide carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner text-light">
                     <div className="container carousel-item active">

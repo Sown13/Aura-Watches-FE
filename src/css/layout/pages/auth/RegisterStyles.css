@@ -1,6 +1,10 @@
+.register-container {
+  background-color: black !important;
+}
+
 .Register {
   float: right;
-  width: 40%; 
+  width: 40%;
   margin: 40px auto;
   padding: 20px;
   border: 0px solid #ccc;
@@ -17,19 +21,19 @@
   font-weight: bold;
 }
 
-.Register h6 a{
+.Register h6 a {
   text-decoration: none;
   color: #E8C284;
 }
 
-.Register h6{
+.Register h6 {
   color: aliceblue;
   margin-left: -50%;
   margin-top: 15px;
   font-size: 14px;
 }
 
-.Register h6 a:hover{
+.Register h6 a:hover {
   color: #207b3c;
 }
 
@@ -47,7 +51,8 @@ label {
   display: inline;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -66,27 +71,27 @@ input[type="text"], input[type="password"] {
 }
 
 .Register .btn-primary {
-  background-color: #E8C284; 
+  background-color: #E8C284;
   color: rgb(0, 0, 0);
   width: 50%;
 }
 
 .Register .btn-primary:hover {
-  background-color: #3e8e41; 
+  background-color: #3e8e41;
 }
 
 .Register .btn-success {
-  background-color: #E8C284; 
+  background-color: #E8C284;
   color: white;
 }
 
 .Register .btn-success:hover {
-  background-color: #207b3c; 
+  background-color: #207b3c;
 }
 
 .background-image {
   float: left;
-  width: 630px; 
+  width: 630px;
   height: 760px;
   margin: 40px auto;
   padding: 20px;
@@ -99,7 +104,8 @@ input[type="text"], input[type="password"] {
   margin-top: -20px;
 }
 
-.reg-facebook img, .reg-google img {
+.reg-facebook img,
+.reg-google img {
   width: 20px;
   height: 20px;
   margin-left: 10px;
@@ -136,7 +142,8 @@ input[type="text"], input[type="password"] {
   float: right;
 }
 
-.reg-facebook:hover, .reg-google:hover {
+.reg-facebook:hover,
+.reg-google:hover {
   color: #207b3c;
 }
 
@@ -155,16 +162,11 @@ input[type="text"], input[type="password"] {
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px; 
+  font-size: 20px;
   color: #E8C284;
-  transition: color 0.3s ease; 
+  transition: color 0.3s ease;
 }
 
 .password-input i:hover {
   color: #207b3c;
 }
-
-
-
-
-

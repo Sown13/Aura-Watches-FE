@@ -144,21 +144,15 @@ export default function ProductList() {
         });
     }, [category]);
 
-    // useEffect(() => {
-    //     const container = containerRef.current;
-    //     if (container) {
-    //         container.scrollTop = 0;
-    //         console.log("scroll to the top, did not work, need fix");
-    //     }
-    // }, [currentPage, currentPageFilter]);
-
 
 
     return (
         <div className='product-list text-light'>
             <h5 className='product-list-title'> HOME/{selectedCategory ? selectedCategory.toLocaleUpperCase() : ''} </h5>
             TEST: {testContext}
-            <div className='product-list-banner'><img src={banner} alt='BANNER' /></div>
+            <div className='product-list-banner'>
+                <a href={`/products/${category}`}><img src={banner} alt='BANNER' /></a>
+            </div>
             <div className="product-list-filter">
 
                 <div className="product-list-filter-select bg-black text-white d-flex gap-3 mb-2">

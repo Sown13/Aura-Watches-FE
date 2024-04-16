@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
                 <div className="product-card-img-badge text-light position-absolute">New</div>
             </div>
             <div className="product-card-body card-body">
-                <h5 className="card-title">{product ? product.name : "Aura-Watch"}</h5>
+                <h5 className="card-title">{product ? product.name_code : "Aura-Watch"}</h5>
                 {/* <p className="card-text">${product ? product.price : 0}</p> */}
                 {product.sale > 0 ? (
                     <div className="card-text d-flex justify-content-center">
@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
                         </p>
                     </div>
                 ) : (
-                    <p className="card-text">{product.price.toLocaleString()}$</p>
+                    <p className="card-text">{Number(product.price).toLocaleString()}$</p>
                 )}
             </div>
         </a>
