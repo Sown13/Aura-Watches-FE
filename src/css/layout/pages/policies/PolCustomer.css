@@ -1,0 +1,22 @@
+.pol-customer body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+.pol-customer h1 {
+    color: #E8C284;
+    text-align: center; 
+}
+.pol-customer h2 {
+    color: #E8C284;
+    font-family:Trebuchet MS;
+}
+.pol-customer p {
+    font-family :Verdana ;
+    text-align: justify;
+}
+.pol-customer ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    text-align: justify;
+}

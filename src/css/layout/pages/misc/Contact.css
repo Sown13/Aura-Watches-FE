@@ -1,0 +1,51 @@
+.misc-contact  {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    text-align: left !important;
+}
+
+.misc-contact h1 {
+    color: #E8C284;
+    text-align: center;
+}
+
+.misc-contact h2 {
+    color: #E8C284;
+    font-family: Trebuchet MS;
+}
+
+.misc-contact p {
+    font-family: Verdana;
+    text-align: justify;
+}
+
+.misc-contact ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    text-align: justify;
+}
+
+/* Layout 2 cột */
+.misc-contact .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.misc-contact .map-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.misc-contact .branch-info {
+    flex: 1;
+}
+
+.misc-contact .branch {
+    margin-top: 30px;
+}
+
+.misc-contact .branch h3 {
+    color: #E8C284;
+}
+

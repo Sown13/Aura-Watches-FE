@@ -1,5 +1,6 @@
 .login-container {
   background-color: black !important;
+  min-height: 100vh !important;
 }
 
 .Login {
@@ -14,10 +15,12 @@
   margin-top: 13%;
 }
 
+
 .Login h2 {
   color: rgb(255, 255, 255);
   margin-bottom: 15px;
 }
+
 
 
 form {

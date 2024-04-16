@@ -1,0 +1,47 @@
+.about-us {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+.about-us h1 {
+    color: #E8C284;
+    text-align: center;
+}
+
+.about-us h2 {
+    color: #E8C284;
+    font-family: Trebuchet MS;
+    text-align: center;
+}
+
+.about-us p {
+    font-family: Verdana;
+    text-align: justify;
+
+}
+
+.about-us ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    text-align: justify;
+}
+
+.about-us .content {
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.about-us .left {
+    width: 400px;
+    margin-right: 20px;
+    float: left;
+    height: 400px;
+}
+
+.about-us .right {
+    width: 400px;
+    margin-left: 20px;
+    float: right;
+    height: 400px
+}

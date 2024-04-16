@@ -20,40 +20,40 @@ import CommentList from './layout/pages/products/tabs/CommentList';
 import PageNotFound from './layout/pages/PageNotFound';
 import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import { UserContext } from './context/UserContext';
+import { UserContext, UserProvider } from './context/UserContext';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(1);
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  // const [isLoggedIn, setIsLoggedIn] = useState(0);
+  // const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
-  const handleLogout = () => {
-    removeCookie('user');
-    setIsLoggedIn(0);
-  }
+  // const handleLogout = () => {
+  //   removeCookie('user');
+  //   setIsLoggedIn(0);
+  // }
 
-  const handleLogin = (user) => {
-    setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
-    setIsLoggedIn(1);
-    console.log("login?:" + isLoggedIn);
-  }
+  // const handleLogin = (user) => {
+  //   setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
+  //   setIsLoggedIn(1);
+  //   console.log("login?:" + isLoggedIn);
+  // }
 
-  useEffect(() => {
-    console.log(isLoggedIn ? "Logged in" : "Not logged in");
-    console.log(cookies);
-    if (cookies.user) {
-      setIsLoggedIn(1);
-      console.log("yes"+isLoggedIn);
-    } else {
-      setIsLoggedIn(0);
-      console.log("no" + isLoggedIn);
-    }
-  }, [cookies]);
+  // useEffect(() => {
+  //   console.log(isLoggedIn ? "Logged in" : "Not logged in");
+  //   console.log(cookies);
+  //   if (cookies.user) {
+  //     setIsLoggedIn(1);
+  //     console.log("yes"+isLoggedIn);
+  //   } else {
+  //     setIsLoggedIn(0);
+  //     console.log("no" + isLoggedIn);
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <CookiesProvider>
       <div className="App" >
-        <UserContext.Provider value={{ handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn, handleLogin }}>
+        <UserProvider>
           <Routes>
             <Route path="/" element={<Layout></Layout>}>
               <Route path="/" element={<Home />}></Route>
@@ -79,7 +79,7 @@ function App() {
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
           <ToastContainer />
-        </UserContext.Provider>
+        </UserProvider>
       </div >
     </CookiesProvider >
   );
