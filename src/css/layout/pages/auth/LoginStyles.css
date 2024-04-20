@@ -4,15 +4,16 @@
 }
 
 .Login {
-  float: right;
+  position: absolute;
+  right: 0;
   width: 40%;
   margin: 40px auto;
   padding: 20px;
   border: 0px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding-right: 15px;
-  margin-top: 13%;
+  padding-right: 100px;
+  margin-top: 10%;
 }
 
 
@@ -82,9 +83,10 @@ input[type="password"] {
 
 .Login .btn-primary {
   background-color: #E8C284;
-  color: white;
+  color: rgb(0, 0, 0);
   width: 50%;
   margin-top: 15px;
+  border-radius: 15px !important;
 }
 
 .Login .btn-primary:hover {
@@ -101,7 +103,8 @@ input[type="password"] {
 }
 
 .Login .background-image {
-  float: left;
+  display: flex;
+  justify-content: flex-start;
   width: 630px;
   height: 760px;
   margin: 40px auto;
@@ -122,34 +125,37 @@ input[type="password"] {
   margin-right: 5px;
 }
 
+.other-login {
+  display: flex;
+  justify-content: center;
+}
+
 .log-facebook {
   margin-top: 30px;
-  border-radius: 15px;
+  border-radius: 15px !important;
   width: 220px;
   height: 45px;
   background-color: black;
   color: aliceblue;
-  border: 1px solid;
-  margin-right: 5px;
   display: flex;
+  border: 1px solid;
+  margin-right: 35px;
   align-items: center;
   padding: 10px 0;
-  float: left;
 }
 
 .log-google {
   margin-top: 30px;
-  border-radius: 15px;
+  border-radius: 15px !important;
   width: 200px;
   height: 45px;
   background-color: black;
   color: aliceblue;
   border: 1px solid;
-  margin-right: 5px;
   display: flex;
+  margin-right: 5px;
   align-items: center;
   padding: 10px 0;
-  float: right;
 }
 
 .log-facebook:hover,
@@ -166,9 +172,9 @@ input[type="password"] {
   padding-right: 40px;
 }
 
-.password-input i {
+.Login .password-input i {
   position: absolute;
-  top: 50%;
+  top: 67%;
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;

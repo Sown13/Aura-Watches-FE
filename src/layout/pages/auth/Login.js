@@ -111,6 +111,8 @@ const Login = () => {
           </button>
         </form>
         <h6>Already have a account? <Link to="/register">Register</Link></h6>
+
+        <div className='other-login'>
         <button className="log-facebook">
           <img src={facebookLogo} />
           Sign in with Facebook
@@ -119,6 +121,8 @@ const Login = () => {
           <img src={googleLogo} />
           Sign in with Google
         </button>
+        </div>
+
       </div>
       <div className="background-image">
       </div>
