@@ -17,14 +17,20 @@
 }
 
 .product-card-body {
-    height: 30%;
-    padding: 16px 0 0 0 !important;
+    overflow: hidden;
+    height: 10%;
+    /* padding: 0 !important; */
 }
 
+.product-card-body.card-text {
+    object-fit: cover;
+}
 
 .product-card-img-container img {
     width: 100%;
     height: 100%;
+    padding-top: 10%;
+    padding-bottom: 10%;
     object-fit: contain !important;
     transition: transform 0.3s ease;
 }
