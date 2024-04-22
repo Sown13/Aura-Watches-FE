@@ -7,16 +7,10 @@ import { UserContext } from "../../context/UserContext";
 export default function HeaderTop() {
     const { handleLogout, cookies, removeCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
-    useEffect(() => {
-        console.log("header top: " + isLoggedIn);
-        console.log(cookies);
-      }, [cookies]);
-
     return (
         <nav className="navbar navbar-expand header-top d-flex flex-row ">
             <div className="container-fluid">
                 <div className="col d-flex flex-row navbar-nav">
-
                 </div>
                 <div className="col">
                     <Link className="logo-aura-watch navbar-brand" to={"/"}>
@@ -30,8 +24,8 @@ export default function HeaderTop() {
                     {
                         isLoggedIn ?
                             (<div class="dropdown">
-                                <Link class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i className="fa-solid fa-user"></i>
+                                <Link class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="fa-solid fa-user" style={{ color: "#e8c284" }}></i>
                                 </Link>
 
                                 <ul class="dropdown-menu">
@@ -41,7 +35,6 @@ export default function HeaderTop() {
                             </div>)
                             : (<Link className="nav-link text-light" to={"/login"}><i className="fa-solid fa-user"></i></Link>)
                     }
-
                 </div>
             </div>
         </nav>

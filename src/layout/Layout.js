@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import HeaderBotSticky from "../components/navigate/HeaderBotSticky";
 
 export default function Layout() {
-    const testContext = "This one displays mean the context ok";
     const [headerBot, setHeaderBot] = useState(0);
 
     useEffect(() => {
@@ -30,19 +29,17 @@ export default function Layout() {
 
     return (
         <div className="layout d-flex justify-content-center flex-column">
-            <UserContext.Provider value={{ testContext }}>
-                <div className="layout-header-top d-flex flex-column">
-                    <HeaderTop></HeaderTop>
-                </div>
-                <div className={headerBot == 1 ? "sticky" : ""}>
-                    {headerBot == 1 ? <HeaderBotSticky></HeaderBotSticky> : <HeaderBot></HeaderBot>}
-                </div>
-                <div className="outlet">
-                    <Outlet></Outlet>
-                </div>
-                <FooterTop></FooterTop>
-                <FooterBot></FooterBot>
-            </UserContext.Provider>
+            <div className="layout-header-top d-flex flex-column">
+                <HeaderTop></HeaderTop>
+            </div>
+            <div className={headerBot == 1 ? "sticky" : ""}>
+                {headerBot == 1 ? <HeaderBotSticky></HeaderBotSticky> : <HeaderBot></HeaderBot>}
+            </div>
+            <div className="outlet">
+                <Outlet></Outlet>
+            </div>
+            <FooterTop></FooterTop>
+            <FooterBot></FooterBot>
         </div>
     )
 }

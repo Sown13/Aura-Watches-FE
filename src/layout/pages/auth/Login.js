@@ -11,16 +11,6 @@ import { UserContext } from '../../../context/UserContext';
 const Login = () => {
 
   const { handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn, handleLogin } = useContext(UserContext);
-  // const [cookies, setCookie] = useCookies(['user']);
-
-  // function handleLogin(user) {
-  //   setCookie('user', user, { path: '/' })
-  //   setIsLoggedIn(1);
-  //   console.log("login?:" + isLoggedIn);
-  // }
-  // function handleLogout() {
-  //   setCookie('user', null, { path: '/' })
-  // }
 
   // useEffect(() => {
   //   if (cookies.user) {

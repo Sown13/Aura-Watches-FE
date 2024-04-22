@@ -13,47 +13,44 @@ import PolSecurity from './layout/pages/policies/PolSecurity';
 import PolWarranty from './layout/pages/policies/PolWarranty';
 import ProductDetail from './layout/pages/products/ProductDetail';
 import ProductList from './layout/pages/products/ProductList';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import ProductOther from './layout/pages/products/tabs/ProductOther';
 import Store from './layout/pages/products/tabs/Store';
 import CommentList from './layout/pages/products/tabs/CommentList';
 import PageNotFound from './layout/pages/PageNotFound';
 import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import { UserContext, UserProvider } from './context/UserContext';
 import { useEffect, useState } from 'react';
+import { UserContext } from './context/UserContext';
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(0);
-  // const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [isLoggedIn, setIsLoggedIn] = useState(0);
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
-  // const handleLogout = () => {
-  //   removeCookie('user');
-  //   setIsLoggedIn(0);
-  // }
+  const handleLogout = () => {
+    removeCookie('user');
+    setIsLoggedIn(0);
+  }
 
-  // const handleLogin = (user) => {
-  //   setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
-  //   setIsLoggedIn(1);
-  //   console.log("login?:" + isLoggedIn);
-  // }
+  const handleLogin = (user) => {
+    setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
+    setIsLoggedIn(1);
+  }
 
-  // useEffect(() => {
-  //   console.log(isLoggedIn ? "Logged in" : "Not logged in");
-  //   console.log(cookies);
-  //   if (cookies.user) {
-  //     setIsLoggedIn(1);
-  //     console.log("yes"+isLoggedIn);
-  //   } else {
-  //     setIsLoggedIn(0);
-  //     console.log("no" + isLoggedIn);
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    // console.log(isLoggedIn ? "Logged in" : "Not logged in");
+    // console.log(cookies);
+    if (cookies.user) {
+      setIsLoggedIn(1);
+    } else {
+      setIsLoggedIn(0);
+    }
+  }, [isLoggedIn]);
 
   return (
     <CookiesProvider>
       <div className="App" >
-        <UserProvider>
+        <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn, cookies, setCookie, removeCookie, handleLogin, handleLogout }}>
           <Routes>
             <Route path="/" element={<Layout></Layout>}>
               <Route path="/" element={<Home />}></Route>
@@ -74,12 +71,14 @@ function App() {
               <Route path="/news" element={<News></News>}></Route>
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
+            {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}
+            {isLoggedIn && <Route path="/register" element={<Navigate to="/" replace />} />}
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
           <ToastContainer />
-        </UserProvider>
+        </UserContext.Provider>
       </div >
     </CookiesProvider >
   );

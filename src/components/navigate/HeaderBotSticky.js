@@ -1,11 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import "../../css/components/navigate/HeaderBotSticky.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/UserContext";
 
 
 export default function HeaderBotSticky() {
     const { category } = useParams();
     const [tabActive, setTabActive] = useState(0);
+    const { handleLogout, cookies, removeCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
     const selectTab = (number) => {
         setTabActive(number);
@@ -64,7 +66,21 @@ export default function HeaderBotSticky() {
                 <div className="col d-flex flex-row navbar-nav flex-row-reverse">
                     <Link className="nav-link text-light" to={"/#"}><i className="fa-solid fa-bag-shopping"></i></Link>
                     <Link className="nav-link text-light" aria-current="page" to={"/register"}><i className="fa-solid fa-magnifying-glass"></i></Link>
-                    <Link className="nav-link text-light" to={"/login"}><i className="fa-solid fa-user"></i></Link>
+                    {
+                        isLoggedIn ?
+                            (<div class="dropdown">
+                                <Link class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="fa-solid fa-user" style={{ color: "#e8c284" }}></i>
+                                </Link>
+
+                                <ul class="dropdown-menu">
+                                    <li><Link class="dropdown-item" to={'/user/profile'}>Your Profile</Link ></li>
+                                    <li><Link class="dropdown-item" onClick={() => handleLogout()}>Log Out</Link></li>
+                                </ul>
+                            </div>)
+                            : (<Link className="nav-link text-light" to={"/login"}><i className="fa-solid fa-user"></i></Link>)
+                    }
+
                 </div>
             </div>
         </nav>
