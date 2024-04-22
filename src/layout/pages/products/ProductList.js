@@ -37,9 +37,8 @@ export default function ProductList() {
 
     const scrollToFirstResultLine = () => {
         let div = document.getElementById("view-point");
+        // notice: this one is not working if setState() is not done
         div.scrollIntoView();
-        // console.log("out sidebutton work but button in the .map is not?")
-        // fixed, using <a href="#id">, so wield!!
     };
 
     // for pagenation
@@ -49,6 +48,7 @@ export default function ProductList() {
 
     const handlePageChange = (page) => {
         if (page < 1) { page = 1 };
+        if (page > totalPages) { page = totalPages };
         setCurrentPage(page);
     }
 
@@ -57,6 +57,8 @@ export default function ProductList() {
     }
 
     const handlePageFilterChange = (page) => {
+        if (page < 1) { page = 1 };
+        if (page > totalPagesFilter) { page = totalPagesFilter };
         setCurrentPageFilter(page);
     }
     ////////////////////////////////
@@ -102,7 +104,8 @@ export default function ProductList() {
     }
 
     const getPageFilterResult = (page) => {
-        if (page <= 0) { page = 1 };
+        if (page < 1) { page = 1 };
+        if (page > totalPagesFilter) { page = totalPagesFilter };
         ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, page).then((res) => {
             setProductList(res.data.data);
             handlePageFilterChange(page);
@@ -113,6 +116,7 @@ export default function ProductList() {
 
     const getPage = (page) => {
         if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
         ProductService.getAllProduct(category, page).then((res) => {
             setProductList(res.data.data);
             handlePageChange(page);
@@ -149,7 +153,6 @@ export default function ProductList() {
     return (
         <div className='product-list text-light'>
             <h5 className='product-list-title'> HOME/{selectedCategory ? selectedCategory.toLocaleUpperCase() : ''} </h5>
-            TEST: {testContext}
             <div className='product-list-banner'>
                 <a href={`/products/${category}`}><img src={banner} alt='BANNER' /></a>
             </div>
@@ -262,7 +265,28 @@ export default function ProductList() {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>
+            </div>
+            <div className='d-flex justify-content-center'>
+                {!isFiltering &&
+                    (<div>
+                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                        <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
+                        <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
+                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    </div>)
+                }
+
+                {isFiltering ? (
+                    <div>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter === totalPagesFilter ? "LAST" : currentPageFilter}  </a>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    </div>
+                ) : null}
             </div>
             <div className='row' ref={containerRef}>
                 {productList.map((product, index) => (
@@ -272,44 +296,31 @@ export default function ProductList() {
                 ))}
             </div>
             <br />
-            <div className='d-flex justify-content-end'>
+            <div className='d-flex justify-content-center'>
                 {!isFiltering &&
                     (<div>
-                        {currentPage > 1 && <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>}
-                        {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                            <a
-                                className={'change-page-btn ' + (currentPage === pageNumber ? 'current' : '')}
-                                key={pageNumber}
-                                onClick={() => {
-                                    getPage(pageNumber);
-                                }}
-                                disabled={currentPage === pageNumber}
-                                href='#view-point'
-                            >
-                                {pageNumber}
-                            </a>
-                        ))}
-                        {currentPage < totalPages && <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>}
+                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                        {currentPage === 1 ?
+                            <button className='change-page-btn' disabledonClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            : <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>}
+
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
+
+                        {currentPage === totalPages ?
+                            <button className='change-page-btn' disabled onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
+                            : <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
+                        }
+                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
                     </div>)
                 }
 
                 {isFiltering ? (
                     <div>
-                        {currentPageFilter > 1 && <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>}
-                        {Array.from({ length: totalPagesFilter }, (_, index) => index + 1).map((pageNumber) => (
-                            <a
-                                className={'change-page-btn ' + (currentPageFilter === pageNumber ? 'current' : '')}
-                                href='#view-point'
-                                key={pageNumber}
-                                onClick={() => {
-                                    getPageFilterResult(pageNumber);
-                                }}
-                                disabled={currentPageFilter === pageNumber}
-                            >
-                                {pageNumber}
-                            </a>
-                        ))}
-                        {currentPageFilter < totalPagesFilter && <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>}
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter === totalPagesFilter ? "LAST" : currentPageFilter}  </a>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
+                        <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
                     </div>
                 ) : null}
             </div>

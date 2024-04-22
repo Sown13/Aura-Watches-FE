@@ -22,6 +22,7 @@ import { ToastContainer } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { UserContext } from './context/UserContext';
+import UserDetail from './layout/pages/users/UserDetail';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -69,6 +70,8 @@ function App() {
               <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
               <Route path="/contact-us" element={<Contact></Contact>}></Route>
               <Route path="/news" element={<News></News>}></Route>
+              {!isLoggedIn && <Route path="/user/profile" element={<Navigate to="/" replace />} />}
+              <Route path='/user/profile' element={<UserDetail></UserDetail>}></Route>
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
             {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}
