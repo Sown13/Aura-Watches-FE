@@ -53,8 +53,15 @@ export default function HeaderBot() {
                             BRANDS
                         </Link>
                         <ul className="dropdown-menu">
-                            <li><Link className="dropdown-item p-3" to={"/products/brand-1"}>AURA WATCH</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/brand-2"}>ROLEX</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/AURA-WATCH"}>AURA WATCH</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/FOSSIL"}>FOSSIL</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/TOMMY-HILFIGER"}> TOMMY HILFIGER</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/BULOVA"}>BULOVA</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/GUESS"}>GUESS</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/ANNE-KLEIN"}>ANNE KLEIN</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/G-SHOCK"}>G-SHOCK</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/NINE-WEST"}>NINE WEST</Link></li>
+                            <li><Link className="dropdown-item p-3" to={"/products/TIMEX"}>TIMEX</Link></li>
                         </ul>
                     </div>
                     <Link className={"nav-link text-light p-3" + (tabActive === 4 ? " active" : "")} onClick={() => selectTab(4)} to={"/products/premier"}>PREMIER</Link>

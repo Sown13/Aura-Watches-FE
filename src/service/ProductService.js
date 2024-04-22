@@ -1,19 +1,40 @@
 import http from "./httpCommon";
 
+const resultPerPage = "&_per_page=20";
+
 const getAllProduct = (category, page) => {
+    const resultPerPage = "&_page=" + page + "&_per_page=20";
     switch (category) {
         case "all":
-            return http.get("/products?_page=" + page + "&_per_page=20");
+            return http.get("/products?" + resultPerPage);
         case "men":
-            return http.get("/products?isMen=1&_page=" + page + "&_per_page=20");
+            return http.get("/products?isMen=1" + resultPerPage);
         case "women":
-            return http.get("/products?isWomen=1&_page=" + page + "&_per_page=20");
+            return http.get("/products?isWomen=1" + resultPerPage);
         case "premier":
-            return http.get("/products?isPremier=1&_page=" + page + "&_per_page=20");
+            return http.get("/products?isPremier=1" + resultPerPage);
         case "sport":
-            return http.get("/products?isSport=1&_page=" + page + "&_per_page=20");
+            return http.get("/products?isSport=1" + resultPerPage);
+        case "AURA-WATCH":
+            return http.get("/products?brand=AURA WATCH" + resultPerPage);
+        case "FOSSIL":
+            return http.get("/products?brand=FOSSIL" + resultPerPage);
+        case "TOMMY-HILFIGER":
+            return http.get("/products?brand=TOMMY HILFIGER" + resultPerPage);
+        case "BULOVA":
+            return http.get("/products?brand=BULOVA" + resultPerPage);
+        case "GUESS":
+            return http.get("/products?brand=GUESS" + resultPerPage);
+        case "ANNE-KLEIN":
+            return http.get("/products?brand=ANNE KLEIN" + resultPerPage);
+        case "G-SHOCK":
+            return http.get("/products?brand=G-SHOCK" + resultPerPage);
+        case "NINE-WEST":
+            return http.get("/products?brand=NINE WEST" + resultPerPage);
+        case "TIMEX":
+            return http.get("/products?brand=TIMEX" + resultPerPage);
         default:
-            return http.get("/products?_page=" + page + "&_per_page=20");
+            return http.get("/products?" + resultPerPage);
     }
 }
 

@@ -90,7 +90,7 @@ export default function ProductDetail() {
                         {product.isWomen ? <Link className="badge text-bg-secondary" to={"/products/women"} >women</Link> : null}
                         {product.isPremier ? <Link className="badge text-bg-secondary" to={"/products/premier"} >premier</Link> : null}
                         {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
-                        {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand} >{product.brand}</Link> : null}
+                        {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
                     </div>
                 </div>
             </div>

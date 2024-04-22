@@ -7,7 +7,8 @@ import "../../../css/layout/pages/products/ProductList.css";
 
 export default function ProductList() {
     const { category } = useParams();
-    const categoryList = ["all", "men", "women", "premier", "sport", "sales", "aura-watch"];
+    const categoryList = ["all", "men", "women", "premier", "sport", "sales",
+        "AURA-WATCH", "FOSSIL", "TOMMY-HILFIGER", "BULOVA", "GUESS", "ANNE-KLEIN", "G-SHOCK", "NINE-WEST", "TIMEX"];
     const [selectedCategory, setSelectedCategory] = useState(category);
     const { testContext } = useContext(UserContext);
 
@@ -125,6 +126,7 @@ export default function ProductList() {
     // get products after change the category
     useEffect(() => {
         ProductService.getAllProduct(category, currentPage).then((res) => {
+            console.log("data")
             setProductList(res.data.data);
             setTotalPages(res.data.last);
             resetFilter(category);
