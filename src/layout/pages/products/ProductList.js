@@ -10,7 +10,6 @@ export default function ProductList() {
     const categoryList = ["all", "men", "women", "premier", "sport", "sales",
         "AURA-WATCH", "FOSSIL", "TOMMY-HILFIGER", "BULOVA", "GUESS", "ANNE-KLEIN", "G-SHOCK", "NINE-WEST", "TIMEX"];
     const [selectedCategory, setSelectedCategory] = useState(category);
-    const { testContext } = useContext(UserContext);
 
     // for display
     const [productList, setProductList] = useState([]);
@@ -22,9 +21,14 @@ export default function ProductList() {
     const [isWomen, setIsWomen] = useState(0);
     const [isPremier, setIsPremier] = useState(0);
     const [isSport, setIsSport] = useState(0);
-    const [isSale, setIsSale] = useState(0);
+    const [saleMin, setSaleMin] = useState(0);
+    const [saleMax, setSaleMax] = useState(100);
+    const [priceMin, setPriceMin] = useState(0);
+    const [priceMax, setPriceMax] = useState(0);
+    const [sort, setSort] = useState("");
     const [brand, setBrand] = useState("");
     const [currentPageFilter, setCurrentPageFilter] = useState(1);
+    const brandList = ["AURA WATCH", "FOSSIL", "TOMMY HILFIGER", "BULOVA", "GUESS", "ANNE KLEIN", "G-SHOCK", "NINE WEST", "TIMEX"];
 
     // for pagnation
     const [currentPage, setCurrentPage] = useState(1);
@@ -59,7 +63,7 @@ export default function ProductList() {
 
     const handlePageFilterChange = (page) => {
         if (page < 1) { page = 1 };
-        if (page > totalPagesFilter) { page = totalPagesFilter };
+        if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
         setCurrentPageFilter(page);
     }
     ////////////////////////////////
@@ -85,6 +89,30 @@ export default function ProductList() {
         }
     }
 
+    const handleSelectChange = (e, inputName, value) => {
+        switch (inputName) {
+            case 'minPrice': setPriceMin(value);
+                break;
+            case 'maxPrice': setPriceMax(value);
+                break;
+            case 'minSale': setSaleMin(value);
+                break;
+            case 'maxSale':
+                if (value <= 0) { setSaleMax(100) }
+                else setSaleMax(value);
+                break;
+            case "sort": setSort(value);
+                break;
+            default:
+                break;
+        };
+    }
+
+    const handleSelectBrand = (event) => {
+        setBrand(event.target.value);
+    }
+
+
     const resetFilter = (category) => {
         setIsMen(0);
         setIsWomen(0);
@@ -106,7 +134,7 @@ export default function ProductList() {
 
     const getPageFilterResult = (page) => {
         if (page < 1) { page = 1 };
-        if (page > totalPagesFilter) { page = totalPagesFilter };
+        if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
         ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, page).then((res) => {
             setProductList(res.data.data);
             handlePageFilterChange(page);
@@ -159,18 +187,12 @@ export default function ProductList() {
                 <a href={`/products/${category}`}><img src={banner} alt='BANNER' /></a>
             </div>
             <div className="product-list-filter">
-
                 <div className="product-list-filter-select bg-black text-white d-flex gap-3 mb-2">
                     <select className="form-select" aria-label="Default select example">
                         <option selected>Price</option>
                         <option value="1">&#60;$50,000</option>
                         <option value="2">$50,000-$200,000</option>
-                        <option value="3">&#60;$200,000</option>
-                    </select>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Date Indicator</option>
-                        <option value="1">Digital</option>
-                        <option value="2">Number</option>
+                        <option value="3">&gt;$200,000</option>
                     </select>
                     <select className="form-select" aria-label="Default select example">
                         <option selected>Sale</option>
@@ -179,19 +201,12 @@ export default function ProductList() {
                         <option value="3">50%-&#60;80%</option>
                         <option value="4">&#62;80%</option>
                     </select>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Sort</option>
-                        <option value="1">Price(low to high)</option>
-                        <option value="2">Price(high to low)</option>
-                        <option value="3">Name</option>
-                        <option value="4">Release Date</option>
-                    </select>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Sort</option>
-                        <option value="1">Price(low to high)</option>
-                        <option value="2">Price(high to low)</option>
-                        <option value="3">Name</option>
-                        <option value="4">Release Date</option>
+                    <select className="form-select" aria-label="Default select example" onChange={(e) => handleSelectChange(e, 'sort', e.target.value)}>
+                        <option selected >Sort</option>
+                        <option value="priceDown">Price(low to high)</option>
+                        <option value="priceUp">Price(high to low)</option>
+                        <option value="saleDown">Name</option>
+                        <option value="saleUp">Code Name</option>
                     </select>
                 </div>
 
@@ -229,42 +244,22 @@ export default function ProductList() {
                 </div>
 
                 <div className="product-list-filter-check-brand  bg-black text-white d-flex gap-3">
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                            Aura Watch
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Rolex
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Brand 3
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Brand 4
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Brand 5
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label" htmlFor="flexCheckChecked">
-                            Brand 6
-                        </label>
-                    </div>
+                    {brandList.map((brandItem) => (
+                        <div className="form-check" key={brandItem}>
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                name="brand"
+                                id={brandItem}
+                                value={brandItem}
+                                checked={category === brandItem.replace(/ /g, "-")}
+                                onChange={handleSelectBrand}
+                            />
+                            <label className="form-check-label" htmlFor={brandItem}>
+                                {brandItem}
+                            </label>
+                        </div>
+                    ))}
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>

@@ -15,6 +15,8 @@ const getAllProduct = (category, page) => {
             return http.get("/products?isPremier=1" + resultPerPage);
         case "sport":
             return http.get("/products?isSport=1" + resultPerPage);
+        case "sales":
+            return http.get("/products?sale_gt=0" + resultPerPage);
         case "AURA-WATCH":
             return http.get("/products?brand=AURA WATCH" + resultPerPage);
         case "FOSSIL":
@@ -41,9 +43,9 @@ const getAllProduct = (category, page) => {
 const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, page) => {
     // console.log("/products?isActive=" + isActive + "&isMen=" + isMen + "&isWomen=" + isWomen
     //     + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20") + "&_page=" + page);
-    if (brand) {
-        brand = brand.replace(/ /g, "%20");
-    }
+    // if (brand) {
+    //     brand = brand.replace(/ /g, "%20");
+    // }
     return http.get(`/products?isActive=${isActive}
     ${isMen === 1 ? `&isMen=${isMen}` : ''}
     ${isWomen === 1 ? `&isWomen=${isWomen}` : ''}

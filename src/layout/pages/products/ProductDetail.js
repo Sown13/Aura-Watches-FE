@@ -63,8 +63,19 @@ export default function ProductDetail() {
 
                 <div className="product-detail-option d-flex flex-column">
                     <h3>{product.name_code}</h3>
+                    <h3>BRAND: {product.brand}</h3>
                     <h1>{product.name}</h1>
-                    <h1>${Number(product.price).toLocaleString()}</h1>
+                    {product.sale > 0 ? (
+                        <div className="card-text d-flex justify-content-left">
+                            <h1><del className="card-text">{Number(product.price).toLocaleString()}$</del></h1>
+                            <h1 className="card-tex">
+                                &nbsp;  &nbsp; <span style={{ color: "red" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}</span>$
+                            </h1>
+                            <h1>-{product.sale}%</h1>
+                        </div>
+                    ) : (
+                        <h1 className="card-text">{Number(product.price).toLocaleString()}$</h1>
+                    )}
                     <h6>{product.summary ? product.summary : product.description}</h6>
                     <div className="button-container ">
                         <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
@@ -72,13 +83,13 @@ export default function ProductDetail() {
                     </div>
                     <br />
                     <div>
-                        <h5>Detail:</h5>
+                        <h4>Detail:</h4>
                         <p>{product.description}</p>
-                        <h4>Example Section 1</h4>
+                        <h4>History</h4>
                         <p>{product.description}</p>
-                        <h4>Example Section 2</h4>
+                        <h4>Origin</h4>
                         <p>{product.description}</p>
-                        <h4>Example Section 3</h4>
+                        <h4>Material</h4>
                         <p>{product.description}</p>
                     </div>
                     <div className="button-container ">
