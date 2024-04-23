@@ -251,11 +251,14 @@ const Register = () => {
                         />
                         {formik.touched.address && formik.errors.address && <div className="error">{formik.errors.address}</div>}
                     </div>
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="Submit btn btn-primary">
                         Create Account
                     </button>
                 </form>
                 <h6>Already have an account? <Link to="/login">Login</Link></h6>
+
+                <div className="other-reg">
+
                 <button className="reg-facebook">
                     <img src={facebookLogo} />
                     Sign up with Facebook
@@ -264,6 +267,9 @@ const Register = () => {
                     <img src={googleLogo} />
                     Sign up with Google
                 </button>
+
+                </div>
+
             </div>
             <div className="background-image">
             </div>

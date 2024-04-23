@@ -4,21 +4,41 @@
 }
 
 .Register {
-  float: right;
+  position: absolute;
+  right: 0;
   width: 40%;
   margin: 40px auto;
   padding: 20px;
   border: 0px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding-right: 15px;
+  padding-right: 100px;
   text-align: center;
   margin-top: -20px;
+  margin-left: 20px;
+}
+
+
+.background-image {
+  display: flex;
+  justify-content: flex-start;
+  width: 630px;
+  height: 760px;
+  /* margin: 40px auto; */
+  padding: 20px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 15px;
+  background-image: url('../../../../images/register.png');
+  background-size: contain;
+  margin-top: -20px;
+  margin-left: 20px;
 }
 
 .Register h2 {
   color: rgb(255, 255, 255);
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
@@ -71,10 +91,12 @@ input[type="password"] {
   border-radius: 15px;
 }
 
-.Register .btn-primary {
+.Submit {
   background-color: #E8C284;
   color: rgb(0, 0, 0);
   width: 50%;
+  margin-top: 15px;
+  border-radius: 15px !important; 
 }
 
 .Register .btn-primary:hover {
@@ -90,20 +112,6 @@ input[type="password"] {
   background-color: #207b3c;
 }
 
-.background-image {
-  float: left;
-  width: 630px;
-  height: 760px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 0px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding-right: 15px;
-  background-image: url('../../../../images/register.png');
-  background-size: contain;
-  margin-top: -20px;
-}
 
 .reg-facebook img,
 .reg-google img {
@@ -113,24 +121,30 @@ input[type="password"] {
   margin-right: 5px;
 }
 
+.other-reg {
+  display: flex;
+  justify-content: center;
+}
+
 .reg-facebook {
   margin-top: 30px;
-  border-radius: 15px;
+  border-radius: 15px !important;
   width: 225px;
   height: 45px;
   background-color: black;
   color: aliceblue;
   border: 1px solid;
-  margin-right: 5px;
-  display: flex;
+  margin-right: 35px;
   align-items: center;
+  display: flex;
   padding: 10px 0;
-  float: left;
+  /* display: flex;
+  justify-content: flex-start; */
 }
 
 .reg-google {
   margin-top: 30px;
-  border-radius: 15px;
+  border-radius: 15px !important;
   width: 205px;
   height: 45px;
   background-color: black;
@@ -139,8 +153,9 @@ input[type="password"] {
   margin-right: 5px;
   display: flex;
   align-items: center;
+  display: flex;
   padding: 10px 0;
-  float: right;
+  /* float: right; */
 }
 
 .reg-facebook:hover,
@@ -157,9 +172,9 @@ input[type="password"] {
   padding-right: 40px;
 }
 
-.password-input i {
+.Register .password-input i {
   position: absolute;
-  top: 50%;
+  top: 67%;
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
