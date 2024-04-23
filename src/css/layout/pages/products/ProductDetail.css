@@ -104,3 +104,7 @@
 .product-detail-glitter {
     animation: glitter 3s infinite linear;
 }
+
+.product-detail-title {
+    font-weight: 350;
+}

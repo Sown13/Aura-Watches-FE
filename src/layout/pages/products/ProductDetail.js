@@ -65,9 +65,12 @@ export default function ProductDetail() {
 
 
                 <div className="product-detail-option d-flex flex-column">
-                    <h3>{product.name_code}</h3>
-                    <h3>BRAND: {product.brand}</h3>
-                    <h1>{product.name}</h1>
+                    <h3><span className="product-detail-title">CODE&nbsp;&nbsp;&nbsp;:</span> {product.name_code}</h3>
+                    <h3><span className="product-detail-title">BRAND&nbsp;:</span> {product.brand}</h3>
+                    <h3><span className="product-detail-title">NAME&nbsp;&nbsp;&nbsp;:</span> {product.name}</h3>
+                    <h3><span className="product-detail-title">WARRANTY:</span> 2 Years</h3>
+                    <h3><span className="product-detail-title">PRICE&nbsp;&nbsp;&nbsp;:</span></h3>
+
                     {product.sale > 0 ? (
                         <div className="card-text d-flex justify-content-left">
                             <h1><del className="card-text">{Number(product.price).toLocaleString()}$</del></h1>
