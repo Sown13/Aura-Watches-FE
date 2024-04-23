@@ -9,7 +9,7 @@ export default function Home() {
     return (
         <div className="home">
             {/* {isLoggedIn ? <h1 style={{ color: 'white' }}> Welcome, {cookies.user.Fullname}!</h1> : null} */}
-            <div id="home-carousel" className="carousel slide carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div id="home-carousel" className="carousel slide carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div className="carousel-inner text-light">
                     <div className="container carousel-item active">
                         <div className="row">

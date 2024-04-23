@@ -1278,5 +1278,25 @@
       "isSport": 0,
       "brand": "AURA WATCH"
     }
+  ],
+  "carts": [
+    {
+      "userId": "b0ff",
+      "productId": 4,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "userId": "b0ff",
+      "productId": 25,
+      "quantity": 2,
+      "id": 2
+    },
+    {
+      "userId": "b0ff",
+      "productId": 6,
+      "quantity": 1,
+      "id": 3
+    }
   ]
 }
