@@ -1,9 +1,7 @@
 import http from "./httpCommon";
 
-const resultPerPage = "&_per_page=20";
-
 const getAllProduct = (category, page) => {
-    const resultPerPage = "&_page=" + page + "&_per_page=20";
+    const resultPerPage = "&_page=" + page + "&_limit=20";
     switch (category) {
         case "all":
             return http.get("/products?" + resultPerPage);
@@ -41,18 +39,24 @@ const getAllProduct = (category, page) => {
 }
 
 const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, sort, page) => {
-    console.log("/products?isActive=" + isActive + "&isMen=" + isMen + "&isWomen=" + isWomen
-        + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20")
-        + "&_sort=" + sort + "&_page=" + page);
-    // if (brand) {
-    //     brand = brand.replace(/ /g, "%20");
-    // }
-    return http.get(`/products?isActive=${isActive}
-    ${isMen === 1 ? `&isMen=${isMen}` : ''}
-    ${isWomen === 1 ? `&isWomen=${isWomen}` : ''}
-    ${isPremier === 1 ? `&isPremier=${isPremier}` : ''}
-    ${isSport === 1 ? `&isSport=${isSport}` : ''}
-    &brand=${brand}&_sort=${sort}&_page=${page}&_per_page=8`);
+    // console.log(`/products?isActive=${isActive}` +
+    //     `${isMen === 1 ? `&isMen=${isMen}` : ''}` +
+    //     `${isWomen === 1 ? `&isWomen=${isWomen}` : ''}` +
+    //     `${isPremier === 1 ? `&isPremier=${isPremier}` : ''}` +
+    //     `${isSport === 1 ? `&isSport=${isSport}` : ''}` +
+    //     `${brand === "" ? "" : `&brand=${brand}`}` +
+    //     `&_page=${page}&_limit=8`);
+    return http.get(
+        `/products?isActive=${isActive}` +
+        `${isMen === 1 ? `&isMen=${isMen}` : ''}` +
+        `${isWomen === 1 ? `&isWomen=${isWomen}` : ''}` +
+        `${isPremier === 1 ? `&isPremier=${isPremier}` : ''}` +
+        `${isSport === 1 ? `&isSport=${isSport}` : ''}` +
+        `${brand === "" ? "" : `&brand=${brand}`}` +
+        `${sort === "" ? "" : `&sort=${sort}`}` +
+        `&_page=${page}&_limit=8`
+    );
+
 }
 
 const getProductById = (id) => {

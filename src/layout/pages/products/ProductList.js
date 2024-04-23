@@ -105,9 +105,13 @@ export default function ProductList() {
 
 
     const getFilterResultFirstTime = () => {
+        console.log("brand: " + brand);
         ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, 1).then((res) => {
-            setProductList(res.data.data);
-            setTotalPagesFilter(res.data.last);
+            setProductList(res.data);
+            const recordCount = res.headers.get('X-Total-Count');
+            if (recordCount % 8 === 0) {
+                setTotalPagesFilter(recordCount / 8);
+            } else setTotalPagesFilter(Math.floor(recordCount / 8) + 1);
             handlePageFilterChange(1);
             setIsFiltering(1);
         }).catch((err) => { console.error("Failed to fetch ", err) });
@@ -117,7 +121,7 @@ export default function ProductList() {
         if (page < 1) { page = 1 };
         if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
         ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, page).then((res) => {
-            setProductList(res.data.data);
+            setProductList(res.data);
             handlePageFilterChange(page);
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }
@@ -128,15 +132,19 @@ export default function ProductList() {
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         ProductService.getAllProduct(category, page).then((res) => {
-            setProductList(res.data.data);
+            console.log(res.data);
+            setProductList(res.data);
             handlePageChange(page);
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }
     // get products after change the category
     useEffect(() => {
         ProductService.getAllProduct(category, currentPage).then((res) => {
-            setProductList(res.data.data);
-            setTotalPages(res.data.last);
+            setProductList(res.data);
+            const recordCount = res.headers.get('X-Total-Count');
+            if (recordCount % 20 === 0) {
+                setTotalPages(recordCount / 20);
+            } else setTotalPages(Math.floor(recordCount / 20) + 1);
             resetFilter(category);
             resetPages();
             resetPagesFilter();
@@ -246,16 +254,16 @@ export default function ProductList() {
                         onChange={(e) => handleSelectSort(e)}
                         style={{ backgroundColor: "black", border: "0" }}>
                         <option value="" >Sort By Newest</option>
-                        <option value="price">Sort By Price (low to high)</option>
-                        <option value="-price">Sort By Price (high to low)</option>
-                        <option value="sale">Sort By Sale (low to high)</option>
-                        <option value="-sale">Sort By Sale (high to low)</option>
+                        <option value="price&_order=asc">Sort By Price (low to high)</option>
+                        <option value="price&_order=desc">Sort By Price (high to low)</option>
+                        <option value="sale&_order=asc">Sort By Sale (low to high)</option>
+                        <option value="sale&_order=desc">Sort By Sale (high to low)</option>
                         <option value="name">Sort By Name</option>
                         <option value="name_code">Code Name</option>
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
             </div>
 
             <div className='d-flex justify-content-center'>
