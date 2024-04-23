@@ -73,8 +73,34 @@
     color: white;
 }
 
-.product-detail-tab  .nav-link.active {
-    border: 0px ;
+.product-detail-tab .nav-link.active {
+    border: 0px;
     background-color: black;
-    color: #e8c284; 
-  }
+    color: #e8c284;
+}
+
+
+
+@keyframes glitter {
+    0% {
+        color: white;
+    }
+
+    25% {
+        color: #000;
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px #000;
+    }
+
+    50% {
+        color: white;
+        text-shadow: none;
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+.product-detail-glitter {
+    animation: glitter 3s infinite linear;
+}

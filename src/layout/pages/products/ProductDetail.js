@@ -22,7 +22,10 @@ export default function ProductDetail() {
         <div className="product-detail container">
             <div className="text-light" style={{ height: "100px", overflow: "hidden" }}>
                 {/* <img src="/img/banner_sales.svg" style={{ objectFit: "cover", width: "auto" }} /> */}
-                Just put something here so it not to be too empty
+                <h2 className="d-flex justify-content-center" style={{ backgroundColor: "#E8C284", padding: "10px", color: "black" }}>
+                    Free exchange and returns within
+                    <span className="product-detail-glitter"> &nbsp;30&nbsp;</span>days
+                </h2>
             </div>
             <div className="product-detail-content d-flex flex-row text-light">
                 {/* <div className="product-detail-img-frame d-flex justify-content-center">
@@ -71,7 +74,7 @@ export default function ProductDetail() {
                             <h1 className="card-tex">
                                 &nbsp;  &nbsp; <span style={{ color: "red" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}</span>$
                             </h1>
-                            <h1>-{product.sale}%</h1>
+                            <h3>-{product.sale}%</h3>
                         </div>
                     ) : (
                         <h1 className="card-text">{Number(product.price).toLocaleString()}$</h1>

@@ -298,7 +298,7 @@ export default function ProductList() {
 
             <br />
             <div className='d-flex justify-content-center'>
-                {!isFiltering &&
+                {/* {!isFiltering &&
                     (<div>
                         <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                         {currentPage === 1 ?
@@ -311,6 +311,15 @@ export default function ProductList() {
                             <button className='change-page-btn' disabled onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
                             : <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
                         }
+                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    </div>)
+                } */}
+                {!isFiltering &&
+                    (<div>
+                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                        <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
+                        <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
                         <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
                     </div>)
                 }

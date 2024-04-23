@@ -14,7 +14,7 @@ const getAllProduct = (category, page) => {
         case "sport":
             return http.get("/products?isSport=1" + resultPerPage);
         case "sales":
-            return http.get("/products?sale_gt=0" + resultPerPage);
+            return http.get("/products?sale_gte=0.1" + resultPerPage);
         case "AURA-WATCH":
             return http.get("/products?brand=AURA WATCH" + resultPerPage);
         case "FOSSIL":
