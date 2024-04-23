@@ -40,9 +40,10 @@ const getAllProduct = (category, page) => {
     }
 }
 
-const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, page) => {
-    // console.log("/products?isActive=" + isActive + "&isMen=" + isMen + "&isWomen=" + isWomen
-    //     + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20") + "&_page=" + page);
+const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, sort, page) => {
+    console.log("/products?isActive=" + isActive + "&isMen=" + isMen + "&isWomen=" + isWomen
+        + "&isPremier=" + isPremier + "&isSport=" + isSport + "&brand=" + brand.replaceAll(" ", "%20")
+        + "&_sort=" + sort + "&_page=" + page);
     // if (brand) {
     //     brand = brand.replace(/ /g, "%20");
     // }
@@ -51,7 +52,7 @@ const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, br
     ${isWomen === 1 ? `&isWomen=${isWomen}` : ''}
     ${isPremier === 1 ? `&isPremier=${isPremier}` : ''}
     ${isSport === 1 ? `&isSport=${isSport}` : ''}
-    &brand=${brand}&_page=${page}&_per_page=8`);
+    &brand=${brand}&_sort=${sort}&_page=${page}&_per_page=8`);
 }
 
 const getProductById = (id) => {

@@ -21,10 +21,6 @@ export default function ProductList() {
     const [isWomen, setIsWomen] = useState(0);
     const [isPremier, setIsPremier] = useState(0);
     const [isSport, setIsSport] = useState(0);
-    const [saleMin, setSaleMin] = useState(0);
-    const [saleMax, setSaleMax] = useState(100);
-    const [priceMin, setPriceMin] = useState(0);
-    const [priceMax, setPriceMax] = useState(0);
     const [sort, setSort] = useState("");
     const [brand, setBrand] = useState("");
     const [currentPageFilter, setCurrentPageFilter] = useState(1);
@@ -89,23 +85,8 @@ export default function ProductList() {
         }
     }
 
-    const handleSelectChange = (e, inputName, value) => {
-        switch (inputName) {
-            case 'minPrice': setPriceMin(value);
-                break;
-            case 'maxPrice': setPriceMax(value);
-                break;
-            case 'minSale': setSaleMin(value);
-                break;
-            case 'maxSale':
-                if (value <= 0) { setSaleMax(100) }
-                else setSaleMax(value);
-                break;
-            case "sort": setSort(value);
-                break;
-            default:
-                break;
-        };
+    const handleSelectSort = (e) => {
+        setSort(e.target.value);
     }
 
     const handleSelectBrand = (event) => {
@@ -124,7 +105,7 @@ export default function ProductList() {
 
 
     const getFilterResultFirstTime = () => {
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, 1).then((res) => {
+        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, 1).then((res) => {
             setProductList(res.data.data);
             setTotalPagesFilter(res.data.last);
             handlePageFilterChange(1);
@@ -135,7 +116,7 @@ export default function ProductList() {
     const getPageFilterResult = (page) => {
         if (page < 1) { page = 1 };
         if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, page).then((res) => {
+        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, page).then((res) => {
             setProductList(res.data.data);
             handlePageFilterChange(page);
         }).catch((err) => { console.error("Failed to fetch ", err) });
@@ -154,13 +135,17 @@ export default function ProductList() {
     // get products after change the category
     useEffect(() => {
         ProductService.getAllProduct(category, currentPage).then((res) => {
-            console.log("data")
             setProductList(res.data.data);
             setTotalPages(res.data.last);
             resetFilter(category);
             resetPages();
             resetPagesFilter();
             setIsFiltering(0);
+            if (brandList.includes(category.replace(/-/g, " ")) || brandList.includes(category)) {
+                if (category !== "G-SHOCK")
+                    setBrand(category.replace(/-/g, " "));
+                else setBrand(category);
+            } else setBrand("");
         }).catch((err) => { console.error("Failed to fetch ", err) });
     }, [category])
 
@@ -182,35 +167,15 @@ export default function ProductList() {
 
     return (
         <div className='product-list text-light'>
+
             <h5 className='product-list-title'> HOME/{selectedCategory ? selectedCategory.toLocaleUpperCase() : ''} </h5>
             <div className='product-list-banner'>
                 <a href={`/products/${category}`}><img src={banner} alt='BANNER' /></a>
             </div>
-            <div className="product-list-filter">
-                <div className="product-list-filter-select bg-black text-white d-flex gap-3 mb-2">
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Price</option>
-                        <option value="1">&#60;$50,000</option>
-                        <option value="2">$50,000-$200,000</option>
-                        <option value="3">&gt;$200,000</option>
-                    </select>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Sale</option>
-                        <option value="1">&#60;25%</option>
-                        <option value="2">25%-&#60;50%</option>
-                        <option value="3">50%-&#60;80%</option>
-                        <option value="4">&#62;80%</option>
-                    </select>
-                    <select className="form-select" aria-label="Default select example" onChange={(e) => handleSelectChange(e, 'sort', e.target.value)}>
-                        <option selected >Sort</option>
-                        <option value="priceDown">Price(low to high)</option>
-                        <option value="priceUp">Price(high to low)</option>
-                        <option value="saleDown">Name</option>
-                        <option value="saleUp">Code Name</option>
-                    </select>
-                </div>
 
-                <div id='view-point' className="product-list-filter-check-catagory  bg-black text-white d-flex gap-3">
+            <div className="product-list-filter">
+
+                <div id='view-point' className="product-list-filter-check-catagory bg-black text-white d-flex gap-3">
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="men" checked={isMen === 1} onChange={() => setFilter("men")} />
                         <label className="form-check-label" htmlFor="men">
@@ -244,6 +209,20 @@ export default function ProductList() {
                 </div>
 
                 <div className="product-list-filter-check-brand  bg-black text-white d-flex gap-3">
+                    <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="brand"
+                            id="brand-all"
+                            value=""
+                            checked={brand === ""}
+                            onChange={(e) => handleSelectBrand(e)}
+                        />
+                        <label className="form-check-label" htmlFor="brand-all">
+                            All Brand
+                        </label>
+                    </div>
                     {brandList.map((brandItem) => (
                         <div className="form-check" key={brandItem}>
                             <input
@@ -252,8 +231,8 @@ export default function ProductList() {
                                 name="brand"
                                 id={brandItem}
                                 value={brandItem}
-                                checked={category === brandItem.replace(/ /g, "-")}
-                                onChange={handleSelectBrand}
+                                checked={brand === brandItem}
+                                onChange={(e) => handleSelectBrand(e)}
                             />
                             <label className="form-check-label" htmlFor={brandItem}>
                                 {brandItem}
@@ -262,8 +241,23 @@ export default function ProductList() {
                     ))}
                 </div>
 
+                <div className='d-flex ms-auto text-light'>
+                    <select className="form-select text-light" aria-label="Default select example"
+                        onChange={(e) => handleSelectSort(e)}
+                        style={{ backgroundColor: "black", border: "0" }}>
+                        <option value="" >Sort By Newest</option>
+                        <option value="price">Sort By Price (low to high)</option>
+                        <option value="-price">Sort By Price (high to low)</option>
+                        <option value="sale">Sort By Sale (low to high)</option>
+                        <option value="-sale">Sort By Sale (high to low)</option>
+                        <option value="name">Sort By Name</option>
+                        <option value="name_code">Code Name</option>
+                    </select>
+                </div>
+
                 <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => getFilterResultFirstTime()}>FILTER</button>
             </div>
+
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
                     (<div>
@@ -285,6 +279,7 @@ export default function ProductList() {
                     </div>
                 ) : null}
             </div>
+
             <div className='row' ref={containerRef}>
                 {productList.map((product, index) => (
                     <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
@@ -292,13 +287,14 @@ export default function ProductList() {
                     </div>
                 ))}
             </div>
+
             <br />
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
                     (<div>
                         <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                         {currentPage === 1 ?
-                            <button className='change-page-btn' disabledonClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            <button className='change-page-btn' disabled onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
                             : <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>}
 
                         <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
