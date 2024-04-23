@@ -23,6 +23,7 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { UserContext } from './context/UserContext';
 import UserDetail from './layout/pages/users/UserDetail';
+import ProductSearchResult from './layout/pages/products/ProductSearchResult';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -62,6 +63,7 @@ function App() {
                 <Route path='store' element={<Store></Store>} />
                 <Route path='comment' element={<CommentList></CommentList>} />
               </Route>
+              <Route path='/products/search' element={<ProductSearchResult></ProductSearchResult>}></Route>
               <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
               <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
               <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
