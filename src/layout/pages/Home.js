@@ -1,10 +1,6 @@
-import { useContext, useEffect, useState } from "react";
 import "../../css/layout/pages/Home.css";
-import { Cookies, useCookies } from "react-cookie";
-import { UserContext } from "../../context/UserContext";
 
 export default function Home() {
-    const { handleLogout, cookies, setCookie, removeCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
     return (
         <div className="home">

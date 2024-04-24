@@ -1,25 +1,76 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Outlet, useParams, useSearchParams } from "react-router-dom"
 import ProductService from "../../../service/ProductService";
 import "../../../css/layout/pages/products/ProductDetail.css";
+import { UserContext } from "../../../context/UserContext";
+import CartService from "../../../service/CartService";
 
 export default function ProductDetail() {
     const { productId } = useParams();
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({});
     const [tabActive, setTabActive] = useState(1);
+    const [carts, setCarts] = useState([]);
+    const [cartExist, setCartExist] = useState({});
+    const [isInCart, setIsInCart] = useState(0);
+
+    const { cookies, isLoggedIn } = useContext(UserContext);
+
 
     const selectTab = (number) => {
         setTabActive(number);
     }
 
-    useEffect(() => {
+    const fetchProductDetailData = () => {
         ProductService.getProductById(productId).then((res) => {
             setProduct(res.data);
+            setCarts(res.data.carts);
         }).catch((err) => { console.error("Failed to fetch ", err) });
+    }
+
+    useEffect(() => {
+        fetchProductDetailData();
     }, [])
+
+    useEffect(() => {
+        if (isLoggedIn && carts.some(cart => cart.userId === cookies.user.id)) {
+            setIsInCart(1);
+            const cartFound = carts.find(cart => cart.userId === cookies.user.id);
+            console.log("found: " + JSON.stringify(cartFound));
+            setCartExist(cartFound);
+        } else setIsInCart(0);
+    }, [carts, productId])
+
+    const addProductToCart = () => {
+        if (isLoggedIn) {
+            const cartToAdd = {
+                userId: cookies.user.id,
+                productId: product.id,
+                quantity: 1
+            }
+            if (!isInCart) {
+                CartService.addProductToCart(cartToAdd).then((res) => {
+                    console.log(res.status);
+                    setIsInCart(1);
+                }).then(() => {
+                    fetchProductDetailData();
+                }).catch((err) => { console.error("Failed to add product to cart ", err) });
+            } else {
+                // console.log(cartExist.id);
+                const cartToIncrease = {
+                    id: cartExist.id,
+                    quantity: cartExist.quantity + 1
+                };
+                CartService.increaseQuantity(cartToIncrease).then((res) => {
+                    setCartExist(cartToIncrease);
+                    console.log(res.status);
+                }).catch((err) => { console.error("Failed to increase quantity", err) });
+            }
+        }
+    }
 
     return (
         <div className="product-detail container">
+            <div>TEST cart: {isInCart ? "in Cart" : "not in cart"}</div>
             <div className="text-light" style={{ height: "100px", overflow: "hidden" }}>
                 {/* <img src="/img/banner_sales.svg" style={{ objectFit: "cover", width: "auto" }} /> */}
                 <h2 className="d-flex justify-content-center" style={{ backgroundColor: "#E8C284", padding: "10px", color: "black" }}>
@@ -33,29 +84,29 @@ export default function ProductDetail() {
                 </div> */}
 
 
-                <div id="carouselExample" class="product-detail-img-frame  carousel slide">
-                    <div class="d-flex carousel-inner h-100">
-                        <div class="carousel-item active">
-                            <img src={product.img} class="d-block" alt="..." />
+                <div id="carouselExample" className="product-detail-img-frame  carousel slide">
+                    <div className="d-flex carousel-inner h-100">
+                        <div className="carousel-item active">
+                            <img src={product.img} className="d-block" alt="..." />
                         </div>
                         {product.img2 &&
-                            <div class="carousel-item">
-                                <img src={product.img2} class="d-block" alt="..." />
+                            <div className="carousel-item">
+                                <img src={product.img2} className="d-block" alt="..." />
                             </div>}
 
                         {product.img3 &&
-                            <div class="carousel-item">
-                                <img src={product.img3} class="d-block" alt="..." />
+                            <div className="carousel-item">
+                                <img src={product.img3} className="d-block" alt="..." />
                             </div>}
 
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
                     </button>
                 </div>
 
@@ -85,7 +136,7 @@ export default function ProductDetail() {
                     <h6>{product.summary ? product.summary : product.description}</h6>
                     <div className="button-container ">
                         <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
-                        <button type="button" className="btn btn-warning product-detail-button-2">Add To Cart</button>
+                        <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
                     </div>
                     <br />
                     <div>
@@ -100,7 +151,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="button-container ">
                         <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
-                        <button type="button" className="btn btn-warning product-detail-button-2">Add To Cart</button>
+                        <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
                     </div>
                     <div className="product-detail-tag">
                         {product.isMen ? <Link className="badge text-bg-secondary" to={"/products/men"} >men</Link> : null}

@@ -18,19 +18,19 @@ export default function HeaderTop() {
                     </Link>
                 </div>
                 <div className="col d-flex flex-row navbar-nav flex-row-reverse">
-                    <Link className="nav-link text-light" to={"/#"}><i className="fa-solid fa-bag-shopping"></i></Link>
+                    <Link className="nav-link text-light" to={"/cart"}><i className="fa-solid fa-bag-shopping"></i></Link>
                     <Link className="nav-link text-light" aria-current="page" to={"/products/search"}><i className="fa-solid fa-magnifying-glass"></i></Link>
 
                     {
                         isLoggedIn ?
-                            (<div class="dropdown">
-                                <Link class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            (<div className="dropdown">
+                                <Link className="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fa-solid fa-user" style={{ color: "#e8c284" }}></i>
                                 </Link>
 
-                                <ul class="dropdown-menu">
-                                    <li><Link class="dropdown-item" to={'/user/profile'}>Your Profile</Link ></li>
-                                    <li><Link class="dropdown-item" onClick={() => handleLogout()}>Log Out</Link></li>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to={'/user/profile'}>Your Profile</Link ></li>
+                                    <li><Link className="dropdown-item" onClick={() => handleLogout()}>Log Out</Link></li>
                                 </ul>
                             </div>)
                             : (<Link className="nav-link text-light" to={"/login"}><i className="fa-solid fa-user"></i></Link>)

@@ -60,7 +60,9 @@ const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, br
 }
 
 const getProductById = (id) => {
-    return http.get("/products/" + id);
+    // notice for me: this _embed is asynchronous with the /products/id,
+    //  so we need to check both products and cart retrieved before using it
+    return http.get("/products/" + id + "?_embed=carts");
 }
 
 const addProduct = (product) => {

@@ -1292,7 +1292,7 @@
     {
       "userId": "b0ff",
       "productId": 4,
-      "quantity": 1,
+      "quantity": 8,
       "id": 1
     },
     {
@@ -1306,6 +1306,30 @@
       "productId": 6,
       "quantity": 1,
       "id": 3
+    },
+    {
+      "userId": "b0ff",
+      "productId": 5,
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "userId": "b0ff",
+      "productId": 7,
+      "quantity": 1,
+      "id": 5
+    },
+    {
+      "userId": "b0ff",
+      "productId": 8,
+      "quantity": 2,
+      "id": 6
+    },
+    {
+      "userId": "b0ff",
+      "productId": 10,
+      "quantity": 1,
+      "id": 7
     }
   ]
 }
