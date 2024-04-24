@@ -4,6 +4,9 @@ import "../../css/components/navigate/FooterTop.css";
 export default function FooterTop() {
     return (
         <div className="footer-top container text-center" style={{ color: "white" }}>
+            <h3 className="d-flex justify-content-center " style={{backgroundColor:"#E8C284", color: "black", padding: "10px", marginTop: "4%"}}>
+                PRODUCT ILLUSTRATION
+                </h3>
             <img src="/img/footer_top_banner_1.png" />
             <div className="row">
                 <div className="col-4">

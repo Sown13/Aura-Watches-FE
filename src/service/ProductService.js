@@ -79,6 +79,10 @@ const getProductsByUser = (user) => {
     return http.get("/users/" + user + "/products");
 }
 
+const getAllActiveProductsNoPage = () => {
+    return http.get("/products?isActive=1");
+}
+
 const ProductService = {
     getAllProduct,
     getProductListByFilter,
@@ -86,7 +90,8 @@ const ProductService = {
     addProduct,
     updateProduct,
     removeProduct,
-    getProductsByUser
+    getProductsByUser,
+    getAllActiveProductsNoPage
 }
 
 export default ProductService;

@@ -1,69 +1,51 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import ProductService from "../../../service/ProductService";
 import ProductCard from "../../../components/parts/ProductCard";
 
 export default function ProductSearchResult() {
-    const { category } = useParams();
-    const categoryList = ["all", "men", "women", "premier", "sport", "sales",
-        "AURA-WATCH", "FOSSIL", "TOMMY-HILFIGER", "BULOVA", "GUESS", "ANNE-KLEIN", "G-SHOCK", "NINE-WEST", "TIMEX"];
-    const [selectedCategory, setSelectedCategory] = useState(category);
-
     // for display
     const [productList, setProductList] = useState([]);
-    const [banner, setBanner] = useState('/img/banner_men.svg');
 
-    // for filtering
+    // for origin query results (use to filter)
+    const [originProductList, setOriginProductList] = useState([]);
+
+    // for filtering and searching
     const [isActive, setIsActive] = useState(1);
     const [isMen, setIsMen] = useState(0);
     const [isWomen, setIsWomen] = useState(0);
     const [isPremier, setIsPremier] = useState(0);
     const [isSport, setIsSport] = useState(0);
+    const [isOnSale, setIsOnSale] = useState(0);
     const [sort, setSort] = useState("");
     const [brand, setBrand] = useState("");
-    const [currentPageFilter, setCurrentPageFilter] = useState(1);
     const brandList = ["AURA WATCH", "FOSSIL", "TOMMY HILFIGER", "BULOVA", "GUESS", "ANNE KLEIN", "G-SHOCK", "NINE WEST", "TIMEX"];
-
-    // for pagnation
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [totalPagesFilter, setTotalPagesFilter] = useState(1);
     const [isFiltering, setIsFiltering] = useState(0);
-
+    const [search, setSearch] = useState("");
 
     // for scrolling to top of the div after changing page
     const containerRef = useRef(null);
 
     const scrollToFirstResultLine = () => {
         let div = document.getElementById("view-point");
-        // notice: this one is not working if setState() is not done
+        // my note: this one is not working if setState() is not done
         div.scrollIntoView();
     };
 
-    // for pagenation
-    const resetPages = () => {
-        setCurrentPage(1);
+    // for searching
+    const handleSearchInput = (event) => {
+        setSearch(event.target.value);
     }
 
-    const handlePageChange = (page) => {
-        if (page < 1) { page = 1 };
-        if (page > totalPages) { page = totalPages };
-        setCurrentPage(page);
+    const getSearchResult = (e) => {
+        e.preventDefault();
+        resetFilter();
+        const tempSearchResult = originProductList
+            .filter(product => product.name.toLowerCase().includes(search.toLowerCase())
+                || product.name_code.toLowerCase().includes(search.toLowerCase()));
+        setProductList(tempSearchResult);
     }
 
-    const resetPagesFilter = () => {
-        setCurrentPageFilter(1);
-    }
-
-    const handlePageFilterChange = (page) => {
-        if (page < 1) { page = 1 };
-        if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
-        setCurrentPageFilter(page);
-    }
-    ////////////////////////////////
-
-
-    // for pagenation of filter results
+    // for filter results
     const setFilter = (filter) => {
         switch (filter) {
             case "men":
@@ -77,6 +59,9 @@ export default function ProductSearchResult() {
                 break;
             case "sport":
                 setIsSport(isSport === 1 ? 0 : 1);
+                break;
+            case "onSale":
+                setIsOnSale(isOnSale === 1 ? 0 : 1);
                 break;
             default:
                 break;
@@ -92,90 +77,81 @@ export default function ProductSearchResult() {
     }
 
 
-    const resetFilter = (category) => {
+    const resetFilter = () => {
         setIsMen(0);
         setIsWomen(0);
         setIsPremier(0);
         setIsSport(0);
         setBrand("");
-        setFilter(category);
+    }
+
+    const getFilterResult = () => {
+        let tempFilterResult = [...originProductList];
+        tempFilterResult = tempFilterResult.filter(product => product.name.toLowerCase().includes(search.toLowerCase())
+            || product.name_code.toLowerCase().includes(search.toLowerCase()));
+        if (isMen) {
+            tempFilterResult = tempFilterResult.filter(product => product.isMen === isMen);
+        }
+        if (isWomen) {
+            tempFilterResult = tempFilterResult.filter(product => product.isWomen === isWomen);
+        }
+        if (isPremier) {
+            tempFilterResult = tempFilterResult.filter(product => product.isPremier === isPremier);
+        }
+        if (isSport) {
+            tempFilterResult = tempFilterResult.filter(product => product.isSport === isSport);
+        }
+        if (isOnSale) {
+            tempFilterResult = tempFilterResult.filter(product => product.sale > 0);
+        }
+        if (brand !== "") {
+            tempFilterResult = tempFilterResult.filter(product => product.brand === brand);
+        }
+        switch (sort) {
+            case "priceDown":
+                tempFilterResult.sort((product1, product2) => product2.price * (100 - product2.sale) / 100 - product1.price * (100 - product1.sale) / 100);
+                break;
+            case "priceUp":
+                tempFilterResult.sort((product1, product2) => product1.price * (100 - product1.sale) / 100 - product2.price * (100 - product2.sale) / 100);
+                break;
+            case "saleDown":
+                tempFilterResult.sort((product1, product2) => product2.sale - product1.sale);
+                break;
+            case "saleUp":
+                tempFilterResult.sort((product1, product2) => product2.sale - product1.sale);
+                break;
+            default: break;
+        }
+        setProductList(tempFilterResult);
     }
 
 
-    const getFilterResultFirstTime = () => {
-        console.log("brand: " + brand);
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, 1).then((res) => {
-            setProductList(res.data);
-            const recordCount = res.headers.get('X-Total-Count');
-            if (recordCount % 8 === 0) {
-                setTotalPagesFilter(recordCount / 8);
-            } else setTotalPagesFilter(Math.floor(recordCount / 8) + 1);
-            handlePageFilterChange(1);
-            setIsFiltering(1);
-        }).catch((err) => { console.error("Failed to fetch ", err) });
-    }
-
-    const getPageFilterResult = (page) => {
-        if (page < 1) { page = 1 };
-        if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, page).then((res) => {
-            setProductList(res.data);
-            handlePageFilterChange(page);
-        }).catch((err) => { console.error("Failed to fetch ", err) });
-    }
-
-    /// for pagenation of category
-
-    const getPage = (page) => {
-        if (page < 1) page = 1;
-        if (page > totalPages) page = totalPages;
-        ProductService.getAllProduct(category, page).then((res) => {
-            console.log(res.data);
-            setProductList(res.data);
-            handlePageChange(page);
-        }).catch((err) => { console.error("Failed to fetch ", err) });
-    }
-    // get products after change the category
+    // get original products list for filtering and searching
     useEffect(() => {
-        ProductService.getAllProduct(category, currentPage).then((res) => {
-            setProductList(res.data);
-            const recordCount = res.headers.get('X-Total-Count');
-            if (recordCount % 20 === 0) {
-                setTotalPages(recordCount / 20);
-            } else setTotalPages(Math.floor(recordCount / 20) + 1);
-            resetFilter(category);
-            resetPages();
-            resetPagesFilter();
+        resetFilter();
+        ProductService.getAllActiveProductsNoPage().then((res) => {
+            setOriginProductList(res.data);
             setIsFiltering(0);
-            if (brandList.includes(category.replace(/-/g, " ")) || brandList.includes(category)) {
-                if (category !== "G-SHOCK")
-                    setBrand(category.replace(/-/g, " "));
-                else setBrand(category);
-            } else setBrand("");
         }).catch((err) => { console.error("Failed to fetch ", err) });
-    }, [category])
-
-    useEffect(() => {
-        // Check if user type in invalid category then set back category = "all"
-        if (categoryList.includes(category)) { setSelectedCategory(category) }
-        else setSelectedCategory("all");
-        selectedCategory ? setBanner(`/img/banner_${selectedCategory}.svg`) : setBanner('/img/banner_men.svg');
-    }, [category, selectedCategory]);
+    }, [])
 
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-    }, [category]);
+    }, []);
 
     return (
-        <div>
+        <div className="search-page">
+            <h5 className="text-light d-flex justify-content-left" style={{ fontWeight: "300", marginBottom: "2%" }}>HOME/SEARCH</h5>
             <div className="product-list-filter">
-                <div className="d-flex form-style" role="search" style={{marginBottom:"1%"}}>
-                    <input className="form-control me-2" type="search" name="search" placeholder="Enter your search" aria-label="Search" style={{ border: "0" }} />
+                <form onSubmit={getSearchResult} className="d-flex form-style" role="search" style={{ marginBottom: "1%" }}>
+                    <input className="form-control me-2" type="search" name="search" placeholder="Enter your search" aria-label="Search" style={{ border: "0" }}
+                        onChange={handleSearchInput}
+                    />
                     <button className="btn search-button text-light" type="submit" ><i className="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </form>
                 <div id='view-point' className="product-list-filter-check-catagory bg-black text-white d-flex gap-3">
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="men" checked={isMen === 1} onChange={() => setFilter("men")} />
@@ -197,12 +173,12 @@ export default function ProductSearchResult() {
                     </div>
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="sport" checked={isSport === 1} onChange={() => setFilter("sport")} />
-                        <label className="form-check-label" htmlFor="sales">
+                        <label className="form-check-label" htmlFor="sport">
                             Sport
                         </label>
                     </div>
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="sales" />
+                        <input className="form-check-input" type="checkbox" value="" id="sales" checked={isOnSale === 1} onChange={() => setFilter("onSale")} />
                         <label className="form-check-label" htmlFor="sales">
                             On Sale
                         </label>
@@ -247,23 +223,25 @@ export default function ProductSearchResult() {
                         onChange={(e) => handleSelectSort(e)}
                         style={{ backgroundColor: "black", border: "0" }}>
                         <option value="" >Sort By Newest</option>
-                        <option value="price&_order=asc">Sort By Price (low to high)</option>
-                        <option value="price&_order=desc">Sort By Price (high to low)</option>
-                        <option value="sale&_order=asc">Sort By Sale (low to high)</option>
-                        <option value="sale&_order=desc">Sort By Sale (high to low)</option>
-                        <option value="name">Sort By Name</option>
-                        <option value="name_code">Code Name</option>
+                        <option value="priceUp">Sort By Price (low to high)</option>
+                        <option value="priceDown">Sort By Price (high to low)</option>
+                        <option value="saleUp">Sort By Sale (low to high)</option>
+                        <option value="saleDown">Sort By Sale (high to low)</option>
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px", fontSize: "27px", fontWeight: "500" }}
+                    onClick={() => { getFilterResult(); scrollToFirstResultLine() }}>
+                    FILTER
+                </button>
             </div>
-            <div className='row' ref={containerRef}>
-                {productList.map((product, index) => (
+            <div className='row' ref={containerRef} >
+                <h2 className="text-light text-start col-12">Search Result for: '{search || "''"}' in Aura Watch</h2>
+                {productList.length > 0 ? (productList.map((product, index) => (
                     <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
                         <ProductCard product={product}></ProductCard>
                     </div>
-                ))}
+                ))) : <h2 className="text-light text-start col-12">There is no result </h2>}
             </div>
             <br />
         </div>
