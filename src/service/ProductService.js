@@ -38,7 +38,7 @@ const getAllProduct = (category, page) => {
     }
 }
 
-const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, brand, sort, page) => {
+const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, isSale, brand, sort, page) => {
     // console.log(`/products?isActive=${isActive}` +
     //     `${isMen === 1 ? `&isMen=${isMen}` : ''}` +
     //     `${isWomen === 1 ? `&isWomen=${isWomen}` : ''}` +
@@ -53,7 +53,8 @@ const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, br
         `${isPremier === 1 ? `&isPremier=${isPremier}` : ''}` +
         `${isSport === 1 ? `&isSport=${isSport}` : ''}` +
         `${brand === "" ? "" : `&brand=${brand}`}` +
-        `${sort === "" ? "" : `&sort=${sort}`}` +
+        `${isSale === 1 ? `&sale_gte=0.1` : ''}` +
+        `${sort === "" ? "" : `&_sort=${sort}`}` +
         `&_page=${page}&_limit=8`
     );
 

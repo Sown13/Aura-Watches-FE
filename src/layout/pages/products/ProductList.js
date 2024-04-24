@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ProductService from '../../../service/ProductService';
 import ProductCard from '../../../components/parts/ProductCard';
-import { UserContext } from '../../../context/UserContext';
 import "../../../css/layout/pages/products/ProductList.css";
 
 export default function ProductList() {
@@ -21,6 +20,7 @@ export default function ProductList() {
     const [isWomen, setIsWomen] = useState(0);
     const [isPremier, setIsPremier] = useState(0);
     const [isSport, setIsSport] = useState(0);
+    const [isSale, setIsSale] = useState(0);
     const [sort, setSort] = useState("");
     const [brand, setBrand] = useState("");
     const [currentPageFilter, setCurrentPageFilter] = useState(1);
@@ -80,6 +80,9 @@ export default function ProductList() {
             case "sport":
                 setIsSport(isSport === 1 ? 0 : 1);
                 break;
+            case "sales":
+                setIsSale(isSale === 1 ? 0 : 1);
+                break;
             default:
                 break;
         }
@@ -99,14 +102,16 @@ export default function ProductList() {
         setIsWomen(0);
         setIsPremier(0);
         setIsSport(0);
+        setIsSale(0);
         setBrand("");
+        // set this for default checkbox
         setFilter(category);
     }
 
 
     const getFilterResultFirstTime = () => {
         console.log("brand: " + brand);
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, 1).then((res) => {
+        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, isSale, brand, sort, 1).then((res) => {
             setProductList(res.data);
             const recordCount = res.headers.get('X-Total-Count');
             if (recordCount % 8 === 0) {
@@ -120,7 +125,7 @@ export default function ProductList() {
     const getPageFilterResult = (page) => {
         if (page < 1) { page = 1 };
         if (page > totalPagesFilter && totalPagesFilter > 0) { page = totalPagesFilter };
-        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, brand, sort, page).then((res) => {
+        ProductService.getProductListByFilter(isActive, isMen, isWomen, isPremier, isSport, isSale, brand, sort, page).then((res) => {
             setProductList(res.data);
             handlePageFilterChange(page);
         }).catch((err) => { console.error("Failed to fetch ", err) });
@@ -209,7 +214,7 @@ export default function ProductList() {
                         </label>
                     </div>
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="sales" />
+                        <input className="form-check-input" type="checkbox" value="" id="sales" checked={isSale === 1} onChange={() => setFilter("sales")} />
                         <label className="form-check-label" htmlFor="sales">
                             On Sale
                         </label>
@@ -298,22 +303,6 @@ export default function ProductList() {
 
             <br />
             <div className='d-flex justify-content-center'>
-                {/* {!isFiltering &&
-                    (<div>
-                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
-                        {currentPage === 1 ?
-                            <button className='change-page-btn' disabled onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
-                            : <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>}
-
-                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
-
-                        {currentPage === totalPages ?
-                            <button className='change-page-btn' disabled onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
-                            : <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
-                        }
-                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
-                    </div>)
-                } */}
                 {!isFiltering &&
                     (<div>
                         <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>

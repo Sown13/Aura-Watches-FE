@@ -1292,7 +1292,7 @@
     {
       "userId": "b0ff",
       "productId": 4,
-      "quantity": 8,
+      "quantity": 13,
       "id": 1
     },
     {
@@ -1330,6 +1330,18 @@
       "productId": 10,
       "quantity": 1,
       "id": 7
+    },
+    {
+      "userId": "b0ff",
+      "productId": 15,
+      "quantity": 15,
+      "id": 8
+    },
+    {
+      "userId": "b0ff",
+      "productId": 32,
+      "quantity": 1,
+      "id": 9
     }
   ]
 }

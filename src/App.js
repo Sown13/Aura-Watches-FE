@@ -13,7 +13,7 @@ import PolSecurity from './layout/pages/policies/PolSecurity';
 import PolWarranty from './layout/pages/policies/PolWarranty';
 import ProductDetail from './layout/pages/products/ProductDetail';
 import ProductList from './layout/pages/products/ProductList';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import ProductOther from './layout/pages/products/tabs/ProductOther';
 import Store from './layout/pages/products/tabs/Store';
 import CommentList from './layout/pages/products/tabs/CommentList';
@@ -25,10 +25,13 @@ import { UserContext } from './context/UserContext';
 import UserDetail from './layout/pages/users/UserDetail';
 import ProductSearchResult from './layout/pages/products/ProductSearchResult';
 import Cart from './layout/pages/cart/Cart';
+import { getAndRemoveRedirectUrl, storeRedirectUrl } from './utils/redirect';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     removeCookie('user');
@@ -38,17 +41,28 @@ function App() {
   const handleLogin = (user) => {
     setCookie('user', user, { expires: new Date(Date.now() + 3600000) });
     setIsLoggedIn(1);
+    const redirectUrl = getAndRemoveRedirectUrl();
+    if (redirectUrl) {
+      navigate(redirectUrl);
+    } else {
+      navigate("/")
+    }
   }
 
   useEffect(() => {
-    // console.log(isLoggedIn ? "Logged in" : "Not logged in");
-    // console.log(cookies);
     if (cookies.user) {
       setIsLoggedIn(1);
     } else {
       setIsLoggedIn(0);
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      const currentPageUrl = window.location.pathname;
+      storeRedirectUrl(currentPageUrl);
+    }
+  }, [])
 
   return (
     <CookiesProvider>
@@ -65,7 +79,8 @@ function App() {
                 <Route path='comment' element={<CommentList></CommentList>} />
               </Route>
               <Route path='/products/search' element={<ProductSearchResult></ProductSearchResult>}></Route>
-              <Route path='/cart' element={<Cart></Cart>}></Route>
+              {!isLoggedIn ? <Route path="/cart" element={<Navigate to="/login" replace />} />
+                : <Route path='/cart' element={<Cart></Cart>}></Route>}
               <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
               <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
               <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
@@ -84,7 +99,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
-          <ToastContainer />
+          <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar"/>
         </UserContext.Provider>
       </div >
     </CookiesProvider >

@@ -4,6 +4,14 @@
   font-family: poppins;
 }
 
+.app-toast-progress-bar {
+  background-color: white !important;
+}
+
+.app-toast .Toastify__toast-icon path {
+  fill: white !important;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

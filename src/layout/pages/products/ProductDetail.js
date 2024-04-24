@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useParams, useSearchParams } from "react-router-dom"
+import { Link, Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import ProductService from "../../../service/ProductService";
 import "../../../css/layout/pages/products/ProductDetail.css";
 import { UserContext } from "../../../context/UserContext";
 import CartService from "../../../service/CartService";
+import { toast } from "react-toastify";
 
 export default function ProductDetail() {
     const { productId } = useParams();
+    const navigate = useNavigate();
+
     const [product, setProduct] = useState({});
     const [tabActive, setTabActive] = useState(1);
     const [carts, setCarts] = useState([]);
@@ -38,7 +41,7 @@ export default function ProductDetail() {
             console.log("found: " + JSON.stringify(cartFound));
             setCartExist(cartFound);
         } else setIsInCart(0);
-    }, [carts, productId])
+    }, [carts, productId, cookies])
 
     const addProductToCart = () => {
         if (isLoggedIn) {
@@ -51,6 +54,7 @@ export default function ProductDetail() {
                 CartService.addProductToCart(cartToAdd).then((res) => {
                     console.log(res.status);
                     setIsInCart(1);
+                    toast.success('Added To Cart!');
                 }).then(() => {
                     fetchProductDetailData();
                 }).catch((err) => { console.error("Failed to add product to cart ", err) });
@@ -63,9 +67,10 @@ export default function ProductDetail() {
                 CartService.increaseQuantity(cartToIncrease).then((res) => {
                     setCartExist(cartToIncrease);
                     console.log(res.status);
+                    toast.success('Added To Cart!');
                 }).catch((err) => { console.error("Failed to increase quantity", err) });
             }
-        }
+        } else navigate("/login");
     }
 
     return (
@@ -82,8 +87,6 @@ export default function ProductDetail() {
                 {/* <div className="product-detail-img-frame d-flex justify-content-center">
                     <img className="d-block" src={product.img} alt="..." />
                 </div> */}
-
-
                 <div id="carouselExample" className="product-detail-img-frame  carousel slide">
                     <div className="d-flex carousel-inner h-100">
                         <div className="carousel-item active">

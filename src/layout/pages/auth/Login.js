@@ -51,7 +51,7 @@ const Login = () => {
       if (foundUser) {
         handleLogin(foundUser);
         toast.success('Login Successful!');
-        navigate('/');
+        // navigate('/');
       } else {
         toast.error('Login Failed. Please check your username and password.');
       }
@@ -103,14 +103,14 @@ const Login = () => {
         <h6>Already have a account? <Link to="/register">Register</Link></h6>
 
         <div className='other-login'>
-        <button className="log-facebook">
-          <img src={facebookLogo} />
-          Sign in with Facebook
-        </button>
-        <button className="log-google">
-          <img src={googleLogo} />
-          Sign in with Google
-        </button>
+          <button className="log-facebook">
+            <img src={facebookLogo} />
+            Sign in with Facebook
+          </button>
+          <button className="log-google">
+            <img src={googleLogo} />
+            Sign in with Google
+          </button>
         </div>
 
       </div>
