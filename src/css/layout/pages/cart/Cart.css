@@ -1,0 +1,25 @@
+.payment {
+    background-color: black !important;
+    position: sticky;
+    top: 100px !important;
+    z-index: 50;
+    height: fit-content;
+}
+
+.checkout {
+    background-color: #e8c284;
+    height: 3rem;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 0;
+}
+
+.checkout:hover {
+    background-color: #eccfa1 !important;
+    color: black !important;
+}
+
+.trash-button:hover {
+    cursor: pointer;
+}
+

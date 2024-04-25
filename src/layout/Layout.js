@@ -13,7 +13,7 @@ export default function Layout() {
 
     useEffect(() => {
         function handleScroll() {
-            const headerTopHeight = document.querySelector('.layout-header-top ').offsetHeight;
+            const headerTopHeight = document.querySelector('.layout-header-top ') && document.querySelector('.layout-header-top ').offsetHeight;
             if (window.scrollY >= headerTopHeight) {
                 setHeaderBot(1);
             } else {

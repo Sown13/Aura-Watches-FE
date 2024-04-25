@@ -1,11 +1,123 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../../css/layout/pages/cart/Cart.css';
 import { Link } from 'react-router-dom';
 import ProductLineCard from '../../../components/parts/ProductLineCard';
+import { UserContext } from '../../../context/UserContext';
+import ProductService from '../../../service/ProductService';
+import CartService from '../../../service/CartService';
+import { toast } from 'react-toastify';
 
 function Cart() {
+  const { cookies, isLoggedIn } = useContext(UserContext);
+
+  const [productList, setProductList] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPriceAfterSale, setTotalPriceAfterSale] = useState(0);
+
+  const getProductInCart = (products, userId) => {
+    const filteredProducts = products.map((product) => {
+      const filteredCarts = product.carts.filter((cart) => cart.userId === userId);
+      return { ...product, carts: filteredCarts };
+    });
+    const productsInCart = filteredProducts.filter((product) => product.carts.length > 0);
+    return productsInCart;
+  }
+
+  const fetchProductData = () => {
+    ProductService.getAllProductWithCart().then((res) => {
+      let originProductList = res.data;
+      originProductList = getProductInCart(originProductList, cookies.user.id);
+      console.log(originProductList);
+      setProductList(originProductList);
+    }).catch((err) => { console.error("Failed to get product list", err) });
+  }
+
+  const calTotalPrice = (products) => {
+    const total = products.reduce((accumulator, product) => {
+      const productTotal = product.price * product.carts[0].quantity;
+      return accumulator + productTotal;
+    }, 0);
+    console.log("Before Sale: " + total);
+    setTotalPrice(total);
+  }
+
+  const calTotalPriceAfterSale = (products) => {
+    const total = products.reduce((accumulator, product) => {
+      const productTotal = (product.price * product.carts[0].quantity * (product.sale > 0 ? product.sale : 100)) / 100;
+      return accumulator + productTotal;
+    }, 0);
+    console.log("After Sale: " + total);
+    setTotalPriceAfterSale(total);
+  }
+
+  const removeFromCart = (cartId) => {
+    CartService.removeProductFromCart(cartId).then((res) => {
+      fetchProductData();
+    }).catch((err) => { console.error("Failed to remove", err) });
+  }
+
+  const increaseQuantity = (cartId, currentQuantity) => {
+    const cartToIncrease = {
+      id: cartId,
+      quantity: currentQuantity + 1
+    };
+    CartService.increaseQuantity(cartToIncrease).then((res) => {
+      fetchProductData();
+    }).catch((err) => { console.error("Failed to increase quantity", err) });
+  }
+
+  const decreaseQuantity = (cartId, currentQuantity) => {
+    if (currentQuantity <= 1) {
+      removeFromCart(cartId);
+    } else {
+      const cartToDecrease = {
+        id: cartId,
+        quantity: currentQuantity - 1
+      };
+      CartService.increaseQuantity(cartToDecrease).then((res) => {
+        fetchProductData();
+      }).catch((err) => { console.error("Failed to increase quantity", err) });
+    }
+  }
+
+  const removeAllProductFromCart = (products) => {
+    const removalPromises = products.map((product) => {
+      return CartService.removeProductFromCart(product.carts[0].id);
+    });
+
+    Promise.all(removalPromises)
+      .catch((err) => {
+        console.error("Failed to remove products:", err);
+      });
+
+    //mimic data solving :))
+    return new Promise(resolve => setTimeout(resolve, 3000));
+  }
+
+  const payNow = () => {
+    toast.promise(
+      removeAllProductFromCart(productList),
+      {
+        pending: 'Requesting Payment, please wait',
+        success: 'Payment Successfully',
+        error: 'Payment rejected 😢'
+      }
+    ).then((res) => { fetchProductData(); });
+  }
+
+  useEffect(() => {
+    calTotalPrice(productList);
+    calTotalPriceAfterSale(productList);
+  }, [productList])
+
+  useEffect(() => {
+    fetchProductData();
+  }, [])
+
+
+
   return (
-    <div className="Cart text-light">
+    <div className="Cart text-light" >
       <div className="text-light" style={{ overflow: "hidden", marginBottom: "1%" }}>
         {/* <img src="/img/banner_sales.svg" style={{ objectFit: "cover", width: "auto" }} /> */}
         <h2 className="d-flex justify-content-center" style={{ backgroundColor: "#E8C284", padding: "10px", color: "black" }}>
@@ -13,93 +125,78 @@ function Cart() {
           <span className="product-detail-glitter"> &nbsp;30&nbsp;</span>days
         </h2>
       </div>
-      <div className="in-cart row">
-        <div className="row-information col-8">
+      <div className="in-cart d-flex">
+        <div className="row-information" style={{ width: "70%", padding: "10px" }}>
           <h5 className="cart-option text-start">
             Shopping cart
           </h5>
           <div style={{ height: "2px", backgroundColor: "white", marginTop: "3%", marginBottom: "3%" }} />
+          <p className="text-start" style={{ marginBottom: "3%" }}>You have {productList.length} items in your cart</p>
 
-          <p className="text-start" style={{ marginBottom: "3%" }}>You have 3 items in your cart</p>
+          <div className="product-line-card d-flex" style={{ backgroundColor: "white", marginBottom: "4%", borderRadius: "4px", color: "black" }}>
+            <div className="d-flex justify-content-center" style={{ padding: "0", width: "60%" }}>
+              <div>Product Info</div>
+            </div>
+            <div className="" style={{ padding: "0", width: "20%" }}>Quantity</div>
+            <div className="text-start" style={{ padding: "0", width: "15%" }}>
+              Price
+            </div>
+            <div className="" style={{ padding: "0", width: "5%" }}>
+
+            </div>
+          </div>
+
+          {productList.map((product) => (
+            <ProductLineCard product={product}
+              removeFromCart={removeFromCart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              key={product.id}></ProductLineCard>
+          ))}
 
 
-          {/* Content for second item */}
-          <ProductLineCard></ProductLineCard>
-          <ProductLineCard></ProductLineCard>
-
-
-          {/* Content for third item */}
-         
         </div>
-
         {/* Payment section */}
-        <div className="payment col-4">
+        <div className="payment" style={{ width: "30%", padding: "10px" }}>
           <div className='in-payment'>
             <div className="card-body">
               {/* Payment form content */}
-              <div className='d-flex justify-content-between'>
-                <h5 className="">Card details</h5>
-
+              <div className='text-start'>
+                <h4 className="">Delivered: </h4>
+                <div className='d-flex justify-content-between'>
+                  <h6 style={{ marginBottom: "0" }}><b>{cookies.user && cookies.user.Fullname}</b></h6>
+                  <p style={{ marginBottom: "0" }}> || </p>
+                  <h6 style={{ marginBottom: "0" }}><b>{cookies.user && cookies.user.phone}</b></h6>
+                </div>
+                <h6>{cookies.user && cookies.user.address}</h6>
               </div>
-
-              <p className="small mb-2">Card type</p>
+              <hr className="my-4" />
               <div className='d-flex justify-content-between'>
-                <a href="#!" type="submit" className="text-light"><i className="fab fa-cc-mastercard fa-4x me-4"></i></a>
-                <a href="#!" type="submit" className="text-light"><i className="fab fa-cc-visa fa-4x me-4"></i></a>
-                <a href="#!" type="submit" className="text-light"><i className="fa-brands fa-cc-apple-pay fa-4x me-4"></i></a>
-                <a href="#!" type="submit" className="text-light"><i className="fab fa-cc-paypal fa-4x"></i></a>
+                <h4 className="">Provisional total amount</h4>
               </div>
-
-              <form className="mt-4">
-                <div data-mdb-input-init className="form-outline form-white mb-4">
-                  <label className="form-label" htmlFor="typeName">Cardholder's Name</label>
-                  <input type="text" id="typeName" className="form-control form-control-lg custom-input" size="17" placeholder="Cardholder's Name" />
-                </div>
-
-                <div data-mdb-input-init className="form-outline form-white mb-4">
-                  <label className="form-label" htmlFor="typeText">Card Number</label>
-                  <input type="text" id="typeText" className="form-control form-control-lg custom-input" size="17" placeholder="1234 5678 9012 3457" minLength="19" maxLength="19" />
-                </div>
-
-                <div className="row mb-4">
-                  <div className="col-md-6">
-                    <div data-mdb-input-init className="form-outline form-white">
-                      <label className="form-label" htmlFor="typeExp">Expiration Date</label>
-                      <input type="text" id="typeExp" className="form-control form-control-lg custom-input" placeholder="MM/YYYY" size="7" minLength="7" maxLength="7" />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div data-mdb-input-init className="form-outline form-white">
-                      <label className="form-label" htmlFor="typeText">CVV</label>
-                      <input type="text" id="typeText" className="form-control form-control-lg custom-input" placeholder="&#9679;&#9679;&#9679;" size="1" minLength="3" maxLength="3" />
-                    </div>
-                  </div>
-                </div>
-              </form>
 
               <hr className="my-4" />
 
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Subtotal</p>
-                <p className="mb-2">$4798.00</p>
+                <p className="mb-2">${totalPrice.toLocaleString()}</p>
               </div>
 
               <div className="d-flex justify-content-between">
-                <p className="mb-2">Shipping</p>
-                <p className="mb-2">$20.00</p>
+                <p className="mb-2">Discount</p>
+                <p className="mb-2">-${(totalPrice - totalPriceAfterSale).toLocaleString()}</p>
               </div>
 
               <div className="d-flex justify-content-between mb-4">
                 <p className="mb-2">Total(Incl. taxes)</p>
-                <p className="mb-2">$4818.00</p>
+                <p className="mb-2">${totalPriceAfterSale.toLocaleString()}</p>
+              </div>
+              <div className='d-flex justify-content-center'>
+                <button type="button" className="checkout" onClick={() => payNow()}>
+                  <div>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></div>
+                </button>
               </div>
 
-              <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-info btn-block btn-lg submit-checkout">
-                <div className="checkout d-flex justify-content-between">
-                  <div><span>$4818.00</span></div>
-                  <div><span>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></span></div>
-                </div>
-              </button>
             </div>
           </div>
         </div>

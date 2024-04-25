@@ -79,8 +79,8 @@ function App() {
                 <Route path='comment' element={<CommentList></CommentList>} />
               </Route>
               <Route path='/products/search' element={<ProductSearchResult></ProductSearchResult>}></Route>
-              {!isLoggedIn ? <Route path="/cart" element={<Navigate to="/login" replace />} />
-                : <Route path='/cart' element={<Cart></Cart>}></Route>}
+              {!isLoggedIn && <Route path="/cart" element={<Navigate to="/login" replace />} />}
+              <Route path='/cart' element={<Cart></Cart>}></Route>
               <Route path="/policy-customers" element={<PolCustomer></PolCustomer>}></Route>
               <Route path="/policy-payment" element={<PolPayment></PolPayment>}></Route>
               <Route path="/policy-refund" element={<PolRefund></PolRefund>}></Route>
@@ -99,7 +99,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
-          <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar"/>
+          <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} autoClose={1500} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar" />
         </UserContext.Provider>
       </div >
     </CookiesProvider >

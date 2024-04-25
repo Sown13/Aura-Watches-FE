@@ -86,6 +86,10 @@ const getAllActiveProductsNoPage = () => {
     return http.get("/products?isActive=1");
 }
 
+const getAllProductWithCart = () => {
+    return http.get("/products?_embed=carts");
+}
+
 const ProductService = {
     getAllProduct,
     getProductListByFilter,
@@ -94,7 +98,8 @@ const ProductService = {
     updateProduct,
     removeProduct,
     getProductsByUser,
-    getAllActiveProductsNoPage
+    getAllActiveProductsNoPage,
+    getAllProductWithCart
 }
 
 export default ProductService;

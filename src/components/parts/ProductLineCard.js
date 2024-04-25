@@ -1,32 +1,39 @@
-export default function ProductLineCard({ product }) {
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+export default function ProductLineCard(props) {
+    const { product, removeFromCart, decreaseQuantity, increaseQuantity } = props;
+
+    useEffect(() => {
+        console.log(product);
+    }, [])
 
     return (
-        <div className="card mb-3">
-            <div className="card-body">
-                <div className="d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center">
-                        <img src="\img\products\f019\f019c.jpg" className="img-fluid rounded-3" alt="Shopping item" style={{ width: "65px", height: "65px" }} />
-                        <div className="ms-3">
-                            <h5>Canon EOS M50</h5>
-                            <p className="small mb-0">Onyx Black</p>
-                        </div>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-center">
-                        <button className="btn btn-outline-secondary btn-sm me-2" style={{ width: '10%', height: '30px', fontWeight: 'bold' }}>
-                            -
-                        </button>
-                        <input type="text" className="form-control input-field text-center" placeholder="1" style={{ border: '1px solid', width: '20%', height:"30px" }} />
-                        <button className="btn btn-outline-secondary btn-sm ms-2" style={{ width: '10%', height: '30px', fontWeight: 'bold' }}>
-                            +
-                        </button>
-                    </div>
-                    <div className="d-flex align-items-center">
-                        <div style={{ width: "80px" }}>
-                            <h5 className="mb-0">$1199</h5>
-                        </div>
-                        <a href="#!" style={{ color: "#cecece", marginLeft: "10px" }}><i className="fas fa-trash-alt"></i></a>
+        <div className="product-line-card d-flex" style={{ backgroundColor: "white", marginBottom: "3%", borderRadius: "14px", color: "black" }}>
+            <Link to={`/products/detail/${product.id}`} className="d-flex product" style={{ padding: "0", width: "60%", textDecoration: "none", color: "black" }}>
+                <div className="d-flex justify-content-center align-items-center" style={{ width: "60px", height: "100%", width: "20%" }}>
+                    <div style={{ width: "60px", height: "60px", width: "100%" }}>
+                        <img src={product.img} style={{ width: "auto", height: "100%", objectFit: "cover", padding: "5px" }} alt="Product Image" />
                     </div>
                 </div>
+                <div className="d-flex flex-column align-items-center" style={{ width: "80%" }}>
+                    <div>{product.name_code}</div>
+                    <div className="text-start ">{product.name}</div>
+                </div>
+            </Link>
+
+            <div className="d-flex justify-content-center align-items-center" style={{ padding: "0", width: "20%" }}>
+                <div className="input-group d-flex justify-content-center align-items-center">
+                    <div className="btn" type="button" style={{ width: "35%" }} onClick={() => decreaseQuantity(product.carts[0].id, product.carts[0].quantity)}>-</div>
+                    <input style={{ width: "30%", border: "0" }} type="text" className="form-control" placeholder={product.carts[0].quantity} />
+                    <div className="btn" type="button" style={{ width: "35%" }} onClick={() => increaseQuantity(product.carts[0].id, product.carts[0].quantity)}>+</div>
+                </div>
+            </div>
+            <div className="text-start d-flex align-items-center" style={{ padding: "0", width: "15%" }}>
+                ${((product.price * (product.sale > 0 ? product.sale : 100)) / 100).toLocaleString()}
+            </div>
+            <div className="trash-button d-flex align-items-center" style={{ padding: "0", width: "5%" }}>
+                <i className="fas fa-trash-alt" onClick={() => { removeFromCart(product.carts[0].id) }}></i>
             </div>
         </div>
     )

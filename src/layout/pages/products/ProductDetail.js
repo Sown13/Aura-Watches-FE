@@ -84,9 +84,6 @@ export default function ProductDetail() {
                 </h2>
             </div>
             <div className="product-detail-content d-flex flex-row text-light">
-                {/* <div className="product-detail-img-frame d-flex justify-content-center">
-                    <img className="d-block" src={product.img} alt="..." />
-                </div> */}
                 <div id="carouselExample" className="product-detail-img-frame  carousel slide">
                     <div className="d-flex carousel-inner h-100">
                         <div className="carousel-item active">
