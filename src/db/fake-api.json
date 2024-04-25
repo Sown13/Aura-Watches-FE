@@ -1288,7 +1288,14 @@
       "brand": "AURA WATCH"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": "b0ff",
+      "productId": 25,
+      "quantity": 1,
+      "id": 1
+    }
+  ],
   "transactions": [
     {
       "userId": "b0ff",
@@ -1319,6 +1326,43 @@
         }
       ],
       "id": 4
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-04-25T11:00:50.834Z",
+      "total_paid": 1776,
+      "products": [
+        {
+          "id": 15,
+          "name_code": "BMen-3Quaz",
+          "price": 22200,
+          "sale": 2,
+          "quantity": 4
+        }
+      ],
+      "id": 5
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-04-25T11:37:13.268Z",
+      "total_paid": 1674,
+      "products": [
+        {
+          "id": 5,
+          "name_code": "GWSS-SRSW-U1053L",
+          "price": 34200,
+          "sale": 1,
+          "quantity": 1
+        },
+        {
+          "id": 15,
+          "name_code": "BMen-3Quaz",
+          "price": 22200,
+          "sale": 2,
+          "quantity": 3
+        }
+      ],
+      "id": 6
     }
   ]
 }

@@ -18,7 +18,7 @@ import ProductOther from './layout/pages/products/tabs/ProductOther';
 import Store from './layout/pages/products/tabs/Store';
 import CommentList from './layout/pages/products/tabs/CommentList';
 import PageNotFound from './layout/pages/PageNotFound';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { UserContext } from './context/UserContext';
@@ -27,6 +27,7 @@ import ProductSearchResult from './layout/pages/products/ProductSearchResult';
 import Cart from './layout/pages/cart/Cart';
 import { getAndRemoveRedirectUrl, storeRedirectUrl } from './utils/redirect';
 import TransactionHistory from './layout/pages/users/TransactionHistory';
+import TransactionDetail from './layout/pages/users/TransactionDetail';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -37,6 +38,7 @@ function App() {
   const handleLogout = () => {
     removeCookie('user');
     setIsLoggedIn(0);
+    toast.success("Logged out, see you again!")
   }
 
   const handleLogin = (user) => {
@@ -56,7 +58,7 @@ function App() {
     } else {
       setIsLoggedIn(0);
     }
-  }, [isLoggedIn]);
+  }, [cookies]);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -92,8 +94,8 @@ function App() {
               <Route path="/news" element={<News></News>}></Route>
               {!isLoggedIn && <Route path="/user/profile" element={<Navigate to="/" replace />} />}
               <Route path='/user/profile' element={<UserDetail></UserDetail>}></Route>
-              {/* {!isLoggedIn && <Route path="/user/profile/payment-history" element={<Navigate to="/" replace />} />} */}
               <Route path='/user/profile/payment-history' element={<TransactionHistory></TransactionHistory>}></Route>
+              <Route path='/user/profile/payment-detail' element={<TransactionDetail></TransactionDetail>}></Route>
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
             {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}

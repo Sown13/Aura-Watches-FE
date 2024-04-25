@@ -1,17 +1,21 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../../context/UserContext"
 import TransactionService from "../../../service/TransactionService.";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function TransactionHistory() {
     const { cookies, isLoggedIn } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const [paymentHistory, setPaymentHistory] = useState([]);
 
     useEffect(() => {
-        TransactionService.getTransactionByUser(cookies.user.id).then((res) => {
-            setPaymentHistory(res.data);
-        }).catch((err) => { console.error("Cannot get payment history", err); });
-    }, [])
+        if (cookies.user) {
+            TransactionService.getTransactionByUser(cookies.user.id).then((res) => {
+                setPaymentHistory(res.data);
+            }).catch((err) => { console.error("Cannot get payment history", err); });
+        } else navigate("/login");
+    }, [cookies])
 
     return (
         <div className="transaction-history">
@@ -22,11 +26,8 @@ export default function TransactionHistory() {
                         <th scope="col">#</th>
                         <th scope="col">Bill Number</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Product Code</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Quantity</th>
                         <th scope="col">Total Payment</th>
+                        <th scope="col" colSpan={2}>Option</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,15 +36,19 @@ export default function TransactionHistory() {
                             <td className="table-dark">{index + 1}</td>
                             <td className="table-dark">{transaction.id}</td>
                             <td className="table-dark">{transaction.date_created}</td>
-                            <td className="table-dark">...</td>
-                            <td className="table-dark">...</td>
-                            <td className="table-dark">...</td>
-                            <td className="table-dark">...</td>
-                            <td className="table-dark">...</td>
+                            <td className="table-dark text-start">${transaction.total_paid.toLocaleString()}</td>
+                            <td className="table-dark">
+                                <Link to={"/user/profile/payment-detail"}
+                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id }}
+                                    style={{ textDecoration: "none", color: "white" }}>
+                                    Detail
+                                </Link>
+                            </td>
+                            <td className="table-dark">Download</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
