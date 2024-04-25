@@ -1291,18 +1291,34 @@
   "carts": [],
   "transactions": [
     {
-      "id": 1,
       "userId": "b0ff",
-      "date_created": "01-01-2015",
+      "date_created": "2024-04-25T04:20:50.136Z",
+      "total_paid": 134,
       "products": [
         {
-          "id": 1,
-          "name_code": "NWWBW-95",
-          "price": 20000,
-          "sale": 0,
+          "id": 16,
+          "name_code": "UL956",
+          "price": 13400,
+          "sale": 1,
           "quantity": 1
         }
-      ]
+      ],
+      "id": 3
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-04-25T04:24:25.243Z",
+      "total_paid": 444,
+      "products": [
+        {
+          "id": 15,
+          "name_code": "BMen-3Quaz",
+          "price": 22200,
+          "sale": 2,
+          "quantity": 1
+        }
+      ],
+      "id": 4
     }
   ]
 }

@@ -26,6 +26,7 @@ import UserDetail from './layout/pages/users/UserDetail';
 import ProductSearchResult from './layout/pages/products/ProductSearchResult';
 import Cart from './layout/pages/cart/Cart';
 import { getAndRemoveRedirectUrl, storeRedirectUrl } from './utils/redirect';
+import TransactionHistory from './layout/pages/users/TransactionHistory';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -91,6 +92,8 @@ function App() {
               <Route path="/news" element={<News></News>}></Route>
               {!isLoggedIn && <Route path="/user/profile" element={<Navigate to="/" replace />} />}
               <Route path='/user/profile' element={<UserDetail></UserDetail>}></Route>
+              {/* {!isLoggedIn && <Route path="/user/profile/payment-history" element={<Navigate to="/" replace />} />} */}
+              <Route path='/user/profile/payment-history' element={<TransactionHistory></TransactionHistory>}></Route>
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
             {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}
@@ -99,7 +102,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
           </Routes>
-          <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} autoClose={1500} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar" />
+          <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} autoClose={2500} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar" />
         </UserContext.Provider>
       </div >
     </CookiesProvider >

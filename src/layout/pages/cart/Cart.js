@@ -6,6 +6,7 @@ import { UserContext } from '../../../context/UserContext';
 import ProductService from '../../../service/ProductService';
 import CartService from '../../../service/CartService';
 import { toast } from 'react-toastify';
+import TransactionService from '../../../service/TransactionService.';
 
 function Cart() {
   const { cookies, isLoggedIn } = useContext(UserContext);
@@ -53,6 +54,7 @@ function Cart() {
   const removeFromCart = (cartId) => {
     CartService.removeProductFromCart(cartId).then((res) => {
       fetchProductData();
+      toast.error("Removed from cart");
     }).catch((err) => { console.error("Failed to remove", err) });
   }
 
@@ -80,12 +82,33 @@ function Cart() {
     }
   }
 
+  const createTransaction = (productsInCart, totalPrice) => {
+    const transaction = {
+      userId: cookies.user.id,
+      date_created: new Date(),
+      total_paid: totalPrice,
+      products: productsInCart.map((product) => {
+        return {
+          id: product.id,
+          name_code: product.name_code,
+          price: product.price,
+          sale: product.sale,
+          quantity: product.carts[0].quantity
+        };
+      })
+    }
+    TransactionService.createTransaction(transaction)
+      .catch((error) => { console.error("Failed to save transaction history", error) });
+  }
+
   const removeAllProductFromCart = (products) => {
     const removalPromises = products.map((product) => {
       return CartService.removeProductFromCart(product.carts[0].id);
     });
 
-    Promise.all(removalPromises)
+    Promise.all(removalPromises).then((res) => {
+      createTransaction(productList, totalPriceAfterSale);
+    })
       .catch((err) => {
         console.error("Failed to remove products:", err);
       });
@@ -99,7 +122,7 @@ function Cart() {
       removeAllProductFromCart(productList),
       {
         pending: 'Requesting Payment, please wait',
-        success: 'Payment Successfully',
+        success: 'Payment Successfully! You can check your payment history in your profile',
         error: 'Payment rejected 😢'
       }
     ).then((res) => { fetchProductData(); });
@@ -192,9 +215,13 @@ function Cart() {
                 <p className="mb-2">${totalPriceAfterSale.toLocaleString()}</p>
               </div>
               <div className='d-flex justify-content-center'>
-                <button type="button" className="checkout" onClick={() => payNow()}>
-                  <div>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></div>
-                </button>
+                {productList.length > 0
+                  ? <button type="button" className="checkout" onClick={() => payNow()}>
+                    <div>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></div>
+                  </button>
+                  : <Link to={"/products"} className="checkout btn">
+                    <div>Go to shop <i className="fas fa-long-arrow-alt-right ms-2"></i></div>
+                  </Link>}
               </div>
 
             </div>
