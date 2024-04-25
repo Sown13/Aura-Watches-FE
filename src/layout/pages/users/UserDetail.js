@@ -1,10 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { Link } from "react-router-dom";
 
 export default function UserDetail() {
     const { cookies, setCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
-    const user = cookies.user || {};
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        setUser(cookies.user);
+    }, [cookies, isLoggedIn])
 
     return (
         <div style={{ minHeight: "70vh" }}>
@@ -40,17 +44,17 @@ export default function UserDetail() {
                     <tbody>
                         <tr>
                             <th className="btn btn-lg w-100" scope="row" >
-                                <Link to={"/user/profile/update-info"} style={{ textDecoration: "none" , color:"white"}}>Update Profile</Link>
+                                <Link to={"/user/profile/update-info"} style={{ textDecoration: "none", color: "white" }}>Update Profile</Link>
                             </th>
                         </tr>
                         <tr>
                             <th className="btn btn-lg w-100" scope="row" >
-                                <Link to={"/user/profile/update-security"} style={{ textDecoration: "none", color:"white" }}>Update Security</Link>
+                                <Link to={"/user/profile/update-security"} style={{ textDecoration: "none", color: "white" }}>Update Security</Link>
                             </th>
                         </tr>
                         <tr>
                             <th className="btn btn-lg w-100" scope="row" >
-                                <Link to={"/user/profile/payment-history"} style={{ textDecoration: "none", color:"white" }}>Your Payment History</Link>
+                                <Link to={"/user/profile/payment-history"} style={{ textDecoration: "none", color: "white" }}>Your Payment History</Link>
                             </th>
                         </tr>
 

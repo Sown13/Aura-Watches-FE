@@ -1288,14 +1288,7 @@
       "brand": "AURA WATCH"
     }
   ],
-  "carts": [
-    {
-      "userId": "b0ff",
-      "productId": 25,
-      "quantity": 1,
-      "id": 1
-    }
-  ],
+  "carts": [],
   "transactions": [
     {
       "userId": "b0ff",
