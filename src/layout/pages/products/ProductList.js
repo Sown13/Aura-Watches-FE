@@ -37,9 +37,17 @@ export default function ProductList() {
     const containerRef = useRef(null);
 
     const scrollToFirstResultLine = () => {
-        let div = document.getElementById("view-point");
-        // notice: this one is not working if setState() is not done
-        div.scrollIntoView();
+        // let div = document.getElementById("view-point");
+        // // notice: this one is not working if setState() is not done
+        // div.scrollIntoView();
+        const viewPointElement = document.getElementById('view-point');
+        if (viewPointElement) {
+            const scrollPosition = viewPointElement.offsetTop - window.innerHeight*0.112;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth',
+            });
+        }
     };
 
     // for pagenation
@@ -268,7 +276,7 @@ export default function ProductList() {
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
             </div>
 
             <div className='d-flex justify-content-center'>

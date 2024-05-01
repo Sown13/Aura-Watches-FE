@@ -27,6 +27,33 @@ export default function Layout() {
     }, [headerBot]);
 
 
+    // handle scroll to top button
+    const [isVisible, setIsVisible] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollPos = window.scrollY;
+            const scrollingUp = prevScrollPos > currentScrollPos;
+
+            setIsVisible(scrollingUp);
+            setPrevScrollPos(currentScrollPos);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [prevScrollPos]);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     return (
         <div className="layout d-flex justify-content-center flex-column">
             <div className="layout-header-top d-flex flex-column">
@@ -37,6 +64,9 @@ export default function Layout() {
             </div>
             <div className="outlet">
                 <Outlet></Outlet>
+            </div>
+            <div className={`go-to-top-button ${isVisible ? '' : 'go-to-top-button-hidden'}`} onClick={scrollToTop}>
+                &uarr;
             </div>
             <FooterTop></FooterTop>
             <FooterBot></FooterBot>

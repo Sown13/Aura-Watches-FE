@@ -73,6 +73,19 @@ export default function ProductDetail() {
         } else navigate("/login");
     }
 
+
+    //scrolling to the store location
+    const scollToOutlet = () => {
+        const outletElement = document.getElementById('store');
+        if (outletElement) {
+            const scrollPosition = outletElement.offsetTop - window.innerHeight*0.27;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth',
+            });
+        }
+    }
+
     return (
         <div className="product-detail container">
             <div>TEST cart: {isInCart ? "in Cart" : "not in cart"}</div>
@@ -135,7 +148,9 @@ export default function ProductDetail() {
                     )}
                     <h6>{product.summary ? product.summary : product.description}</h6>
                     <div className="button-container ">
-                        <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
+                        <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                            Go To Shop Now
+                        </Link>
                         <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
                     </div>
                     <br />
@@ -150,7 +165,9 @@ export default function ProductDetail() {
                         <p>{product.description}</p>
                     </div>
                     <div className="button-container ">
-                        <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
+                        <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                            Go To Shop Now
+                        </Link>
                         <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
                     </div>
                     <div className="product-detail-tag">
@@ -178,7 +195,7 @@ export default function ProductDetail() {
             </div>
             <hr className="text-light" />
             <br />
-            <div className="product-detail-tab-content text-light">
+            <div className="product-detail-tab-content text-light" id="store">
                 <Outlet></Outlet>
             </div>
             <br />
