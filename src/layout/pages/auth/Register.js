@@ -134,10 +134,13 @@ const Register = () => {
     }
 
     return (
-        <div className="register-container">
-            {/* <a className="logo-aura-watch col navbar-brand" href={"/"}>
+        <div className="register-container d-flex">
+            <div className="register-background-image-frame">
+                <img className='register-bg-image' src="/img/register.png"></img>
+            </div>
+            <a className="logo-aura-watch col navbar-brand" href={"/"}>
                 <img src="/img/logo.svg" alt="logo"></img>
-            </a> */}
+            </a>
             <div className="Register">
                 <h2>Create Your Account</h2>
                 <form onSubmit={formik.handleSubmit}>
@@ -259,14 +262,14 @@ const Register = () => {
 
                 <div className="other-reg">
 
-                <button className="reg-facebook">
-                    <img src={facebookLogo} />
-                    Sign up with Facebook
-                </button>
-                <button className="reg-google">
-                    <img src={googleLogo} />
-                    Sign up with Google
-                </button>
+                    <button className="reg-facebook">
+                        <img src={facebookLogo} />
+                        Sign up with Facebook
+                    </button>
+                    <button className="reg-google">
+                        <img src={googleLogo} />
+                        Sign up with Google
+                    </button>
 
                 </div>
 
