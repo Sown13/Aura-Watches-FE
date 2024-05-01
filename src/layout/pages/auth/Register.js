@@ -3,8 +3,8 @@ import UserService from "../../../service/UserService";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import RegisterStyles from "../../../css/layout/pages/auth/RegisterStyles.css";
-import Error from '../../../css/layout/pages/auth/Error.css';
+import "../../../css/layout/pages/auth/RegisterStyles.css";
+import '../../../css/layout/pages/auth/Error.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFormik } from "formik";
 import facebookLogo from '../../../images/facebook.png';
@@ -135,9 +135,9 @@ const Register = () => {
 
     return (
         <div className="register-container">
-            <a className="logo-aura-watch col navbar-brand" href={"/"}>
+            {/* <a className="logo-aura-watch col navbar-brand" href={"/"}>
                 <img src="/img/logo.svg" alt="logo"></img>
-            </a>
+            </a> */}
             <div className="Register">
                 <h2>Create Your Account</h2>
                 <form onSubmit={formik.handleSubmit}>

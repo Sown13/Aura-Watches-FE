@@ -12,7 +12,7 @@ export default function ProductList() {
 
     // for display
     const [productList, setProductList] = useState([]);
-    const [banner, setBanner] = useState('/img/banner_men.svg');
+    const [banner, setBanner] = useState('');
 
     // for filtering
     const [isActive, setIsActive] = useState(1);
@@ -276,7 +276,7 @@ export default function ProductList() {
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i class="fa-solid fa-filter"></i> FILTER</button>
             </div>
 
             <div className='d-flex justify-content-center'>

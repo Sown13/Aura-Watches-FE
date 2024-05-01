@@ -54,7 +54,7 @@ export default function HeaderBotSticky() {
                         <Link className="nav-link dropdown-toggle text-light p-3" to={"#"} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             BRANDS
                         </Link>
-                        <ul className="dropdown-menu">
+                        <ul className="dropdown-menu dropdown-menu-custom">
                             <li><Link className="dropdown-item p-3" to={"/products/AURA-WATCH"}>AURA WATCH</Link></li>
                             <li><Link className="dropdown-item p-3" to={"/products/FOSSIL"}>FOSSIL</Link></li>
                             <li><Link className="dropdown-item p-3" to={"/products/TOMMY-HILFIGER"}> TOMMY HILFIGER</Link></li>

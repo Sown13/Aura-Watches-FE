@@ -34,7 +34,7 @@ export default function Layout() {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY;
-            const scrollingUp = prevScrollPos > currentScrollPos;
+            const scrollingUp = prevScrollPos < currentScrollPos;
 
             setIsVisible(scrollingUp);
             setPrevScrollPos(currentScrollPos);

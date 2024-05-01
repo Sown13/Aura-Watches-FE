@@ -8,6 +8,7 @@
   right: 0;
   width: 40%;
   margin: 40px auto;
+  margin-bottom: 0 !important;
   padding: 20px;
   padding-bottom: 0 !important;
   border: 0px solid #ccc;
@@ -20,7 +21,7 @@
 }
 
 
-.background-image {
+.register-container.background-image {
   display: flex;
   justify-content: flex-start;
   width: 630px;

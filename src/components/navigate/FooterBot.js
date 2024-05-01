@@ -23,6 +23,9 @@ export default function FooterBot() {
                 <Link className="" to={"/#"}>Espisodes</Link>
                 <Link className="" to={"/#"}>Trending</Link>
                 <Link className="" to={"/#"}>Category</Link>
+                <a className="" href="/files/price-list/aw-price-list.csv" download={"AuraWatch_price-list.csv"}>
+                    Price List
+                    &nbsp;<i class="fa-solid fa-download"></i></a>
             </div>
             <div className="footer-bot-nav d-flex flex-column">
                 <h5>POLICIES</h5>

@@ -14,6 +14,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding-right: 100px;
   margin-top: 10%;
+  margin-right: 5%;
 }
 
 
@@ -58,7 +59,7 @@ label {
 }
 
 .Login h6 a:hover {
-  color: #207b3c;
+  color: #ebce9d;
 }
 
 input[type="text"],
@@ -90,7 +91,7 @@ input[type="password"] {
 }
 
 .Login .btn-primary:hover {
-  background-color: #3e8e41;
+  background-color: #ebce9d;
 }
 
 .Login .btn-success {
@@ -99,21 +100,12 @@ input[type="password"] {
 }
 
 .Login .btn-success:hover {
-  background-color: #207b3c;
+  background-color: #ebce9d;
 }
 
-.Login .background-image {
-  display: flex;
-  justify-content: flex-start;
-  width: 630px;
-  height: 760px;
-  padding: 20px;
-  border: 0px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding-right: 15px;
-  background-image: url('../../../../images/register.png');
-  background-size: contain;
+.login-bg-image {
+  max-height: 100vh;
+  margin-left: 30%;
 }
 
 .log-facebook img,
@@ -159,7 +151,7 @@ input[type="password"] {
 
 .log-facebook:hover,
 .log-google:hover {
-  color: #207b3c;
+  color: #ebce9d;
 }
 
 .password-input {
@@ -183,5 +175,9 @@ input[type="password"] {
 }
 
 .password-input i:hover {
-  color: #207b3c;
+  color: #ebce9d;
+}
+
+.login-container.logo-aura-watch {
+ width: 50vw;
 }
