@@ -180,3 +180,13 @@ input[type="password"] {
 .login-container.logo-aura-watch {
  width: 50vw;
 }
+
+.login-container>.background-image {
+  width: 40%;
+}
+.login-container>.logo-aura-watch {
+  width: 20%;
+}
+.Login {
+  width: 40%;
+}

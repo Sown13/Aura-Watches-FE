@@ -188,9 +188,17 @@ input[type="password"] {
 .register-bg-image {
   max-height: 100vh;
   width: auto;
-  margin-left: 10%;
+}
+
+.register-background-image-frame{
+  width: 40%;
+}
+
+.register-container>.logo-aura-watch {
+  width: 20%;
 }
 
 .Register {
-  margin-right: 10%;
+  width: 40%;
+  padding: 40px;
 }
