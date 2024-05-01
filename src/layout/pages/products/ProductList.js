@@ -42,7 +42,7 @@ export default function ProductList() {
         // div.scrollIntoView();
         const viewPointElement = document.getElementById('view-point');
         if (viewPointElement) {
-            const scrollPosition = viewPointElement.offsetTop - window.innerHeight*0.112;
+            const scrollPosition = viewPointElement.offsetTop - window.innerHeight * 0.112;
             window.scrollTo({
                 top: scrollPosition,
                 behavior: 'smooth',
@@ -302,11 +302,15 @@ export default function ProductList() {
             </div>
 
             <div className='row' ref={containerRef}>
-                {productList.map((product, index) => (
-                    <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
-                        <ProductCard product={product}></ProductCard>
-                    </div>
-                ))}
+                {productList.length > 0 ? (
+                    productList.map((product, index) => (
+                        <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
+                            <ProductCard product={product}></ProductCard>
+                        </div>
+                    ))
+                ) : (
+                    <h2 style={{marginTop:"2%"}}>Sorry, there is no Product match your filter</h2>
+                )}
             </div>
 
             <br />
