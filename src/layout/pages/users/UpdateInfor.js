@@ -25,6 +25,7 @@ const UpdateInfor = ({ user, navigate, setUser, formik }) => {
                 });
         }
     }, [user]);
+    
 
     // If userInfo is null, data is still loading
     if (!userInfo) {
@@ -49,19 +50,19 @@ const UpdateInfor = ({ user, navigate, setUser, formik }) => {
     return (
         <form onSubmit={handleSubmit} className='update-infor'>
             <label>
-                Full Name:
+                <span>Full Name:</span>
                 <input type="text" name="Fullname" value={userInfo.Fullname} onChange={handleChange} />
             </label>
             <label>
-                Phone:
+                <span>Phone:</span>
                 <input type="text" name="phone" value={userInfo.phone} onChange={handleChange} />
             </label>
             <label>
-                Email:
+                <span>Email:</span>
                 <input type="text" name="email" value={userInfo.email} onChange={handleChange} />
             </label>
             <label>
-                Address:
+                <span>Address:</span>
                 <input type="text" name="address" value={userInfo.address} onChange={handleChange} />
             </label>
             <input type="submit" value="Update" />

@@ -1,6 +1,8 @@
 import http from "./httpCommon";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { useNavigate, Link } from 'react-router-dom';
+import { useFormik } from "formik";
 
 const createNewUser = (data, navigate, setUser, formik) => {
     // return http.post("/home", data);
@@ -45,15 +47,7 @@ const updateUser = (id, data, navigate, setUser, formik, user) => {
     return axios.put(`http://localhost:8080/users/${id}`, data)
         .then(response => {
             console.log("Updated");
-            setUser({
-                id: response.data.id,
-                Fullname: response.data.Fullname,
-                phone: response.data.phone,
-                email: response.data.email,
-                address: response.data.address,
-                username: user.username,
-                password: user.password,
-            });
+    
             console.log("Updated 2");
             toast.success("Update Success!");
             navigate('/user/profile');
@@ -63,28 +57,39 @@ const updateUser = (id, data, navigate, setUser, formik, user) => {
         });
 }
 
-const updatePassword = (id, password, navigate, setUser, formik, user) => {
+// UserService.js
+const updatePassword = (id, oldPassword, newPassword, confirmNewPassword, navigate) => {
+    // Validate new password
+
+    // Check if new password matches confirm password
+    if (newPassword !== confirmNewPassword) {
+        toast.error('New password and confirm password do not match');
+        return;
+    }
+
     // Get current user data
     axios.get(`http://localhost:8080/users/${id}`)
         .then(response => {
+            // Check if old password is correct
+            if (response.data.password !== oldPassword) {
+                toast.error('Old password is incorrect');
+                return;
+            }
+
             // Update password
             const updatedUser = {
                 ...response.data,
-                password: password,
+                password: newPassword,
             };
 
             // Update user on server
             return axios.put(`http://localhost:8080/users/${id}`, updatedUser);
         })
         .then(response => {
-            setUser({
-                ...response.data,
-                password: password,
-            });
-
-            formik.resetForm();
-            toast.success("Update Success!");
-            navigate('/user/profile');
+            if (response) {
+                toast.success("Update Success!");
+                navigate('/user/profile');
+            }
         })
         .catch(e => {
             console.log(e);
@@ -93,12 +98,10 @@ const updatePassword = (id, password, navigate, setUser, formik, user) => {
 
 
 
-
-
-const UserDataService = {
+const UserService = {
     createNewUser,
     updateUser,
     updatePassword
 };
 
-export default UserDataService;
+export default UserService;
