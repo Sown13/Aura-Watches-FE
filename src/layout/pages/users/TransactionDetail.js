@@ -26,7 +26,10 @@ export default function TransactionDetail() {
 
     return (
         <div className="transaction-history">
-            <h1 className="text-start text-light">Detail for Bill No.{transactionId}</h1>
+            <h1 className="text-start text-light">
+                <Link className="btn" to={"/user/profile/payment-history"} style={{ textDecoration: "none", color: "white" }}>&lt;</Link>
+                Detail for Bill No.{transactionId}
+            </h1>
             <table className="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -45,7 +48,13 @@ export default function TransactionDetail() {
                         <tr className="table-dark" key={index}>
                             <td className="table-dark">{index + 1}</td>
                             <td className="table-dark">{historyDetail.id}</td>
-                            <td className="table-dark">{historyDetail.date_created}</td>
+                            <td className="table-dark"> {new Date(historyDetail.date_created).toLocaleString([], {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}</td>
                             <td className="table-dark">{product.name_code}</td>
                             <td className="table-dark">{product.price}</td>
                             <td className="table-dark">{product.sale}</td>

@@ -45,6 +45,7 @@
     position: sticky;
     top: 100px !important;
     height: fit-content;
+    border: #e8c284 5px solid;
 }
 
 .product-detail-content-padding {
@@ -56,6 +57,7 @@
 }
 
 .product-detail-img-frame img {
+    padding: 1%;
     object-fit: contain;
     width: 100%;
     height: 100%;

@@ -137,6 +137,13 @@ function Cart() {
     fetchProductData();
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+
 
 
   return (
@@ -191,7 +198,7 @@ function Cart() {
                   <p style={{ marginBottom: "0" }}> || </p>
                   <h6 style={{ marginBottom: "0" }}><b>{cookies.user && cookies.user.phone}</b></h6>
                 </div>
-                <h6>{cookies.user && cookies.user.address}</h6>
+                <h6>Address: {cookies.user && cookies.user.address}</h6>
               </div>
               <hr className="my-4" />
               <div className='d-flex justify-content-between'>

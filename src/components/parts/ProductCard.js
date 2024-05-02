@@ -12,13 +12,13 @@ export default function ProductCard({ product }) {
                 {/* <p className="card-text">${product ? product.price : 0}</p> */}
                 {product.sale > 0 ? (
                     <div className="card-text d-flex justify-content-center">
-                        <del className="card-text">{Number(product.price).toLocaleString()}$</del>
+                        <del className="card-text">${Number(product.price).toLocaleString()}</del>
                         <p className="card-tex">
-                            &nbsp;  &nbsp; <span style={{ color: "red" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}</span>$
+                            &nbsp;  &nbsp; $<span style={{ color: "red" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}</span>
                         </p>
                     </div>
                 ) : (
-                    <p className="card-text">{Number(product.price).toLocaleString()}$</p>
+                    <p className="card-text">${Number(product.price).toLocaleString()}</p>
                 )}
             </div>
         </a>

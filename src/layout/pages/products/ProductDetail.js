@@ -151,14 +151,14 @@ export default function ProductDetail() {
 
                     {product.sale > 0 ? (
                         <div className="card-text d-flex justify-content-left">
-                            <h1><del className="card-text">{Number(product.price).toLocaleString()}$</del></h1>
+                            <h1><del className="card-text">${Number(product.price).toLocaleString()}</del></h1>
                             <h1 className="card-tex">
-                                &nbsp;  &nbsp; <span style={{ color: "#e8c284" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}$</span>
+                                &nbsp;  &nbsp; <span style={{ color: "#e8c284" }}>${(product.price * (100 - product.sale) / 100).toLocaleString()}</span>
                             </h1>
                             <h3>-{product.sale}%</h3>
                         </div>
                     ) : (
-                        <h1 className="card-text" style={{ color: "#e8c284" }}>{Number(product.price).toLocaleString()}$</h1>
+                        <h1 className="card-text" style={{ color: "#e8c284" }}>${Number(product.price).toLocaleString()}</h1>
                     )}
                     <h6>{product.summary ? product.summary : product.description}</h6>
                     <div className="button-container ">

@@ -24,20 +24,20 @@ export default function Contact() {
 
                 <div class="branch-info">
                     <div class="branch">
-                        <a onClick={(e) => selectStore(1, e)}><h3>Aura Watches Ha Noi</h3></a>
+                        <a onClick={(e) => selectStore(1, e)}><h3>{storeAddress === 1 ? <span><i class="fa-solid fa-play"></i></span> : null} Aura Watches Ha Noi</h3></a>
                         <p>Address: 8a, Ton That Thuyet, My Dinh, Nam Tu Liem, Ha Noi</p>
                         <p>Hotline: 0123 456 789</p>
                         <span>Email: </span><a href="mailto:aurawatch1@gmail.com">aurawatch1@gmail.com</a>
                     </div>
 
                     <div class="branch">
-                        <a onClick={(e) => selectStore(2, e)}><h3>Aura Watches Hoa Lac</h3></a>
+                        <a onClick={(e) => selectStore(2, e)}><h3>{storeAddress === 2 ?<span><i class="fa-solid fa-play"></i></span> : null} Aura Watches Hoa Lac</h3></a>
                         <p>Address: Tan Xa, Thach That, Ha Noi</p>
                         <p>Hotline: 0987 654 321</p>
                         <span>Email: </span><a href="mailto:aurawatch2@gmail.com">aurawatch2@gmail.com</a>
                     </div>
                     <div class="branch">
-                        <a onClick={(e) => selectStore(3, e)}><h3>Aura Watches HCM</h3></a>
+                        <a onClick={(e) => selectStore(3, e)}><h3>{storeAddress === 3 ?<span><i class="fa-solid fa-play"></i></span> : null} Aura Watches HCM</h3></a>
                         <p>Address: 391a Nam Ky Khoi Nghia, Vo Thi Sau, Quan 3, Tp.HCM</p>
                         <p>Hotline: 01345 689 124</p>
                         <span>Email: </span><a href="mailto:aurawatch3@gmail.com">aurawatch3@gmail.com</a>

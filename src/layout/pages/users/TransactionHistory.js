@@ -35,7 +35,11 @@ export default function TransactionHistory() {
                         <tr className="table-dark" key={index}>
                             <td className="table-dark">{index + 1}</td>
                             <td className="table-dark">{transaction.id}</td>
-                            <td className="table-dark">{transaction.date_created}</td>
+                            <td className="table-dark">{new Date(transaction.date_created).toLocaleDateString([], {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            })}</td>
                             <td className="table-dark text-start">${transaction.total_paid.toLocaleString()}</td>
                             <td className="table-dark">
                                 <Link to={"/user/profile/payment-detail"}

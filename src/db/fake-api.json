@@ -1356,6 +1356,35 @@
         }
       ],
       "id": 6
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-05-02T09:53:57.701Z",
+      "total_paid": 35945,
+      "products": [
+        {
+          "id": 4,
+          "name_code": "TW-ERLSW",
+          "price": 23400,
+          "sale": 1,
+          "quantity": 2
+        },
+        {
+          "id": 16,
+          "name_code": "UL956",
+          "price": 13400,
+          "sale": 1,
+          "quantity": 1
+        },
+        {
+          "id": 18,
+          "name_code": "FNM-18",
+          "price": 56100,
+          "sale": 21,
+          "quantity": 3
+        }
+      ],
+      "id": 7
     }
   ]
 }
