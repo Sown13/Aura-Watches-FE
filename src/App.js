@@ -28,6 +28,9 @@ import Cart from './layout/pages/cart/Cart';
 import { getAndRemoveRedirectUrl, storeRedirectUrl } from './utils/redirect';
 import TransactionHistory from './layout/pages/users/TransactionHistory';
 import TransactionDetail from './layout/pages/users/TransactionDetail';
+import UpdateInfor from './layout/pages/users/UpdateInfor';
+import UpdatePassword from './layout/pages/users/UpdatePassword';
+import ProductListAdmin from './admin/admin_page/components/ProductListAdmin';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -96,6 +99,9 @@ function App() {
               <Route path='/user/profile' element={<UserDetail></UserDetail>}></Route>
               <Route path='/user/profile/payment-history' element={<TransactionHistory></TransactionHistory>}></Route>
               <Route path='/user/profile/payment-detail' element={<TransactionDetail></TransactionDetail>}></Route>
+              <Route path='/user/profile/update-info' element={<UpdateInfor user={cookies.user} />} />
+              <Route path='/user/profile/update-security' element={<UpdatePassword user={cookies.user} />} />
+              
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
             {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}
@@ -103,7 +109,9 @@ function App() {
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+            <Route path="/admin" element={<ProductListAdmin></ProductListAdmin>} />
           </Routes>
+
           <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} autoClose={2500} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar" />
         </UserContext.Provider>
       </div >

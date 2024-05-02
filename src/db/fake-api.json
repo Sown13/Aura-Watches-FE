@@ -2,31 +2,20 @@
   "users": [
     {
       "id": "admin",
-      "email": "admin@mail.com",
+      "email": "admin1234567@mail.com",
       "password": "admin",
       "firstname": "admin",
       "lastname": "admin",
       "phone": "xxxxxxxx-xxxx"
     },
     {
-      "id": "b0ff",
       "Fullname": "Nguyễn Quốc Hiếu",
-      "phone": "0836473122",
-      "email": "hieunguyen2005q@gmail.com",
+      "phone": "0836473234",
+      "email": "hien2005q@gmail.com",
+      "address": "Hải Phòng",
       "username": "hieu01",
-      "password": "12345678a@",
-      "rePassword": "12345678a@",
-      "address": "Thanh Ba"
-    },
-    {
-      "id": "9dfe",
-      "Fullname": "Nguyễn Quốc Hiếu",
-      "phone": "0836473134",
-      "email": "hieunguyen200q@gmail.com",
-      "username": "hieu02",
-      "password": "123456a@",
-      "rePassword": "123456a@",
-      "address": "Thanh Ba"
+      "password": "1234567a@",
+      "id": "b0ff"
     },
     {
       "id": "da78",
@@ -34,7 +23,7 @@
       "phone": "0836473162",
       "email": "hieunguy2005q@gmail.com",
       "username": "hieu011",
-      "password": "123456a@",
+      "password": "testthu",
       "rePassword": "123456a@",
       "address": "Thanh Ba"
     },
@@ -84,6 +73,24 @@
       "password": "123456a@",
       "address": "Thanh Ba",
       "id": "tbPvHfJ"
+    },
+    {
+      "Fullname": "hsfdfgfg",
+      "phone": "0375937592",
+      "email": "hieun2005q@gmail.com",
+      "username": "test1019384",
+      "password": "123456a@",
+      "address": "HaNoi",
+      "id": "NjvKXF5"
+    },
+    {
+      "Fullname": "HoàngTest",
+      "phone": "0936482645",
+      "email": "rneng65@gmail.com",
+      "address": "Thanh Ba",
+      "username": "dsfsdfsf",
+      "password": "121212a@",
+      "id": "SVYxQDY"
     }
   ],
   "products": [
@@ -99,7 +106,7 @@
       "img2": "/img/products/f001/f001b.jpg",
       "img3": "/img/products/f001/f001c.jpg",
       "img4": "",
-      "isActive": 1,
+      "isActive": 0,
       "isMen": 0,
       "isWomen": 1,
       "isPremier": 0,
@@ -1288,7 +1295,14 @@
       "brand": "AURA WATCH"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": "b0ff",
+      "productId": 19,
+      "quantity": 1,
+      "id": 1
+    }
+  ],
   "transactions": [
     {
       "userId": "b0ff",
