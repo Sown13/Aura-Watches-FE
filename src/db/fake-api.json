@@ -1385,6 +1385,36 @@
         }
       ],
       "id": 7
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-05-02T10:37:54.074Z",
+      "total_paid": 444,
+      "products": [
+        {
+          "id": 15,
+          "name_code": "BMen-3Quaz",
+          "price": 22200,
+          "sale": 2,
+          "quantity": 1
+        }
+      ],
+      "id": 8
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-05-02T10:44:07.553Z",
+      "total_paid": 134,
+      "products": [
+        {
+          "id": 16,
+          "name_code": "UL956",
+          "price": 13400,
+          "sale": 1,
+          "quantity": 1
+        }
+      ],
+      "id": 9
     }
   ]
 }

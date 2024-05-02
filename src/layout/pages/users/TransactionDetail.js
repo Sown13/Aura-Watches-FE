@@ -2,15 +2,26 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../../context/UserContext"
 import TransactionService from "../../../service/TransactionService.";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { PDFViewer } from "@react-pdf/renderer";
+import PDFTable from "../../../components/parts/PDFTable";
 
 export default function TransactionDetail() {
     const { cookies, isLoggedIn } = useContext(UserContext);
     const navigate = useNavigate();
 
     const location = useLocation();
-    const { paymentHistory, transactionId } = location.state || {};
+    const { paymentHistory, transactionId, total_paid } = location.state || {};
 
     const [historyDetail, setHistoryDetail] = useState([]);
+
+    // Test pdf
+    const [showPDF, setShowPDF] = useState(false);
+
+    const handleDownloadPDF = () => {
+        if (showPDF) {
+            setShowPDF(false);
+        } else setShowPDF(true);
+    };
 
     useEffect(() => {
         console.log(paymentHistory);
@@ -57,13 +68,19 @@ export default function TransactionDetail() {
                             })}</td>
                             <td className="table-dark">{product.name_code}</td>
                             <td className="table-dark">{product.price}</td>
-                            <td className="table-dark">{product.sale}</td>
+                            <td className="table-dark">{product.sale}%</td>
                             <td className="table-dark">{product.quantity}</td>
                             <td className="table-dark"><Link to={"/products/detail/" + product.id}><i className="fa-solid fa-eye" style={{ color: "#e8c284" }}></i></Link></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <button className="btn text-light" style={{ border: "1px solid" }} onClick={() => { handleDownloadPDF() }}>Download This Bill As PDF</button>
+            {showPDF && (
+                <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                    <PDFTable historyDetail={historyDetail} total_paid={total_paid} />
+                </PDFViewer>
+            )}
         </div>
     )
 }

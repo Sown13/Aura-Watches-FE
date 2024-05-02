@@ -43,7 +43,7 @@ export default function TransactionHistory() {
                             <td className="table-dark text-start">${transaction.total_paid.toLocaleString()}</td>
                             <td className="table-dark">
                                 <Link to={"/user/profile/payment-detail"}
-                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id }}
+                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id, total_paid: transaction.total_paid}}
                                     style={{ textDecoration: "none", color: "white" }}>
                                     Detail
                                 </Link>
