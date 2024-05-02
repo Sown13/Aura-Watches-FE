@@ -30,7 +30,7 @@ export default function ProductLineCard(props) {
                 </div>
             </div>
             <div className="text-start d-flex align-items-center" style={{ padding: "0", width: "15%" }}>
-                ${((product.price * (product.sale > 0 ? product.sale : 100)) / 100).toLocaleString()}
+                ${product.sale > 0 ? (product.price * (100 - product.sale) / 100).toLocaleString() : Number(product.price).toLocaleString()}
             </div>
             <div className="trash-button d-flex align-items-center" style={{ padding: "0", width: "5%" }}>
                 <i className="fas fa-trash-alt" onClick={() => { removeFromCart(product.carts[0].id) }}></i>

@@ -13,8 +13,8 @@ function Cart() {
 
   const [productList, setProductList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalDiscount, settotalDiscount] = useState(0);
-  const [totalPriceAfterDiscount, settotalPriceAfterDiscount] = useState(0);
+  const [totalPriceAfterSale, setTotalPriceAfterSale] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
 
   const getProductInCart = (products, userId) => {
     const filteredProducts = products.map((product) => {
@@ -43,13 +43,14 @@ function Cart() {
     setTotalPrice(total);
   }
 
-  const caltotalDiscount = (products) => {
+  const calTotalPriceAfterSale = (products) => {
     const total = products.reduce((accumulator, product) => {
       const productTotal = (product.price * product.carts[0].quantity * (product.sale > 0 ? product.sale : 100)) / 100;
       return accumulator + productTotal;
     }, 0);
     console.log("After Sale: " + total);
-    settotalDiscount(total);
+    setTotalDiscount(total);
+    setTotalPriceAfterSale(totalPrice - total);
   }
 
   const removeFromCart = (cartId) => {
@@ -108,7 +109,7 @@ function Cart() {
     });
 
     Promise.all(removalPromises).then((res) => {
-      createTransaction(productList, totalDiscount);
+      createTransaction(productList, totalPriceAfterSale);
     })
       .catch((err) => {
         console.error("Failed to remove products:", err);
@@ -131,16 +132,12 @@ function Cart() {
 
   useEffect(() => {
     calTotalPrice(productList);
-    caltotalDiscount(productList);
+    calTotalPriceAfterSale(productList);
   }, [productList])
 
   useEffect(() => {
     fetchProductData();
   }, [])
-
-  useEffect(() => {
-    settotalPriceAfterDiscount(totalPrice - totalDiscount);
-  }, [totalDiscount, totalPrice]);
 
   useEffect(() => {
     window.scrollTo({
@@ -219,12 +216,12 @@ function Cart() {
 
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
-                <p className="mb-2">-${totalDiscount.toLocaleString()}</p>
+                <p className="mb-2">-${(totalPrice - totalPriceAfterSale).toLocaleString()}</p>
               </div>
 
               <div className="d-flex justify-content-between mb-4">
                 <p className="mb-2">Total(Incl. taxes)</p>
-                <p className="mb-2">${(totalPrice - totalDiscount).toLocaleString()}</p>
+                <p className="mb-2">${totalPriceAfterSale.toLocaleString()}</p>
               </div>
               <div className='d-flex justify-content-center'>
                 {productList.length > 0

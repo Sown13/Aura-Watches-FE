@@ -1415,6 +1415,28 @@
         }
       ],
       "id": 9
+    },
+    {
+      "userId": "b0ff",
+      "date_created": "2024-05-02T13:30:44.512Z",
+      "total_paid": 24165,
+      "products": [
+        {
+          "id": 1,
+          "name_code": "NWWBW-95",
+          "price": 20000,
+          "sale": 1,
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "name_code": "G-TBWWDF-Gold",
+          "price": 4500,
+          "sale": 3,
+          "quantity": 1
+        }
+      ],
+      "id": 10
     }
   ]
 }

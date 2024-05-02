@@ -24,10 +24,10 @@ export default function TransactionHistory() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
+                        <th scope="col">Bill ID</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total Payment</th>
-                        <th scope="col" colSpan={2}>Option</th>
+                        <th scope="col" style={{textAlign:"start"}}>Total Payment</th>
+                        <th scope="col" >Option</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +48,6 @@ export default function TransactionHistory() {
                                     Detail
                                 </Link>
                             </td>
-                            <td className="table-dark">Download</td>
                         </tr>
                     ))}
                 </tbody>
