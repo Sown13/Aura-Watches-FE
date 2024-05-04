@@ -84,6 +84,24 @@
       "password": "123456a@",
       "address": "Thanh Ba",
       "id": "tbPvHfJ"
+    },
+    {
+      "Fullname": "Hải Sơn Nguyễn",
+      "phone": "0858437557",
+      "email": "truong123@gmail.com",
+      "username": "truong123",
+      "password": "123456789a@",
+      "address": "29 Tổ 8 Phường Minh Khai",
+      "id": "VKvSqs3"
+    },
+    {
+      "Fullname": "Hải Sơn Nguyễn",
+      "phone": "0923456780",
+      "email": "truong@gmail.com",
+      "username": "truongchel1234",
+      "password": "1234567a@",
+      "address": "29 Tổ 8 Phường Minh Khai",
+      "id": "chqIPWn"
     }
   ],
   "products": [
@@ -1288,7 +1306,14 @@
       "brand": "AURA WATCH"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": "chqIPWn",
+      "productId": 1,
+      "quantity": 2,
+      "id": 1
+    }
+  ],
   "transactions": [
     {
       "userId": "b0ff",
@@ -1437,6 +1462,21 @@
         }
       ],
       "id": 10
+    },
+    {
+      "userId": "chqIPWn",
+      "date_created": "2024-05-04T12:09:42.439Z",
+      "total_paid": 2300,
+      "products": [
+        {
+          "id": 7,
+          "name_code": "NW-2884",
+          "price": 6500,
+          "sale": "",
+          "quantity": 3
+        }
+      ],
+      "id": 11
     }
   ]
 }
