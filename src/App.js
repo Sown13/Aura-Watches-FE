@@ -31,6 +31,9 @@ import TransactionDetail from './layout/pages/users/TransactionDetail';
 import UpdateInfor from './layout/pages/users/UpdateInfor';
 import UpdatePassword from './layout/pages/users/UpdatePassword';
 import ProductListAdmin from './admin/admin_page/components/ProductListAdmin';
+import EditProductAdmin from './admin/admin_page/components/EditProductAdmin';
+import AddProductAdmin from './admin/admin_page/components/AddProductAdmin';
+import UserListAdmin from './admin/admin_page/components/UserListAdmin';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(0);
@@ -110,6 +113,9 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             <Route path="/admin" element={<ProductListAdmin></ProductListAdmin>} />
+            <Route path="/admin/edit/:id" element={<EditProductAdmin />} />
+            <Route path="/admin/add" element={<AddProductAdmin></AddProductAdmin>} />
+            <Route path="/admin/user-list" element={<UserListAdmin></UserListAdmin>} />
           </Routes>
 
           <ToastContainer toastStyle={{ backgroundColor: "#e8c284", color: "black" }} autoClose={2500} toastClassName={"app-toast"} progressClassName="app-toast-progress-bar" />
