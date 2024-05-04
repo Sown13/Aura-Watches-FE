@@ -24,10 +24,10 @@ export default function TransactionHistory() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
+                        <th scope="col">Bill ID</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Total Payment</th>
-                        <th scope="col" colSpan={2}>Option</th>
+                        <th scope="col" style={{textAlign:"start"}}>Total Payment</th>
+                        <th scope="col" >Option</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,16 +35,19 @@ export default function TransactionHistory() {
                         <tr className="table-dark" key={index}>
                             <td className="table-dark">{index + 1}</td>
                             <td className="table-dark">{transaction.id}</td>
-                            <td className="table-dark">{transaction.date_created}</td>
+                            <td className="table-dark">{new Date(transaction.date_created).toLocaleDateString([], {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            })}</td>
                             <td className="table-dark text-start">${transaction.total_paid.toLocaleString()}</td>
                             <td className="table-dark">
                                 <Link to={"/user/profile/payment-detail"}
-                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id }}
+                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id, total_paid: transaction.total_paid}}
                                     style={{ textDecoration: "none", color: "white" }}>
                                     Detail
                                 </Link>
                             </td>
-                            <td className="table-dark">Download</td>
                         </tr>
                     ))}
                 </tbody>

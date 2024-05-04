@@ -4,6 +4,7 @@ import UserDataService from '../../../service/UserService';
 import { toast } from 'react-toastify';
 import '../../../css/layout/pages/users/updateInfor.css';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import UserService from '../../../service/UserService';
 
 const UpdateInfor = ({ user, navigate, setUser }) => {
     const [userInfo, setUserInfo] = useState(null);
@@ -53,7 +54,8 @@ const UpdateInfor = ({ user, navigate, setUser }) => {
                 return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-                await UserDataService.updateUser(user.id, values, navigate, setUser);
+                console.log("submitted")
+                await UserService.updateUser(user.id, values, navigate, setUser);
                 setSubmitting(false);
             }}
         >

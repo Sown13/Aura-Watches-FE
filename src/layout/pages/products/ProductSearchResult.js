@@ -39,10 +39,12 @@ export default function ProductSearchResult() {
     const getSearchResult = (e) => {
         e.preventDefault();
         resetFilter();
-        const tempSearchResult = originProductList
-            .filter(product => product.name.toLowerCase().includes(search.toLowerCase())
-                || product.name_code.toLowerCase().includes(search.toLowerCase()));
-        setProductList(tempSearchResult);
+        if (search != "") {
+            const tempSearchResult = originProductList
+                .filter(product => product.name.toLowerCase().includes(search.toLowerCase())
+                    || product.name_code.toLowerCase().includes(search.toLowerCase()));
+            setProductList(tempSearchResult);
+        } else setProductList([]);
     }
 
     // for filter results
@@ -147,7 +149,7 @@ export default function ProductSearchResult() {
             <h5 className="text-light d-flex justify-content-left" style={{ fontWeight: "300", marginBottom: "2%" }}>HOME/SEARCH</h5>
             <div className="product-list-filter">
                 <form onSubmit={getSearchResult} className="d-flex form-style" role="search" style={{ marginBottom: "1%" }}>
-                    <input className="form-control me-2" type="search" name="search" placeholder="Enter your search" aria-label="Search" style={{ border: "0" }}
+                    <input className="form-control me-2" type="search" name="search" placeholder="Enter Product Name or Code Name" aria-label="Search" style={{ border: "0" }}
                         onChange={handleSearchInput}
                     />
                     <button className="btn search-button text-light" type="submit" ><i className="fa-solid fa-magnifying-glass"></i></button>
@@ -232,16 +234,16 @@ export default function ProductSearchResult() {
 
                 <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px", fontSize: "27px", fontWeight: "500" }}
                     onClick={() => { getFilterResult(); scrollToFirstResultLine() }}>
-                    FILTER
+                    <i class="fa-solid fa-filter"></i> FILTER
                 </button>
             </div>
             <div className='row' ref={containerRef} >
-                <h2 className="text-light text-start col-12">Search Result for: '{search || "''"}' in Aura Watch</h2>
+                <h2 className="text-light text-start col-12">Search Result for: '{search || "''"}' in Aura Watch ({productList.length} results)</h2>
                 {productList.length > 0 ? (productList.map((product, index) => (
                     <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
                         <ProductCard product={product}></ProductCard>
                     </div>
-                ))) : <h2 className="text-light text-start col-12">There is no result </h2>}
+                ))) : null}
             </div>
             <br />
         </div>

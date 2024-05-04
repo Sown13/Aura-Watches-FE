@@ -1,5 +1,4 @@
 .misc-contact  {
-    font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 20px;
     text-align: left !important;
@@ -12,11 +11,9 @@
 
 .misc-contact h2 {
     color: #E8C284;
-    font-family: Trebuchet MS;
 }
 
 .misc-contact p {
-    font-family: Verdana;
     text-align: justify;
 }
 
@@ -42,10 +39,21 @@
 }
 
 .misc-contact .branch {
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .misc-contact .branch h3 {
     color: #E8C284;
 }
 
+.store-hidden {
+    display: none;
+}
+
+.branch a:hover {
+    cursor: pointer;
+}
+
+.branch a {
+    color: white;
+}

@@ -23,6 +23,20 @@ export default function ProductDetail() {
         setTabActive(number);
     }
 
+    // check which tab is active
+    useEffect(() => {
+        const path = window.location.pathname;
+
+        if (path.endsWith('/store')) {
+            setTabActive(2);
+        } else if (path.endsWith('/comment')) {
+            setTabActive(3);
+        } else {
+            setTabActive(1);
+        }
+    }, []);
+
+
     const fetchProductDetailData = () => {
         ProductService.getProductById(productId).then((res) => {
             setProduct(res.data);
@@ -71,6 +85,19 @@ export default function ProductDetail() {
                 }).catch((err) => { console.error("Failed to increase quantity", err) });
             }
         } else navigate("/login");
+    }
+
+
+    //scrolling to the store location
+    const scollToOutlet = () => {
+        const outletElement = document.getElementById('store');
+        if (outletElement) {
+            const scrollPosition = outletElement.offsetTop - window.innerHeight * 0.27;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth',
+            });
+        }
     }
 
     return (
@@ -124,19 +151,25 @@ export default function ProductDetail() {
 
                     {product.sale > 0 ? (
                         <div className="card-text d-flex justify-content-left">
-                            <h1><del className="card-text">{Number(product.price).toLocaleString()}$</del></h1>
+                            <h1><del className="card-text">${Number(product.price).toLocaleString()}</del></h1>
                             <h1 className="card-tex">
-                                &nbsp;  &nbsp; <span style={{ color: "red" }}>{(product.price * (100 - product.sale) / 100).toLocaleString()}</span>$
+                                &nbsp;  &nbsp; <span style={{ color: "#e8c284" }}>${(product.price * (100 - product.sale) / 100).toLocaleString()}</span>
                             </h1>
                             <h3>-{product.sale}%</h3>
                         </div>
                     ) : (
-                        <h1 className="card-text">{Number(product.price).toLocaleString()}$</h1>
+                        <h1 className="card-text" style={{ color: "#e8c284" }}>${Number(product.price).toLocaleString()}</h1>
                     )}
                     <h6>{product.summary ? product.summary : product.description}</h6>
                     <div className="button-container ">
-                        <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
-                        <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
+                        {product.isActive ?
+                            (<div>
+                                <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                                    Go To Shop Now
+                                </Link>
+                                <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
+                            </div>)
+                            : <h1>This product is no longer available</h1>}
                     </div>
                     <br />
                     <div>
@@ -150,15 +183,28 @@ export default function ProductDetail() {
                         <p>{product.description}</p>
                     </div>
                     <div className="button-container ">
-                        <button type="button" className="btn btn-dark product-detail-button-1">Buy Now</button>
-                        <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
-                    </div>
+                        {product.isActive ?
+                            (<div>
+                                <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                                    Go To Shop Now
+                                </Link>
+                                <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
+                            </div>)
+                            : <h1>This product is no longer available</h1>}     </div>
                     <div className="product-detail-tag">
-                        {product.isMen ? <Link className="badge text-bg-secondary" to={"/products/men"} >men</Link> : null}
-                        {product.isWomen ? <Link className="badge text-bg-secondary" to={"/products/women"} >women</Link> : null}
-                        {product.isPremier ? <Link className="badge text-bg-secondary" to={"/products/premier"} >premier</Link> : null}
-                        {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
-                        {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                {product.isMen ? <Link className="badge text-bg-secondary" to={"/products/men"} >men</Link> : null}
+                                {product.isWomen ? <Link className="badge text-bg-secondary" to={"/products/women"} >women</Link> : null}
+                                {product.isPremier ? <Link className="badge text-bg-secondary" to={"/products/premier"} >premier</Link> : null}
+                                {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
+                                {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
+                            </div>
+                            {product.file ? <a href={product.file} download={product.file}><i class="fa-solid fa-download"></i></a>
+                                : <a href="/file/f001.txt" download={"/file/f001.txt"}><i class="fa-solid fa-download"></i></a>}
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -178,7 +224,7 @@ export default function ProductDetail() {
             </div>
             <hr className="text-light" />
             <br />
-            <div className="product-detail-tab-content text-light">
+            <div className="product-detail-tab-content text-light" id="store">
                 <Outlet></Outlet>
             </div>
             <br />

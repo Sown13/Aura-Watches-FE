@@ -14,8 +14,8 @@ export default function News() {
                     alt="ho" class="large-img" />
             </div>
             <h2>Introducing The Piaget Altiplano Concept Tourbillon, The World's <br /> Thinnest Tourbillon (Live Pics)</h2>
-            <div class="content">
-                <div style={{ marginRight: "20px" }}>
+            <div class="content" style={{backgroundColor: "black"}}>
+                <div style={{ marginRight: "20px" , backgroundColor:"black"}}>
                     <p>In many ways, Piaget is ultra-thin watchmaking. While Bulgari has reclaimed the title of the world's
                         thinnest watch with the new Octo Finissimo Ultra (1.7mm thin), Piaget's after a different prize. I'm not
                         sure my eyes are actually capable of perceiving the 0.3 difference between these two watches, nor can my

@@ -12,7 +12,7 @@ export default function ProductList() {
 
     // for display
     const [productList, setProductList] = useState([]);
-    const [banner, setBanner] = useState('/img/banner_men.svg');
+    const [banner, setBanner] = useState('');
 
     // for filtering
     const [isActive, setIsActive] = useState(1);
@@ -37,9 +37,17 @@ export default function ProductList() {
     const containerRef = useRef(null);
 
     const scrollToFirstResultLine = () => {
-        let div = document.getElementById("view-point");
-        // notice: this one is not working if setState() is not done
-        div.scrollIntoView();
+        // let div = document.getElementById("view-point");
+        // // notice: this one is not working if setState() is not done
+        // div.scrollIntoView();
+        const viewPointElement = document.getElementById('view-point');
+        if (viewPointElement) {
+            const scrollPosition = viewPointElement.offsetTop - window.innerHeight * 0.112;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth',
+            });
+        }
     };
 
     // for pagenation
@@ -268,7 +276,7 @@ export default function ProductList() {
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100 text-light" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}>FILTER</button>
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i class="fa-solid fa-filter"></i> FILTER</button>
             </div>
 
             <div className='d-flex justify-content-center'>
@@ -294,11 +302,15 @@ export default function ProductList() {
             </div>
 
             <div className='row' ref={containerRef}>
-                {productList.map((product, index) => (
-                    <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
-                        <ProductCard product={product}></ProductCard>
-                    </div>
-                ))}
+                {productList.length > 0 ? (
+                    productList.map((product, index) => (
+                        <div className="product-list-card col-lg-3 col-md-4 col-sm-12" key={product.id}>
+                            <ProductCard product={product}></ProductCard>
+                        </div>
+                    ))
+                ) : (
+                    <h2 style={{marginTop:"2%"}}>Sorry, there is no Product match your filter</h2>
+                )}
             </div>
 
             <br />

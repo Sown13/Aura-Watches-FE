@@ -13,11 +13,11 @@ export default function ProductLineCard(props) {
             <Link to={`/products/detail/${product.id}`} className="d-flex product" style={{ padding: "0", width: "60%", textDecoration: "none", color: "black" }}>
                 <div className="d-flex justify-content-center align-items-center" style={{ width: "60px", height: "100%", width: "20%" }}>
                     <div style={{ width: "60px", height: "60px", width: "100%" }}>
-                        <img src={product.img} style={{ width: "auto", height: "100%", objectFit: "cover", padding: "5px" }} alt="Product Image" />
+                        <img src={product.img} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "5px" }} alt="Product Image" />
                     </div>
                 </div>
                 <div className="d-flex flex-column align-items-center" style={{ width: "80%" }}>
-                    <div>{product.name_code}</div>
+                    <b>{product.name_code}</b>
                     <div className="text-start ">{product.name}</div>
                 </div>
             </Link>
@@ -30,7 +30,7 @@ export default function ProductLineCard(props) {
                 </div>
             </div>
             <div className="text-start d-flex align-items-center" style={{ padding: "0", width: "15%" }}>
-                ${((product.price * (product.sale > 0 ? product.sale : 100)) / 100).toLocaleString()}
+                ${product.sale > 0 ? (product.price * (100 - product.sale) / 100).toLocaleString() : Number(product.price).toLocaleString()}
             </div>
             <div className="trash-button d-flex align-items-center" style={{ padding: "0", width: "5%" }}>
                 <i className="fas fa-trash-alt" onClick={() => { removeFromCart(product.carts[0].id) }}></i>

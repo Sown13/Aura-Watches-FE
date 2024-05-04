@@ -21,9 +21,16 @@
     padding: 0;
 }
 
-.header-bot-sticky  .nav-link.active {
-    border: 0px ;
+.header-bot-sticky .nav-link.active {
+    border: 0px;
     background-color: black;
-    color: #e8c284 !important; 
-  }
+    color: #e8c284 !important;
+}
 
+.dropdown-menu-custom li:hover>.dropdown-item {
+    background-color: #e8c284;
+}
+
+.dropdown-menu-custom a {
+    margin: 0 !important;
+}

@@ -87,7 +87,7 @@ const UpdatePassword = ({ user, navigate, setUser }) => {
             <label>
                 <span>Old Password:</span>
                 <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="oldPassword"
                     required

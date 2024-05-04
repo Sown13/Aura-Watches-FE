@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import LoginStyles from "../../../css/layout/pages/auth/LoginStyles.css";
+import "../../../css/layout/pages/auth/LoginStyles.css";
 import facebookLogo from '../../../images/facebook.png';
 import googleLogo from '../../../images/google.png';
 import { useCookies } from 'react-cookie';
@@ -62,11 +62,14 @@ const Login = () => {
   };
 
   return (
-    <div className='login-container'>
-      <a className="logo-aura-watch col navbar-brand" href={"/"}>
+    <div className='login-container d-flex justify-content-center'>
+      <div className="background-image">
+        <img className='login-bg-image' src="/img/register.png"></img>
+      </div>
+      <a className="logo-aura-watch" href={"/"}>
         <img src="/img/logo.svg" alt="logo"></img>
       </a>
-      <div className="Login">
+      <div className="Login d-flex flex-column justify-content-center">
         <h2>Login</h2>
         <form onSubmit={loginUser}>
           <div className="form-group">
@@ -112,10 +115,8 @@ const Login = () => {
             Sign in with Google
           </button>
         </div>
+      </div>
 
-      </div>
-      <div className="background-image">
-      </div>
     </div>
   );
 };

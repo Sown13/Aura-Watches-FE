@@ -3,8 +3,8 @@ import UserService from "../../../service/UserService";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import RegisterStyles from "../../../css/layout/pages/auth/RegisterStyles.css";
-import Error from '../../../css/layout/pages/auth/Error.css';
+import "../../../css/layout/pages/auth/RegisterStyles.css";
+import '../../../css/layout/pages/auth/Error.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFormik } from "formik";
 import facebookLogo from '../../../images/facebook.png';
@@ -134,7 +134,10 @@ const Register = () => {
     }
 
     return (
-        <div className="register-container">
+        <div className="register-container d-flex">
+            <div className="register-background-image-frame">
+                <img className='register-bg-image' src="/img/register.png"></img>
+            </div>
             <a className="logo-aura-watch col navbar-brand" href={"/"}>
                 <img src="/img/logo.svg" alt="logo"></img>
             </a>
@@ -259,14 +262,14 @@ const Register = () => {
 
                 <div className="other-reg">
 
-                <button className="reg-facebook">
-                    <img src={facebookLogo} />
-                    Sign up with Facebook
-                </button>
-                <button className="reg-google">
-                    <img src={googleLogo} />
-                    Sign up with Google
-                </button>
+                    <button className="reg-facebook">
+                        <img src={facebookLogo} />
+                        Sign up with Facebook
+                    </button>
+                    <button className="reg-google">
+                        <img src={googleLogo} />
+                        Sign up with Google
+                    </button>
 
                 </div>
 

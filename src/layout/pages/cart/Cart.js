@@ -14,6 +14,7 @@ function Cart() {
   const [productList, setProductList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalPriceAfterSale, setTotalPriceAfterSale] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
 
   const getProductInCart = (products, userId) => {
     const filteredProducts = products.map((product) => {
@@ -48,7 +49,8 @@ function Cart() {
       return accumulator + productTotal;
     }, 0);
     console.log("After Sale: " + total);
-    setTotalPriceAfterSale(total);
+    setTotalDiscount(total);
+    setTotalPriceAfterSale(totalPrice - total);
   }
 
   const removeFromCart = (cartId) => {
@@ -137,6 +139,13 @@ function Cart() {
     fetchProductData();
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+
 
 
   return (
@@ -191,7 +200,7 @@ function Cart() {
                   <p style={{ marginBottom: "0" }}> || </p>
                   <h6 style={{ marginBottom: "0" }}><b>{cookies.user && cookies.user.phone}</b></h6>
                 </div>
-                <h6>{cookies.user && cookies.user.address}</h6>
+                <h6>Address: {cookies.user && cookies.user.address}</h6>
               </div>
               <hr className="my-4" />
               <div className='d-flex justify-content-between'>

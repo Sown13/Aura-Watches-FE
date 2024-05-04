@@ -49,19 +49,19 @@ export default function HeaderBot() {
                     <Link className={"nav-link text-light p-3" + (tabActive === 2 ? " active" : "")} onClick={() => selectTab(2)} to={"/products/men"}>MEN</Link>
                     <Link className={"nav-link text-light p-3" + (tabActive === 3 ? " active" : "")} onClick={() => selectTab(3)} to={"/products/women"}>WOMEN</Link>
                     <div className="nav-item dropdown ">
-                        <Link className="nav-link dropdown-toggle text-light p-3" to={"#"} role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <Link className="nav-link dropdown-toggle text-light" to={"#"} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             BRANDS
                         </Link>
-                        <ul className="dropdown-menu">
-                            <li><Link className="dropdown-item p-3" to={"/products/AURA-WATCH"}>AURA WATCH</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/FOSSIL"}>FOSSIL</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/TOMMY-HILFIGER"}> TOMMY HILFIGER</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/BULOVA"}>BULOVA</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/GUESS"}>GUESS</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/ANNE-KLEIN"}>ANNE KLEIN</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/G-SHOCK"}>G-SHOCK</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/NINE-WEST"}>NINE WEST</Link></li>
-                            <li><Link className="dropdown-item p-3" to={"/products/TIMEX"}>TIMEX</Link></li>
+                        <ul className="dropdown-menu dropdown-menu-custom">
+                            <li><Link className="dropdown-item " to={"/products/AURA-WATCH"}>AURA WATCH</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/FOSSIL"}>FOSSIL</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/TOMMY-HILFIGER"}> TOMMY HILFIGER</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/BULOVA"}>BULOVA</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/GUESS"}>GUESS</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/ANNE-KLEIN"}>ANNE KLEIN</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/G-SHOCK"}>G-SHOCK</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/NINE-WEST"}>NINE WEST</Link></li>
+                            <li><Link className="dropdown-item " to={"/products/TIMEX"}>TIMEX</Link></li>
                         </ul>
                     </div>
                     <Link className={"nav-link text-light p-3" + (tabActive === 4 ? " active" : "")} onClick={() => selectTab(4)} to={"/products/premier"}>PREMIER</Link>

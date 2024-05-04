@@ -41,13 +41,11 @@ const createNewUser = (data, navigate, setUser, formik) => {
 
 const updateUser = (id, data, navigate, setUser, formik, user) => {
     // Add username and password to the data object
-    data.username = user.username;
-    data.password = user.password;
 
-    return axios.put(`http://localhost:8080/users/${id}`, data)
+    return axios.patch(`http://localhost:8080/users/${id}`, data)
         .then(response => {
             console.log("Updated");
-    
+
             console.log("Updated 2");
             toast.success("Update Success!");
             navigate('/user/profile');
