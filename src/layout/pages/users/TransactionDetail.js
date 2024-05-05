@@ -8,11 +8,17 @@ import PDFTable from "../../../components/parts/PDFTable";
 export default function TransactionDetail() {
     const { cookies, isLoggedIn } = useContext(UserContext);
     const navigate = useNavigate();
-
     const location = useLocation();
     const { paymentHistory, transactionId, total_paid } = location.state || {};
-
     const [historyDetail, setHistoryDetail] = useState([]);
+
+    //handle redirect user who not logged in
+    useEffect(() => {
+        if (!cookies.user) {
+            navigate("/");
+        }
+    }, [cookies])
+
 
     // Test pdf
     const [showPDF, setShowPDF] = useState(false);
@@ -22,6 +28,12 @@ export default function TransactionDetail() {
             setShowPDF(false);
         } else setShowPDF(true);
     };
+
+    useEffect(() => {
+        if (!cookies.user) {
+            navigate("/");
+        }
+    }, [cookies])
 
     useEffect(() => {
         console.log(paymentHistory);

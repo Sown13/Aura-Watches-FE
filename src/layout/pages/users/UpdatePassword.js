@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import UserService from '../../../service/UserService';
 import { toast } from 'react-toastify';
 import '../../../css/layout/pages/users/updatePassword.css';
 import { useFormik } from 'formik';
 import { updatePassword, validatePassword } from '../../../service/UserService';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
 
-const UpdatePassword = ({ user, navigate, setUser }) => {
+const UpdatePassword = () => {
     const [userInfo, setUserInfo] = useState(null);
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [user, setUser] = useState();
+
+
+    //handle redirect user who not logged in
+    const { cookies, isLoggedIn } = useContext(UserContext);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!cookies.user) {
+            navigate("/");
+        } else setUser(cookies.user);
+    }, [cookies])
 
     useEffect(() => {
         // Get current user info
@@ -25,6 +38,7 @@ const UpdatePassword = ({ user, navigate, setUser }) => {
                 });
         }
     }, [user]);
+
 
     const formik = useFormik({
         initialValues: {
@@ -78,7 +92,7 @@ const UpdatePassword = ({ user, navigate, setUser }) => {
     //     console.log(formik.values.oldPassword, formik.values.newPassword, formik.values.confirmNewPassword);
     //     await UserService.updatePassword(user.id, formik.values.oldPassword, formik.values.newPassword, formik.values.confirmNewPassword, navigate);
     // };
-    
+
 
 
     // Render form when data is loaded

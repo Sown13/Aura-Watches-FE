@@ -42,9 +42,12 @@ function App() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    removeCookie('user');
+    removeCookie('user', { expires: new Date(0) });
     setIsLoggedIn(0);
-    toast.success("Logged out, see you again!")
+    toast.success("Logged out, see you again!");
+    // setTimeout(() => {
+    //   window.location.href = '/'; 
+    // }, 1500);
   }
 
   const handleLogin = (user) => {
@@ -59,6 +62,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(isLoggedIn);
     if (cookies.user) {
       setIsLoggedIn(1);
     } else {
@@ -98,13 +102,13 @@ function App() {
               <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
               <Route path="/contact-us" element={<Contact></Contact>}></Route>
               <Route path="/news" element={<News></News>}></Route>
-              {!isLoggedIn && <Route path="/user/profile" element={<Navigate to="/" replace />} />}
+              {!isLoggedIn && <Route path="/user/*" element={<Navigate to="/" replace />}></Route>}
               <Route path='/user/profile' element={<UserDetail></UserDetail>}></Route>
               <Route path='/user/profile/payment-history' element={<TransactionHistory></TransactionHistory>}></Route>
               <Route path='/user/profile/payment-detail' element={<TransactionDetail></TransactionDetail>}></Route>
-              <Route path='/user/profile/update-info' element={<UpdateInfor user={cookies.user} />} />
-              <Route path='/user/profile/update-security' element={<UpdatePassword user={cookies.user} />} />
-              
+              <Route path='/user/profile/update-info' element={<UpdateInfor />} />
+              <Route path='/user/profile/update-security' element={<UpdatePassword />} />
+
               <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Route>
             {isLoggedIn && <Route path="/login" element={<Navigate to="/" replace />} />}

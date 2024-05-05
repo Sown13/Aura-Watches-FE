@@ -94,12 +94,16 @@ const updatePassword = (id, oldPassword, newPassword, confirmNewPassword, naviga
         });
 }
 
+const getUserInfo = (userId) => {
+    return http.get(`/users/${userId}`);
+}
 
 
 const UserService = {
     createNewUser,
     updateUser,
-    updatePassword
+    updatePassword,
+    getUserInfo
 };
 
 export default UserService;

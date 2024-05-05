@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import UserDataService from '../../../service/UserService';
 import { toast } from 'react-toastify';
 import '../../../css/layout/pages/users/updateInfor.css';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import UserService from '../../../service/UserService';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
 
-const UpdateInfor = ({ user, navigate, setUser }) => {
+const UpdateInfor = () => {
     const [userInfo, setUserInfo] = useState(null);
+    const [user, setUser] = useState(null);
+
+    //handle redirect user who not logged in
+    const { cookies, isLoggedIn } = useContext(UserContext);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!cookies.user) {
+            navigate("/");
+        } else setUser(cookies.user);
+    }, [cookies])
 
     useEffect(() => {
         // Get current user info
@@ -31,6 +43,7 @@ const UpdateInfor = ({ user, navigate, setUser }) => {
     if (!userInfo) {
         return <div>Loading...</div>;
     }
+
 
     return (
         <Formik

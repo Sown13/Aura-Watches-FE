@@ -56,11 +56,11 @@
     },
     {
       "id": "7692",
-      "Fullname": "Nguyễn Quốc Hiếu",
+      "Fullname": "Son Son 2",
       "phone": "0836412322",
       "email": "hieunguyen2q@gmail.com",
       "username": "son7atp255",
-      "password": "123123a@",
+      "password": "12345678a@",
       "address": "Thanh Ba"
     },
     {
@@ -1566,6 +1566,21 @@
         }
       ],
       "id": 11
+    },
+    {
+      "userId": "7692",
+      "date_created": "2024-05-05T14:09:16.926Z",
+      "total_paid": 12000,
+      "products": [
+        {
+          "id": 2,
+          "name_code": "EFM26-LSW",
+          "price": 12000,
+          "sale": 0,
+          "quantity": 1
+        }
+      ],
+      "id": 13
     }
   ]
 }

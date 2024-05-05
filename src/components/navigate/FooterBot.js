@@ -25,7 +25,7 @@ export default function FooterBot() {
                 <Link className="" to={"/#"}>Category</Link>
                 <a className="" href="/files/price-list/aw-price-list.xlsx" download={"AuraWatch_price-list.xslx"}>
                     Price List
-                    &nbsp;<i class="fa-solid fa-download"></i></a>
+                    &nbsp;<i className="fa-solid fa-download"></i></a>
             </div>
             <div className="footer-bot-nav d-flex flex-column">
                 <h5>POLICIES</h5>

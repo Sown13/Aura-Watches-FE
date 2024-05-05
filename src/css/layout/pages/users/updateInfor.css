@@ -40,7 +40,8 @@
 
 /* Trong file CSS của bạn */
 .submit-button {
-    background-color: #4CAF50; /* Green */
+    background-color: #000000; /* Green */
+    border:1px solid #ffffff !important;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -52,3 +53,6 @@
     cursor: pointer;
 }
 
+.submit-button:hover {
+    background-color: #525252;
+}

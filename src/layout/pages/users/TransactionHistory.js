@@ -10,12 +10,19 @@ export default function TransactionHistory() {
     const [paymentHistory, setPaymentHistory] = useState([]);
 
     useEffect(() => {
-        if (cookies.user) {
-            TransactionService.getTransactionByUser(cookies.user.id).then((res) => {
+        if (!isLoggedIn) {
+            navigate("/");
+            return;
+        }
+        // it seem if i call api using cookie value, the cookie will be set again????
+        TransactionService.getTransactionByUser(cookies.user.id)
+            .then((res) => {
                 setPaymentHistory(res.data);
-            }).catch((err) => { console.error("Cannot get payment history", err); });
-        } else navigate("/login");
-    }, [cookies])
+            })
+            .catch((err) => {
+                console.error("Cannot get payment history", err);
+            });
+    }, [cookies, isLoggedIn, navigate]);
 
     return (
         <div className="transaction-history">
@@ -26,7 +33,7 @@ export default function TransactionHistory() {
                         <th scope="col">#</th>
                         <th scope="col">Bill ID</th>
                         <th scope="col">Date</th>
-                        <th scope="col" style={{textAlign:"start"}}>Total Payment</th>
+                        <th scope="col" style={{ textAlign: "start" }}>Total Payment</th>
                         <th scope="col" >Option</th>
                     </tr>
                 </thead>
@@ -43,7 +50,7 @@ export default function TransactionHistory() {
                             <td className="table-dark text-start">${transaction.total_paid.toLocaleString()}</td>
                             <td className="table-dark">
                                 <Link to={"/user/profile/payment-detail"}
-                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id, total_paid: transaction.total_paid}}
+                                    state={{ paymentHistory: paymentHistory, transactionId: transaction.id, total_paid: transaction.total_paid }}
                                     style={{ textDecoration: "none", color: "white" }}>
                                     Detail
                                 </Link>
