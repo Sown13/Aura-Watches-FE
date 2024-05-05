@@ -281,22 +281,39 @@ export default function ProductList() {
 
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
-                    (<div>
-                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
-                        <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
-                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
-                        <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
-                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    (<div className='d-flex justify-content-center'>
+                        {currentPage === 1 ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                                <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            </div>
+                        }
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage}  </a>
+                        {currentPage === totalPages ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
+                                <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                            </div>
+                        }
                     </div>)
                 }
 
                 {isFiltering ? (
-                    <div>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
-                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter === totalPagesFilter ? "LAST" : currentPageFilter}  </a>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    <div className='d-flex justify-content-center'>
+                        {currentPageFilter === 1 ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            </div>
+                        }
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter}  </a>
+                        {currentPageFilter === totalPagesFilter ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                            </div>
+                        }
+
                     </div>
                 ) : null}
             </div>
@@ -309,29 +326,45 @@ export default function ProductList() {
                         </div>
                     ))
                 ) : (
-                    <h2 style={{marginTop:"2%"}}>Sorry, there is no Product match your filter</h2>
+                    <h2 style={{ marginTop: "2%" }}>Sorry, there is no Product match your filter</h2>
                 )}
             </div>
 
             <br />
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
-                    (<div>
-                        <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
-                        <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
-                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage === totalPages ? "LAST" : currentPage}  </a>
-                        <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
-                        <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    (<div className='d-flex justify-content-center'>
+                        {currentPage === 1 ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                                <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            </div>
+                        }
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage}  </a>
+                        {currentPage === totalPages ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
+                                <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                            </div>
+                        }
                     </div>)
                 }
 
                 {isFiltering ? (
-                    <div>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
-                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter === totalPagesFilter ? "LAST" : currentPageFilter}  </a>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
-                        <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                    <div className='d-flex justify-content-center'>
+                        {currentPageFilter === 1 ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
+                            </div>
+                        }
+                        <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter}  </a>
+                        {currentPageFilter === totalPagesFilter ? <div style={{ minWidth: "60px" }}></div>
+                            : <div>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
+                                <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
+                            </div>
+                        }
                     </div>
                 ) : null}
             </div>

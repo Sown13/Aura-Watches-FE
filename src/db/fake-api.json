@@ -1352,6 +1352,18 @@
       "productId": 19,
       "quantity": 1,
       "id": 1
+    },
+    {
+      "userId": "b16b",
+      "productId": 2,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "userId": "b16b",
+      "productId": 26,
+      "quantity": 1,
+      "id": 3
     }
   ],
   "transactions": [

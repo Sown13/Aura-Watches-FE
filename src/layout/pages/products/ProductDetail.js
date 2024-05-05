@@ -102,7 +102,7 @@ export default function ProductDetail() {
 
     return (
         <div className="product-detail container">
-            <div>TEST cart: {isInCart ? "in Cart" : "not in cart"}</div>
+            {/* <div>TEST cart: {isInCart ? "in Cart" : "not in cart"}</div> */}
             <div className="text-light" style={{ height: "100px", overflow: "hidden" }}>
                 {/* <img src="/img/banner_sales.svg" style={{ objectFit: "cover", width: "auto" }} /> */}
                 <h2 className="d-flex justify-content-center" style={{ backgroundColor: "#E8C284", padding: "10px", color: "black" }}>
@@ -137,58 +137,55 @@ export default function ProductDetail() {
                     </button>
                 </div>
 
-
-
                 <div className="product-detail-content-padding"></div>
 
-
                 <div className="product-detail-option d-flex flex-column">
-                    <h3><span className="product-detail-title">CODE&nbsp;&nbsp;&nbsp;:</span> {product.name_code}</h3>
-                    <h3><span className="product-detail-title">BRAND&nbsp;:</span> {product.brand}</h3>
-                    <h3><span className="product-detail-title">NAME&nbsp;&nbsp;&nbsp;:</span> {product.name}</h3>
-                    <h3><span className="product-detail-title">WARRANTY:</span> 2 Years</h3>
-                    <h3><span className="product-detail-title">PRICE&nbsp;&nbsp;&nbsp;:</span></h3>
+                    <p><span className="product-detail-title">CODE&nbsp;&nbsp;&nbsp;:</span> {product.name_code}</p>
+                    <p><span className="product-detail-title">BRAND&nbsp;:</span> {product.brand}</p>
+                    <p><span className="product-detail-title">NAME&nbsp;&nbsp;&nbsp;:</span> {product.name}</p>
+                    <p><span className="product-detail-title">WARRANTY:</span> 2 Years</p>
+                    <p><span className="product-detail-title">PRICE&nbsp;&nbsp;&nbsp;:</span></p>
 
                     {product.sale > 0 ? (
                         <div className="card-text d-flex justify-content-left">
-                            <h1><del className="card-text">${Number(product.price).toLocaleString()}</del></h1>
-                            <h1 className="card-tex">
+                            <h6><del className="card-text">${Number(product.price).toLocaleString()}</del></h6>
+                            <h6 className="card-tex">
                                 &nbsp;  &nbsp; <span style={{ color: "#e8c284" }}>${(product.price * (100 - product.sale) / 100).toLocaleString()}</span>
-                            </h1>
-                            <h3>-{product.sale}%</h3>
+                            </h6>
+                            <p>-{product.sale}%</p>
                         </div>
                     ) : (
-                        <h1 className="card-text" style={{ color: "#e8c284" }}>${Number(product.price).toLocaleString()}</h1>
+                        <h6 className="card-text" style={{ color: "#e8c284" }}>${Number(product.price).toLocaleString()}</h6>
                     )}
-                    <h6>{product.summary ? product.summary : product.description}</h6>
+                    <b>{product.summary ? product.summary : product.description}</b>
                     <div className="button-container ">
                         {product.isActive ?
                             (<div>
-                                <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                                {/* <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
                                     Go To Shop Now
-                                </Link>
-                                <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
+                                </Link> */}
+                                <button type="button" className="btn btn-warning product-detail-button-1" onClick={() => { addProductToCart() }}>Add To Cart</button>
                             </div>)
                             : <h1>This product is no longer available</h1>}
                     </div>
                     <br />
                     <div>
-                        <h4>Detail:</h4>
+                        <b>Detail:</b>
                         <p>{product.description}</p>
-                        <h4>History</h4>
+                        <b>History</b>
                         <p>{product.description}</p>
-                        <h4>Origin</h4>
+                        <b>Origin</b>
                         <p>{product.description}</p>
-                        <h4>Material</h4>
+                        <b>Material</b>
                         <p>{product.description}</p>
                     </div>
                     <div className="button-container ">
                         {product.isActive ?
                             (<div>
-                                <Link to="store" type="button" className="btn btn-dark product-detail-button-1" onClick={() => { selectTab(2); scollToOutlet() }}>
+                                <Link to="store" type="button" className="btn btn-dark product-detail-button-2" onClick={() => { selectTab(2); scollToOutlet() }}>
                                     Go To Shop Now
                                 </Link>
-                                <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button>
+                                {/* <button type="button" className="btn btn-warning product-detail-button-2" onClick={() => { addProductToCart() }}>Add To Cart</button> */}
                             </div>)
                             : <h1>This product is no longer available</h1>}     </div>
                     <div className="product-detail-tag">
@@ -200,8 +197,8 @@ export default function ProductDetail() {
                                 {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
                                 {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
                             </div>
-                            {product.file ? <a href={product.file} download={product.file}><i class="fa-solid fa-download"></i></a>
-                                : <a href="/file/f001.txt" download={"/file/f001.txt"}><i class="fa-solid fa-download"></i></a>}
+                            {product.file ? <a href={product.file} download={product.file}>Download <i class="fa-solid fa-download"></i></a>
+                                : <a href="/file/f001.txt" download={"/file/f001.txt"}>Download <i class="fa-solid fa-download"></i></a>}
 
                         </div>
 

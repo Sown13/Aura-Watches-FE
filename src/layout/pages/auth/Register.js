@@ -138,9 +138,11 @@ const Register = () => {
             <div className="register-background-image-frame">
                 <img className='register-bg-image' src="/img/register.png"></img>
             </div>
-            <a className="logo-aura-watch col navbar-brand" href={"/"}>
-                <img src="/img/logo.svg" alt="logo"></img>
-            </a>
+            <div>
+                <a className="logo-aura-watch" href={"/"}>
+                    <img src="/img/logo.svg" alt="logo"></img>
+                </a>
+            </div>
             <div className="Register">
                 <h2>Create Your Account</h2>
                 <form onSubmit={formik.handleSubmit}>

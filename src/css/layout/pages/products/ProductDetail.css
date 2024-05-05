@@ -19,23 +19,32 @@
 }
 
 .button-container .btn {
-    margin: 10px 10px 10px 20px;
+    margin: 10px 10px 10px 0px;
 }
 
 .product-detail-button-1 {
-    background-color: black;
+    background-color:#e8c284;
     border: 1px solid white !important;
     border-radius: 1px !important;
     font-weight: 400;
-    color: white;
+    color: rgb(0, 0, 0);
+}
+
+.product-detail-button-1:hover {
+    background-color: #eec084;
 }
 
 .product-detail-button-2 {
-    background-color: #e8c284;
-    border: 1px solid white !important;
+    background-color: #000000;
+    border: 1px solid rgb(255, 255, 255) !important;
     border-radius: 1px !important;
     font-weight: 400;
-    color: white;
+    color: rgb(255, 255, 255);
+}
+
+.product-detail-button-2:hover{
+    background-color:#e9cc9e;
+    color: black;
 }
 
 .product-detail-img-frame {

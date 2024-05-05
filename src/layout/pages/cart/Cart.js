@@ -44,13 +44,14 @@ function Cart() {
   }
 
   const calTotalPriceAfterSale = (products) => {
-    const total = products.reduce((accumulator, product) => {
-      const productTotal = (product.price * product.carts[0].quantity * (product.sale > 0 ? product.sale : 100)) / 100;
+    const totalDiscount = products.reduce((accumulator, product) => {
+      const productTotal = (product.price * product.carts[0].quantity * (product.sale > 0 ? product.sale : 0)) / 100;
       return accumulator + productTotal;
     }, 0);
-    console.log("After Sale: " + total);
-    setTotalDiscount(total);
-    setTotalPriceAfterSale(totalPrice - total);
+    console.log("After Sale: " + (totalPrice - totalDiscount));
+    console.log("Total Discount: " + totalDiscount);
+    setTotalDiscount(totalDiscount);
+    setTotalPriceAfterSale(totalPrice - totalDiscount);
   }
 
   const removeFromCart = (cartId) => {
@@ -216,7 +217,7 @@ function Cart() {
 
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
-                <p className="mb-2">-${(totalPrice - totalPriceAfterSale).toLocaleString()}</p>
+                <p className="mb-2">-${totalDiscount.toLocaleString()}</p>
               </div>
 
               <div className="d-flex justify-content-between mb-4">

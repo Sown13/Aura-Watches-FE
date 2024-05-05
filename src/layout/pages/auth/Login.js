@@ -66,10 +66,13 @@ const Login = () => {
       <div className="background-image">
         <img className='login-bg-image' src="/img/register.png"></img>
       </div>
-      <a className="logo-aura-watch" href={"/"}>
-        <img src="/img/logo.svg" alt="logo"></img>
-      </a>
-      <div className="Login d-flex flex-column justify-content-center">
+      <div>
+        <a className="logo-aura-watch" href={"/"}>
+          <img src="/img/logo.svg" alt="logo"></img>
+        </a>
+      </div>
+
+      <div className="Login d-flex flex-column justify-content-center" style={{padding:"5%"}}>
         <h2>Login</h2>
         <form onSubmit={loginUser}>
           <div className="form-group">

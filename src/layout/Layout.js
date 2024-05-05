@@ -11,10 +11,12 @@ import HeaderBotSticky from "../components/navigate/HeaderBotSticky";
 export default function Layout() {
     const [headerBot, setHeaderBot] = useState(0);
 
+
+    //changing header bot
     useEffect(() => {
         function handleScroll() {
             const headerTopHeight = document.querySelector('.layout-header-top ') && document.querySelector('.layout-header-top ').offsetHeight;
-            if (window.scrollY >= headerTopHeight) {
+            if (window.scrollY >= headerTopHeight*2/3) {
                 setHeaderBot(1);
             } else {
                 setHeaderBot(0);
