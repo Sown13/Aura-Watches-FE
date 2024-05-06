@@ -16,7 +16,7 @@ export default function Layout() {
     useEffect(() => {
         function handleScroll() {
             const headerTopHeight = document.querySelector('.layout-header-top ') && document.querySelector('.layout-header-top ').offsetHeight;
-            if (window.scrollY >= headerTopHeight*2/3) {
+            if (window.scrollY >= headerTopHeight * 2 / 3) {
                 setHeaderBot(1);
             } else {
                 setHeaderBot(0);
@@ -36,9 +36,15 @@ export default function Layout() {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY;
-            const scrollingUp = prevScrollPos < currentScrollPos;
+            const windowHeight = window.innerHeight;
+            const offset = windowHeight * 0.5; // 1 = 100% offset
 
-            setIsVisible(scrollingUp);
+            if (currentScrollPos >= offset) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+
             setPrevScrollPos(currentScrollPos);
         };
 
@@ -47,7 +53,7 @@ export default function Layout() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [prevScrollPos]);
+    }, []);
 
     const scrollToTop = () => {
         window.scrollTo({
