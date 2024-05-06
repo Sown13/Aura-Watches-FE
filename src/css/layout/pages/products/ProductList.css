@@ -36,10 +36,26 @@
 }
 
 .change-page-btn.current {
-    background-color: #E8C284;
+    /* background-color: #E8C284; */
     width: 60px;
     height: 30px;
     object-fit: contain;
 }
 
+.filter-btn {
+    margin-left: 1%;
+}
 
+.filter-btn:hover {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+.sort-btn:hover {
+    cursor: pointer;
+    background-color: #505050 !important;
+}
+
+.btn-disabled {
+    color: #505050;
+}

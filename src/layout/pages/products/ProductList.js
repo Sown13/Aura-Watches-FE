@@ -262,34 +262,44 @@ export default function ProductList() {
                     ))}
                 </div>
 
-                <div className='d-flex ms-auto text-light'>
-                    <select className="form-select text-light" aria-label="Default select example"
-                        onChange={(e) => handleSelectSort(e)}
-                        style={{ backgroundColor: "black", border: "0" }}>
-                        <option value="" >Sort By Newest</option>
-                        <option value="price&_order=asc">Sort By Price (low to high)</option>
-                        <option value="price&_order=desc">Sort By Price (high to low)</option>
-                        <option value="sale&_order=asc">Sort By Sale (low to high)</option>
-                        <option value="sale&_order=desc">Sort By Sale (high to low)</option>
-                        <option value="name">Sort By Name</option>
-                        <option value="name_code">Code Name</option>
-                    </select>
-                </div>
+                <div className="d-flex" style={{ marginBottom: "20px" }}>
+                    <div className='d-flex ms-auto text-light'>
+                        <select className="sort-btn form-select text-light" aria-label="Default select example"
+                            onChange={(e) => handleSelectSort(e)}
+                            style={{ backgroundColor: "black", border: "0" }}>
+                            <option value="" >Sort By Newest</option>
+                            <option value="price&_order=asc">Sort By Price (low to high)</option>
+                            <option value="price&_order=desc">Sort By Price (high to low)</option>
+                            <option value="sale&_order=asc">Sort By Sale (low to high)</option>
+                            <option value="sale&_order=desc">Sort By Sale (high to low)</option>
+                            <option value="name">Sort By Name</option>
+                            <option value="name_code">Code Name</option>
+                        </select>
+                    </div>
 
-                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i class="fa-solid fa-filter"></i> FILTER</button>
+                    <button type="submit" className="filter-btn btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "0px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i class="fa-solid fa-filter"></i> FILTER</button>
+                </div>
             </div>
 
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
                     (<div className='d-flex justify-content-center'>
-                        {currentPage === 1 ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPage === 1
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;&lt;</button>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                                 <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
                             </div>
                         }
                         <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage}  </a>
-                        {currentPage === totalPages ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPage === totalPages
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;</button>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;&gt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
                                 <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
@@ -300,14 +310,22 @@ export default function ProductList() {
 
                 {isFiltering ? (
                     <div className='d-flex justify-content-center'>
-                        {currentPageFilter === 1 ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPageFilter === 1
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;&lt;</button>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
                             </div>
                         }
                         <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter}  </a>
-                        {currentPageFilter === totalPagesFilter ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPageFilter === totalPagesFilter
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;</button>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;&gt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
@@ -334,14 +352,22 @@ export default function ProductList() {
             <div className='d-flex justify-content-center'>
                 {!isFiltering &&
                     (<div className='d-flex justify-content-center'>
-                        {currentPage === 1 ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPage === 1
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;&lt;</button>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPage(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                                 <button className='change-page-btn' onClick={() => { getPage(currentPage - 1); scrollToFirstResultLine() }}>&lt;</button>
                             </div>
                         }
                         <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPage}  </a>
-                        {currentPage === totalPages ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPage === totalPages
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;</button>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;&gt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPage(currentPage + 1); scrollToFirstResultLine() }}> &gt;</button>
                                 <button className='change-page-btn' onClick={() => { getPage(totalPages); scrollToFirstResultLine() }}> &gt;&gt;</button>
@@ -352,19 +378,28 @@ export default function ProductList() {
 
                 {isFiltering ? (
                     <div className='d-flex justify-content-center'>
-                        {currentPageFilter === 1 ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPageFilter === 1
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;&lt;</button>
+                                <button className='change-page-btn btn-disabled' disabled>&lt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(1); scrollToFirstResultLine() }}>&lt;&lt;</button>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter - 1); scrollToFirstResultLine() }}>&lt;</button>
                             </div>
                         }
                         <a className={'change-page-btn current'} disabled href='#view-point'  >   {currentPageFilter}  </a>
-                        {currentPageFilter === totalPagesFilter ? <div style={{ minWidth: "60px" }}></div>
+                        {currentPageFilter === totalPagesFilter
+                            ? <div>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;</button>
+                                <button className='change-page-btn btn-disabled' disabled> &gt;&gt;</button>
+                            </div>
                             : <div>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(currentPageFilter + 1); scrollToFirstResultLine() }}> &gt;</button>
                                 <button className='change-page-btn' onClick={() => { getPageFilterResult(totalPagesFilter); scrollToFirstResultLine() }}> &gt;&gt;</button>
                             </div>
                         }
+
                     </div>
                 ) : null}
             </div>
