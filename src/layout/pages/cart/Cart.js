@@ -133,8 +133,12 @@ function Cart() {
 
   useEffect(() => {
     calTotalPrice(productList);
-    calTotalPriceAfterSale(productList);
   }, [productList])
+
+  
+  useEffect(() => {
+    calTotalPriceAfterSale(productList);
+  }, [totalPrice])
 
   useEffect(() => {
     fetchProductData();

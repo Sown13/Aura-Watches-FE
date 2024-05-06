@@ -198,8 +198,7 @@ export default function ProductDetail() {
                                 {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
                             </div>
                             {product.file ? <a href={product.file} download={product.file}>Download <i class="fa-solid fa-download"></i></a>
-                                : <a href="/file/f001.txt" download={"/file/f001.txt"}>Download <i class="fa-solid fa-download"></i></a>}
-
+                                : <a href="/files/sample.docx" download={product.file}>Download <i class="fa-solid fa-download"></i></a>}
                         </div>
 
                     </div>

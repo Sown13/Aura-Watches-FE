@@ -92,7 +92,7 @@ const getAllProductWithCart = () => {
 }
 
 const getProductForAdmin = (page) => {
-    const resultPerPage = "&_page=" + page + "&_limit=6";
+    const resultPerPage = "&_page=" + page + "&_limit=6" + "&_sort=id&_order=desc";
     return http.get("/products?" + resultPerPage);
 }
 

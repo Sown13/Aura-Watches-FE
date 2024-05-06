@@ -17,11 +17,7 @@ export default function Contact() {
         <div className="misc-contact text-light">
             <h2>Our Stores</h2>
             <p>Choose the store to show it's address on the map</p>
-
             <div class="container">
-
-
-
                 <div class="branch-info">
                     <div class="branch">
                         <a onClick={(e) => selectStore(1, e)}><h3>{storeAddress === 1 ? <span><i class="fa-solid fa-play"></i></span> : null} Aura Watches Ha Noi</h3></a>
