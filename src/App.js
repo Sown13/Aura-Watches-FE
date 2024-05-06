@@ -35,8 +35,10 @@ import EditProductAdmin from './admin/admin_page/components/EditProductAdmin';
 import AddProductAdmin from './admin/admin_page/components/AddProductAdmin';
 import UserListAdmin from './admin/admin_page/components/UserListAdmin';
 import AdminLayout from './admin/AdminLayout';
+import ProductService from './service/ProductService';
 
 function App() {
+  // for login purposes
   const [isLoggedIn, setIsLoggedIn] = useState(0);
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
@@ -45,6 +47,7 @@ function App() {
   const handleLogout = () => {
     removeCookie('user', { expires: new Date(0) });
     setIsLoggedIn(0);
+    setCartQuantity(0);
     toast.success("Logged out, see you again!");
     // setTimeout(() => {
     //   window.location.href = '/'; 
@@ -78,10 +81,42 @@ function App() {
     }
   }, [])
 
+
+  // for showing number products in cart
+  const [cartQuantity, setCartQuantity] = useState([]);
+
+  const getProductInCart = (products, userId) => {
+    const filteredProducts = products.map((product) => {
+      const filteredCarts = product.carts.filter((cart) => cart.userId === userId);
+      return { ...product, carts: filteredCarts };
+    });
+    const productsInCart = filteredProducts.filter((product) => product.carts.length > 0);
+    return productsInCart;
+  }
+
+  const fetchProductData = () => {
+    ProductService.getAllProductWithCart().then((res) => {
+      let originProductList = res.data;
+      originProductList = getProductInCart(originProductList, cookies.user.id);
+      console.log(originProductList);
+      setCartQuantity(originProductList.length);
+    }).catch((err) => { console.error("Failed to get product list", err) });
+  }
+
+  useEffect(() => {
+    if (cookies.user) {
+      fetchProductData();
+    }
+  }, [cookies])
+
   return (
     <CookiesProvider>
       <div className="App" >
-        <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn, cookies, setCookie, removeCookie, handleLogin, handleLogout }}>
+        <UserContext.Provider
+          value={{
+            isLoggedIn, setIsLoggedIn, cookies, setCookie, removeCookie, handleLogin, handleLogout,
+            cartQuantity, setCartQuantity, getProductInCart, fetchProductData
+          }}>
           <Routes>
             <Route path="/" element={<Layout></Layout>}>
               <Route path="/" element={<Home />}></Route>

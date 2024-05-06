@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import TransactionService from '../../../service/TransactionService.';
 
 function Cart() {
-  const { cookies, isLoggedIn } = useContext(UserContext);
+  const { cookies, isLoggedIn, setCartQuantity } = useContext(UserContext);
 
   const [productList, setProductList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -31,6 +31,7 @@ function Cart() {
       originProductList = getProductInCart(originProductList, cookies.user.id);
       console.log(originProductList);
       setProductList(originProductList);
+      setCartQuantity(originProductList.length);
     }).catch((err) => { console.error("Failed to get product list", err) });
   }
 
@@ -116,7 +117,7 @@ function Cart() {
         console.error("Failed to remove products:", err);
       });
 
-    //mimic data solving :))
+    //stimulate payment solving :))
     return new Promise(resolve => setTimeout(resolve, 3000));
   }
 

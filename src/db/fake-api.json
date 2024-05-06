@@ -1467,7 +1467,14 @@
       "id": 70
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": "iUj9u6k",
+      "productId": 66,
+      "quantity": 1,
+      "id": 1
+    }
+  ],
   "transactions": [
     {
       "userId": "iUj9u6k",
@@ -1483,6 +1490,57 @@
         }
       ],
       "id": 1
+    },
+    {
+      "userId": "iUj9u6k",
+      "date_created": "2024-05-06T16:49:11.349Z",
+      "total_paid": 97227,
+      "products": [
+        {
+          "id": 52,
+          "name_code": "BMen-3Quaz-3",
+          "price": 22200,
+          "sale": 2,
+          "quantity": 1
+        },
+        {
+          "id": 64,
+          "name_code": "TW-35mm-2-3",
+          "price": 23100,
+          "sale": 3,
+          "quantity": 1
+        },
+        {
+          "id": 66,
+          "name_code": "UL956-2-3",
+          "price": 13400,
+          "sale": 1,
+          "quantity": 4
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": "iUj9u6k",
+      "date_created": "2024-05-06T17:15:00.238Z",
+      "total_paid": 15566,
+      "products": [
+        {
+          "id": 9,
+          "name_code": "GMAS110SR-7A",
+          "price": 2300,
+          "sale": 0,
+          "quantity": 1
+        },
+        {
+          "id": 66,
+          "name_code": "UL956-2-3",
+          "price": 13400,
+          "sale": 1,
+          "quantity": 1
+        }
+      ],
+      "id": 3
     }
   ]
 }

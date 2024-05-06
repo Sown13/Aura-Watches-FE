@@ -7,7 +7,7 @@ import { UserContext } from "../../context/UserContext";
 export default function HeaderBotSticky() {
     const { category } = useParams();
     const [tabActive, setTabActive] = useState(0);
-    const { handleLogout, cookies, removeCookie, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+    const { handleLogout, cookies, removeCookie, isLoggedIn, setIsLoggedIn, cartQuantity} = useContext(UserContext);
 
     const selectTab = (number) => {
         setTabActive(number);
@@ -71,7 +71,26 @@ export default function HeaderBotSticky() {
                     <Link className={"nav-link text-light p-3" + (tabActive === 6 ? " active" : "")} onClick={() => selectTab(6)} to={"/products/sales"}>SALES</Link>
                 </div>
                 <div className="col d-flex flex-row navbar-nav flex-row-reverse">
-                    <Link className="nav-link text-light" to={"/cart"}><i className="fa-solid fa-bag-shopping"></i></Link>
+                    <Link className="nav-link text-light" to={"/cart"}>
+                        <i className="fa-solid fa-bag-shopping position-relative">
+                            {cartQuantity > 0
+                                ? <span
+                                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                                    style={{
+                                        fontSize: "9px",
+                                        width: "15px",
+                                        height: "15px",
+                                        transform: "translate(-50%, -50%)",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    {cartQuantity}
+                                </span>
+                                : null}
+                        </i>
+                    </Link>
                     <Link className="nav-link text-light" aria-current="page" to={"/products/search"}><i className="fa-solid fa-magnifying-glass"></i></Link>
                     {
                         isLoggedIn ?

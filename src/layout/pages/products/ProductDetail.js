@@ -16,7 +16,7 @@ export default function ProductDetail() {
     const [cartExist, setCartExist] = useState({});
     const [isInCart, setIsInCart] = useState(0);
 
-    const { cookies, isLoggedIn } = useContext(UserContext);
+    const { cookies, isLoggedIn, cartQuantity, setCartQuantity, getProductInCart, fetchProductData } = useContext(UserContext);
 
 
     const selectTab = (number) => {
@@ -68,6 +68,7 @@ export default function ProductDetail() {
                 CartService.addProductToCart(cartToAdd).then((res) => {
                     console.log(res.status);
                     setIsInCart(1);
+                    fetchProductData();
                     toast.success('Added To Cart!');
                 }).then(() => {
                     fetchProductDetailData();
