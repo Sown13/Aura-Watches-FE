@@ -23,7 +23,7 @@ export default function FooterBot() {
                 <Link className="" to={"/#"}>Espisodes</Link>
                 <Link className="" to={"/#"}>Trending</Link>
                 <Link className="" to={"/#"}>Category</Link>
-                <a className="" href="/files/price-list/aw-price-list.xlsx" download={"AuraWatch_price-list.xslx"}>
+                <a className="" href="/files/price-list/aw-price-list.xlsx" download={"AuraWatch_price-list.xlsx"}>
                     Price List
                     &nbsp;<i className="fa-solid fa-download"></i></a>
             </div>

@@ -1,7 +1,7 @@
 import http from "./httpCommon";
 
 const getAllProduct = (category, page) => {
-    const resultPerPage = "&_page=" + page + "&_limit=20";
+    const resultPerPage = "&_page=" + page + "&_limit=20" + "&_sort=id&_order=desc&isActive=1";
     switch (category) {
         case "all":
             return http.get("/products?" + resultPerPage);
@@ -55,7 +55,8 @@ const getProductListByFilter = (isActive, isMen, isWomen, isPremier, isSport, is
         `${brand === "" ? "" : `&brand=${brand}`}` +
         `${isSale === 1 ? `&sale_gte=0.1` : ''}` +
         `${sort === "" ? "" : `&_sort=${sort}`}` +
-        `&_page=${page}&_limit=8`
+        `&_page=${page}&_limit=8` +
+        `&_sort=id&_order=desc`
     );
 
 }
@@ -90,6 +91,11 @@ const getAllProductWithCart = () => {
     return http.get("/products?_embed=carts");
 }
 
+const getProductForAdmin = (page) => {
+    const resultPerPage = "&_page=" + page + "&_limit=6";
+    return http.get("/products?" + resultPerPage);
+}
+
 const ProductService = {
     getAllProduct,
     getProductListByFilter,
@@ -99,7 +105,8 @@ const ProductService = {
     removeProduct,
     getProductsByUser,
     getAllActiveProductsNoPage,
-    getAllProductWithCart
+    getAllProductWithCart,
+    getProductForAdmin
 }
 
 export default ProductService;

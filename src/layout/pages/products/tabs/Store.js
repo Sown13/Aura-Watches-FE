@@ -7,6 +7,11 @@ export default function Store() {
             <div style={{ margin: "1%" }}>
                 <h5 > Store Address:</h5>
                 <p>8A Ton That Thuyet, My Dinh, Nam Tu Liem, Ha Noi</p>
+                <h5 > Hotline: </h5>
+                <p>0123 456 789</p>
+                <h5 > Email: </h5>
+                <a href="mailto:aurawatch1@gmail.com">aurawatch1@gmail.com</a>
+
             </div>
 
         </div>
