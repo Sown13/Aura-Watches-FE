@@ -28,11 +28,11 @@
       "id": "chqIPWn"
     },
     {
-      "Fullname": "Hải Sơn",
+      "Fullname": "Hải Sơn New",
       "phone": "0912312312",
-      "email": "son1@mail.com",
+      "email": "son123@mail.com",
       "username": "son1",
-      "password": "123123a@",
+      "password": "12345678a@",
       "address": "29 Tổ 16 Phường Minh Khai",
       "id": "iUj9u6k"
     }
@@ -1467,14 +1467,7 @@
       "id": 70
     }
   ],
-  "carts": [
-    {
-      "userId": "iUj9u6k",
-      "productId": 66,
-      "quantity": 1,
-      "id": 1
-    }
-  ],
+  "carts": [],
   "transactions": [
     {
       "userId": "iUj9u6k",
@@ -1541,6 +1534,28 @@
         }
       ],
       "id": 3
+    },
+    {
+      "userId": "iUj9u6k",
+      "date_created": "2024-05-06T18:07:01.509Z",
+      "total_paid": 78474,
+      "products": [
+        {
+          "id": 48,
+          "name_code": "IW-18796-3",
+          "price": 34500,
+          "sale": 1,
+          "quantity": 1
+        },
+        {
+          "id": 68,
+          "name_code": "FNM-18-2-3",
+          "price": 56100,
+          "sale": 21,
+          "quantity": 1
+        }
+      ],
+      "id": 4
     }
   ]
 }

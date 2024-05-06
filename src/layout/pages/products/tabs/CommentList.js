@@ -1,11 +1,11 @@
 import "../../../../css/layout/pages/products/tabs/Comment.css";
 export default function CommentList() {
     return (
-        <div class="comment d-flex flex-column">
+        <div className="comment d-flex flex-column">
             <div className="comment-input-box">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Leave your comment" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                    <button class="btn btn-outline-secondary text-light" type="button" id="button-addon2">Post</button>
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control" placeholder="Leave your comment" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                    <button className="btn btn-outline-secondary text-light" type="button" id="button-addon2">Post</button>
                 </div>
             </div>
             <div className="comment-list">

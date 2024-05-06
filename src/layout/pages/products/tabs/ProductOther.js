@@ -20,7 +20,7 @@ export default function ProductOther() {
         <div className="container text-center">
             <div className="row">
                 {productList.map((product) =>
-                    <div className="col"> <ProductCard product={product} /></div>
+                    <div className="col" key={product.id}> <ProductCard product={product} /></div>
 
                 )}
             </div>

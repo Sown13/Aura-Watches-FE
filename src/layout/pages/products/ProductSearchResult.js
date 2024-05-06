@@ -234,7 +234,7 @@ export default function ProductSearchResult() {
 
                 <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "20px", fontSize: "27px", fontWeight: "500" }}
                     onClick={() => { getFilterResult(); scrollToFirstResultLine() }}>
-                    <i class="fa-solid fa-filter"></i> FILTER
+                    <i className="fa-solid fa-filter"></i> FILTER
                 </button>
             </div>
             <div className='row' ref={containerRef} >

@@ -198,8 +198,8 @@ export default function ProductDetail() {
                                 {product.isSport ? <Link className="badge text-bg-secondary" to={"/products/sport"} >sport</Link> : null}
                                 {product.brand ? <Link className="badge text-bg-secondary" to={"/products/" + product.brand.replace(/ /g, "-")} >{product.brand}</Link> : null}
                             </div>
-                            {product.file ? <a href={product.file} download={product.file}>Download <i class="fa-solid fa-download"></i></a>
-                                : <a href="/files/sample.docx" download={product.file}>Download <i class="fa-solid fa-download"></i></a>}
+                            {product.file ? <a href={product.file} download={product.file}>Download <i className="fa-solid fa-download"></i></a>
+                                : <a href="/files/sample.docx" download={product.file}>Download <i className="fa-solid fa-download"></i></a>}
                         </div>
 
                     </div>

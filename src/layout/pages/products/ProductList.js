@@ -277,7 +277,7 @@ export default function ProductList() {
                         </select>
                     </div>
 
-                    <button type="submit" className="filter-btn btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "0px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i class="fa-solid fa-filter"></i> FILTER</button>
+                    <button type="submit" className="filter-btn btn btn-primary w-100" style={{ backgroundColor: "#e8c284", borderColor: "#e8c284", color: "black", marginBottom: "0px" }} onClick={() => { getFilterResultFirstTime(); scrollToFirstResultLine() }}><i className="fa-solid fa-filter"></i> FILTER</button>
                 </div>
             </div>
 
